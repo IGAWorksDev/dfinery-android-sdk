@@ -128,9 +128,12 @@ DfineryProperties.setUserProfile(DF.UserProfile.MEMBERSHIP, "VVIP")
 ```
 ```mermaid
 classDiagram
+    class 식별된사용자A
+    식별된사용자A : gender("MALE")
+    식별된사용자A : membership("VIP")
     class 식별된사용자B
-    식별된사용자A : gender("FEMALE")
-    식별된사용자A : membership("VVIP")
+    식별된사용자B : gender("FEMALE")
+    식별된사용자B : membership("VVIP")
 ```
 
  ### 3. 로그인 이벤트 기록하기
