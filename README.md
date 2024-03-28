@@ -14,7 +14,7 @@
 
 ### 📁 Components
 - `docs` : a folder containing documents needed to use the SDK
-- `samples` :  a folder containing sample app
+- `sample` :  a folder containing sample app
 
 ### ✨ Features
 
