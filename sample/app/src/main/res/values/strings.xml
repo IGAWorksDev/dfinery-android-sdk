@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Dfinery Sample</string>
+    <string name="leak_canary_test_class_name">assertk.Assert</string>
+    <string-array name="notification_type">
+        <item>INFORMATIONAL</item>
+        <item>ADVERTISING</item>
+        <item>ADVERTISING AT NIGHT</item>
+    </string-array>
+    <string-array name="notification_channel">
+        <item>PUSH</item>
+        <item>SMS</item>
+        <item>KAKAO</item>
+    </string-array>
+    <string-array name="notification_channel_at_night">
+        <item>PUSH</item>
+    </string-array>
+</resources>

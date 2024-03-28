@@ -74,3 +74,6 @@ void resetIdentity()
 ```kotlin
 DfineryProperties.resetIdentity();
 ```
+
+## 추가 정보
+통합 ID 연동에 대한 더 자세한 내용이 필요할 경우 고급 사용 사례에 있는 [통합 ID 연동 시나리오](./identity_scenario.md)를 참고하세요.

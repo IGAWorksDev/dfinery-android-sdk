@@ -40,14 +40,17 @@ dependencyResolutionManagement {
 ### 3. dependencies에 Dfinery와 필요한 요소에 대해 SDK 종속 항목을 추가합니다.
 
 > [!NOTE]
-> Dfinery는 AppSetId를 수집하기 위해 [play-services-appset](https://developer.android.com/training/articles/app-set-id) 의존성을 필요로 합니다.
+> Dfinery는 AppSetId를 수집하기 위해 [play-services-appset](https://developer.android.com/training/articles/app-set-id) 의존성을 필요로 합니다. 
 
 ```
  dependencies {
-  implementation 'com.igaworks.dfinery:android-sdk:1.+'
+  implementation 'com.igaworks.dfinery:android-sdk:+'
   implementation 'com.google.android.gms:play-services-appset:16.0.2'
 }
 ```
+
+> [!TIP]
+> Dfinery의 최신 버전을 확인하려면 [Dfinery Android SDK Release](https://github.com/IGAWorksDev/dfinery-android-sdk/releases)를 방문하세요.
 
 ## 초기화하기
 앱에서 Dfinery SDK를 초기화하려면 다음 단계를 완료하세요.
