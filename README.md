@@ -26,6 +26,8 @@
 - [통합 ID 식별 정보 설정하기](./docs/ko/identity.md)
 - [유저 프로필 설정하기](./docs/ko/user_profile.md)
 - [액션](./docs/ko/action.md)
-- [부가 설정](./docs/ko/additional.md)
+- 고급 사용 사례
+  - [통합 ID 연동 시나리오](./docs/ko/identity_scenario.md)
+  - [부가 설정](./docs/ko/additional.md)
 
 </details>
