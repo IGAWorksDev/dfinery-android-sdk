@@ -21,5 +21,5 @@ void suspendUserTargeting()
 Dfinery.getInstance().suspendUserTargeting();
 ```
 
-## 추가 정보
+## 더 알아보기
 통합 ID 연동과 단말기 연결에 대한 더 자세한 내용이 필요할 경우 고급 사용 사례에 있는 [통합 ID 연동 시나리오](./identity_scenario.md)를 참고하세요.
