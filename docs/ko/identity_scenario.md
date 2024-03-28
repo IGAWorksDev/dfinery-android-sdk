@@ -41,6 +41,13 @@ DfineryProperties.setUserProfile(DF.UserProfile.MEMBERSHIP, "VIP")
 ...
 ```
 
+```mermaid
+classDiagram
+    class 식별된사용자A
+    식별된사용자A : gender("MALE")
+    식별된사용자A : membership("VIP")
+```
+
 ### 3. 로그인 이벤트 기록하기
 [이벤트를 기록](./analytics.md)합니다. 
 
@@ -86,6 +93,12 @@ DfineryProperties.setIdentity(DF.Identity.EXTERNAL_ID, "A")
 ```java
 Dfinery.getInstance().logEvent(DF.Event.LOGIN)
 ```
+```mermaid
+graph TB
+subgraph 식별된사용자A
+A(Login)--> B(Logout) --> C(Login)
+end
+```
 
 ## 다른 `EXTERNAL_ID`를 사용한 로그인
 이 섹션은 통합 식별 정보를 설정한 이력이 있는 사용자가 다른 `EXTERNAL_ID` 값을 사용해서 로그인을 하는 과정을 보여줍니다.
@@ -110,7 +123,14 @@ sequenceDiagram
 
 ```java
 DfineryProperties.setUserProfile(DF.UserProfile.GENDER, DF.Gender.FEMALE)
+DfineryProperties.setUserProfile(DF.UserProfile.MEMBERSHIP, "VVIP")
 ...
+```
+```mermaid
+classDiagram
+    class 식별된사용자B
+    식별된사용자A : gender("FEMALE")
+    식별된사용자A : membership("VVIP")
 ```
 
  ### 3. 로그인 이벤트 기록하기
@@ -118,6 +138,15 @@ DfineryProperties.setUserProfile(DF.UserProfile.GENDER, DF.Gender.FEMALE)
 
 ```java
 Dfinery.getInstance().logEvent(DF.Event.LOGIN)
+```
+```mermaid
+graph TB
+subgraph 식별된사용자B
+D(Login)
+end
+subgraph 식별된사용자A
+A(Login)--> B(Logout) --> C(Login)
+end
 ```
 
 ---
