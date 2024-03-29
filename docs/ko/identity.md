@@ -66,7 +66,9 @@ DfineryProperties.setIdentities(identities)
 `DfineryProperties.resetIdentity()` 메소드를 호출하면 기존 저장하고 있던 통합 ID 식별 정보를 제거하고 초기화할 수 있습니다.
 
 > [!CAUTION]
-> 이 메소드를 호출 할 경우 기존 사용자의 이벤트 흐름이 끊기므로 반영하고자 하는 이벤트를 먼저 호출 한 후에 호출하여 주시기 바랍니다.
+> 통합 ID 식별 정보를 초기화 할 경우 기존에 이어지고 있던 이벤트 흐름이 끊기고 단말기와 통합 ID의 연결도 끊기게 되므로 호출에 주의하여 주시기 바랍니다. 
+> 
+> 만약 그래도 호출하신다면 수집된 이벤트의 반영을 위해 API 호출 전에 반영하고자 하는 이벤트를 먼저 호출 한 후 호출하여 주시기 바랍니다.
 
 ```kotlin
 void resetIdentity()

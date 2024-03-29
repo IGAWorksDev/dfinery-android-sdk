@@ -8,7 +8,7 @@
 로그 활성화는 Dfinery의 설정을 적용하는 DfineryConfig를 사용하여 설정 가능합니다. DfineryConfig는 `init()` 메소드 호출 시에 파라미터로 넣어 적용할 수 있습니다.
 
 ```java
-DfineryConfig.Builder setLogEnable(boolean enable)
+setLogEnable(boolean enable)
 ```
 
 - 첫번째 인자인 `enable`은 로그를 표시할 지 말지 설정하는 값입니다. 기본값은 `false` 입니다.
@@ -44,7 +44,7 @@ Dfinery.getInstance().init(this, "{your_application_key}", config)
 로그 레벨은 Dfinery의 설정을 적용하는 DfineryConfig를 사용하여 설정 가능합니다. DfineryConfig는 `init()` 메소드 호출 시에 파라미터로 넣어 적용할 수 있습니다.
 
 ```java
-DfineryConfig.Builder setLogLevel(int logLevel)
+setLogLevel(int logLevel)
 ```
 
 - 첫번째 인자인 `logLevel `은 로그 표시 레벨을 설정하는 값입니다. 기본값은 `Log.ERROR(6)` 입니다.

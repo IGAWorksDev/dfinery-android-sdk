@@ -104,7 +104,7 @@ override fun onCreate() {
 
 #### 3. onCreate() 메소드 내에 다음 코드를 작성합니다.
 
-> Service ID는 [Console](https://dev-cdp.dfinery.io/)의 `서비스 관리/서비스 정보/Key 정보/서비스키` 경로에서 확인이 가능합니다. 추가적인 정보를 원한다면 이 [섹션](#서비스-id-가져오기)을 참고하세요 
+> Service ID는 콘솔의 `서비스 관리/서비스 정보/Key 정보/서비스키` 경로에서 확인이 가능합니다. 추가적인 정보를 원한다면 이 [섹션](#서비스-id-가져오기)을 참고하세요 
 
 ```java
 Dfinery.getInstance().init(this, "{your_service_id}")
@@ -224,7 +224,7 @@ Thread {
 
 ### 서비스 ID 가져오기
 
-#### 1. [Dfinery 콘솔](https://dev-cdp.dfinery.io/login)에 접속합니다.
+#### 1. Dfinery 콘솔에 접속합니다.
 #### 2. 이메일과 비밀번호를 입력하여 로그인 합니다. 
 ![login](../../assets/integration_1.png)
 #### 3. 좌측 상단에 네모난 서비스 아이콘을 클릭하여 화면을 활성화 합니다.

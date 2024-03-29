@@ -69,7 +69,10 @@ Dfinery.getInstance().logEvent(DF.Event.LOGOUT)
 
 ### 2. 통합 ID와 단말기의 연결 해제하기
 
-만약 식별된 사용자 A가 로그아웃한 이후 A에 대해 액션이 타게팅이 되기를 원치 않을 경우 `suspendUserTargeting()` API를 호출함으로써 연결을 해제합니다. 
+만약 식별된 사용자 A가 로그아웃한 이후 A에 대해 액션이 타게팅이 되기를 원치 않을 경우 `suspendUserTargeting()` API를 호출함으로써 연결을 해제합니다.
+
+> [!WARNING]
+> 로그아웃 및 종료 후에도 개인화 메시지를 받고 싶으시다면 `suspendUserTargeting()` API를 호출하지 않아야 합니다.
 
 ```java
 Dfinery.getInstance().suspendUserTargeting()

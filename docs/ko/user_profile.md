@@ -6,6 +6,9 @@
 
 SDK의 `DfineryProperties.setUserProfile()` 메소드 혹은 `DfineryProperties.setUserProfiles()` 사용하여 유저 프로필을 설정할 수 있습니다.
 
+> [!IMPORTANT]
+> 유저 프로필은 콘솔에서 미리 유저 프로필 속성을 생성을 하여 등록해야 서버에 정상적으로 반영됩니다. 등록되어 있지 않을 경우 호출 하더라도 반영되지 않습니다.
+
 ### 유저 프로필 한 건 설정하기
 설정해야 할 유저 프로필이 하나 일 때 사용 합니다.
 
@@ -148,8 +151,8 @@ DfineryProperties.setUserProfile(DF.UserProfile.BIRTH, birthday)
 ### 알림 수신 동의 정보 설정하기
 알림 수신 동의 정보는 유저 프로필에 속해있으며 다양한 채널에 대한 수신 동의 정보 값을 설정할 수 있습니다.
 
-> [!CAUTION]
-> [오후 9시 부터 오전 8시 사이에는 별도의 수신 동의를 받아야 광고성 알림을 전송할 수 있습니다.](https://spam.kisa.or.kr/spam/na/ntt/selectNttInfo.do?mi=1037&nttSn=1351&bbsId=1003)
+> [!IMPORTANT]
+> 알림 수신 동의 정보에 대한 유저 프로필은 시스템에서 이미 등록되어 있어 콘솔에서 설정하지 않아도 설정이 가능합니다.
 
 #### 알림 수신 동의 유형
 
@@ -160,6 +163,9 @@ DfineryProperties.setUserProfile(DF.UserProfile.BIRTH, birthday)
 |DF.UserProfile.ADVERTISING_NOTIFICATION_FOR_SMS_CHANNEL|문자|문자 채널에 대한 광고성 알림 동의|
 |DF.UserProfile.ADVERTISING_NOTIFICATION_FOR_KAKAO_CHANNEL|알림톡|카카오 알림톡 채널에 대한 광고성 알림 동의|
 |DF.UserProfile.ADVERTISING_NOTIFICATION_AT_NIGHT_FOR_PUSH_CHANNEL|푸시|푸시 채널에 대한 야간 광고성 알림 동의|
+
+> [!CAUTION]
+> [오후 9시 부터 오전 8시 사이에는 별도의 수신 동의](https://spam.kisa.or.kr/spam/na/ntt/selectNttInfo.do?mi=1037&nttSn=1351&bbsId=1003)를 받아야 광고성 알림을 전송할 수 있으므로 해당 시간에 메시지를 발송하고 싶으실 경우 `ADVERTISING_NOTIFICATION_AT_NIGHT_FOR_PUSH_CHANNEL` 값을 사용하여 동의를 받아 주시기 바랍니다.
 
 #### 설정하기
 - 지원 유형

@@ -1,10 +1,13 @@
 # 📊 분석
 
-이 문서는 Dfinery SDK를 사용하여 사용자의 동작을 추적하기 위해 수행해야할 작업에 대해 서술합니다.)
+이 문서는 Dfinery SDK를 사용하여 사용자의 동작을 추적하기 위해 수행해야할 작업에 대해 서술합니다.
 
 ## 이벤트 기록 하기
 
 SDK의 `Dfinery.getInstance().logEvent()` 메소드를 사용하여 사용자의 동작을 기록할 수 있습니다.
+
+> [!IMPORTANT]
+> 모든 이벤트는 콘솔에서 미리 이벤트 생성을 하여 등록해야 서버에 정상적으로 반영됩니다. 등록되어 있지 않을 경우 호출 하더라도 반영되지 않습니다.
 
 ```java
 void logEvent(String eventName)
@@ -59,7 +62,7 @@ Dfinery.getInstance().logEvent("{event_name}", eventParam)
 </details>
 
 
-## 기 정의된 이벤트 기록 예제
+## 표준 이벤트 기록 예제
 
 ### 로그인
 유저가 서비스에 회원으로 가입하는 동작을 나타내는 이벤트입니다.
@@ -902,7 +905,7 @@ Dfinery는 [활동의 생명주기 콜백](https://developer.android.com/referen
 ### App Set ID
 Dfinery는 사용자를 특정하기 위해 [App Set Id](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjl6-Lfg8CDAxXdQPUHHa9BCYMQFnoECBIQAQ&url=https%3A%2F%2Fdeveloper.android.com%2Ftraining%2Farticles%2Fapp-set-id&usg=AOvVaw2BN0DC8U-gaq6r7U2PulxJ&opi=89978449) 를 자동으로 수집합니다.
 
-### 디바이스 정보 
+### 단말기 정보 
 Dfinery는 다음의 단말기 정보를 자동으로 수집합니다.
 > 해당 값은 앱의 환경 및 허용된 권한에 따라 수집되지 않을 수 있습니다.
 
