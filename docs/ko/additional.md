@@ -5,7 +5,7 @@
 ## 디버깅
 
 ### 로그 활성화 하기
-로그 활성화는 Dfinery의 설정을 적용하는 DfineryConfig를 사용하여 설정 가능합니다. DfineryConfig는 init시에 파라미터로 넣어 적용할 수 있습니다.
+로그 활성화는 Dfinery의 설정을 적용하는 DfineryConfig를 사용하여 설정 가능합니다. DfineryConfig는 `init()` 메소드 호출 시에 파라미터로 넣어 적용할 수 있습니다.
 
 ```java
 DfineryConfig.Builder setLogEnable(boolean enable)
@@ -41,7 +41,7 @@ Dfinery.getInstance().init(this, "{your_application_key}", config)
 </details>
 
 ### 로그 레벨 변경하기
-로그 레벨은 Dfinery의 설정을 적용하는 DfineryConfig를 사용하여 설정 가능합니다. DfineryConfig는 init시에 파라미터로 넣어 적용할 수 있습니다.
+로그 레벨은 Dfinery의 설정을 적용하는 DfineryConfig를 사용하여 설정 가능합니다. DfineryConfig는 `init()` 메소드 호출 시에 파라미터로 넣어 적용할 수 있습니다.
 
 ```java
 DfineryConfig.Builder setLogLevel(int logLevel)
