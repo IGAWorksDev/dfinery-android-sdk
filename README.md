@@ -36,3 +36,7 @@
   - [부가 설정](./docs/ko/additional.md)
 
 </details>
+
+### 🗄️ Changelog
+
+Click [here](./CHANGELOG.md) to view the Android SDK Changelog.
