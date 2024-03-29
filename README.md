@@ -20,8 +20,11 @@
 
 ### ✨ Features
 
+<details>
+ <summary>EN</summary>
+</details>
 <details open>
- <summary>Korean</summary>
+ <summary>KO</summary>
 
 - [빠른 시작](./docs/ko/integration.md)
 - [분석](./docs/ko/analytics.md)
