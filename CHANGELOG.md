@@ -3,7 +3,7 @@
  <summary>EN</summary>
 - Initial release
 </details>
-<details>
+<details open>
  <summary>KO</summary>
 - 최초 배포 
 </details>

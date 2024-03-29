@@ -68,7 +68,7 @@ Dfinery.getInstance().logEvent("{event_name}", eventParam)
 유저가 서비스에 회원으로 가입하는 동작을 나타내는 이벤트입니다.
 
 > [!TIP]
-> 로그인을 한 [사용자의 식별 정보를 설정](https://github.com/IGAWorksDev/dfn-v2-dfinery-aos-sdk/wiki/👤-사용자-정보-설정하기#사용자-식별-정보-설정하기)하면 통합 아이디에 정보가 반영되어 사용자를 더 명확하게 식별할 수 있게 됩니다.
+> 로그인을 한 [사용자의 식별 정보를 설정](./identity.md)하면 통합 아이디에 정보가 반영되어 사용자를 더 명확하게 식별할 수 있게 됩니다.
 
 <details open>
   <summary>Java</summary>
@@ -145,9 +145,9 @@ Dfinery.getInstance().logEvent(DF.Event.SIGN_UP, eventParam)
 </details>
 
 #### 기 정의된 속성 값
-| 이름            | 타입   | 설명          |
-| --------------- | ------ | ------------- |
-| DF.EventProperty.KEY_STRING_SIGN_CHANNEL | String | 회원가입 채널 |
+| 이름            | 타입   | 설명          |필수|
+| --------------- | ------ | ------------- |---|
+| DF.EventProperty.KEY_STRING_SIGN_CHANNEL | String | 회원가입 채널 |✅|
 
 ### 홈 화면 조회
 유저가 앱의 홈 화면을 조회하는 동작을 나타내는 이벤트입니다.
@@ -233,9 +233,9 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_CART, eventParam)
 </details>
 
 #### 기 정의된 속성 값
-| 이름     | 타입  | 설명                                                                                 |
-| -------- | ----- | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
+| 이름     | 타입  | 설명                                                                                 |필수|
+| -------- | ----- | ---|------------------------------------------------------------------------------------ |
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
 
 ### 상품 목록 조회
 유저가 상품 목록을 조회하는 동작을 나타내는 이벤트입니다.
@@ -299,9 +299,9 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_LIST, eventParam)
 </details>
 
 #### 기 정의된 속성 값
-| 이름     | 타입  | 설명                                                                                 |
-| -------- | ----- | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
+| 이름     | 타입  | 설명                                                                                 |필수|
+| -------- | ----- | ---|------------------------------------------------------------------------------------ |
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
 
 ### 상품 공유하기
 유저가 상품을 공유하는 동작을 나타내는 이벤트입니다.
@@ -367,10 +367,10 @@ Dfinery.getInstance().logEvent(DF.Event.SHARE_PRODUCT, eventParam)
 </details>
 
 #### 기 정의된 속성 값
-| 이름               | 타입  | 설명                                                                                 |
-| ------------------ | ----- | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS           | Array | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
-| DF.EventProperty.KEY_STRING_SHARING_CHANNEL | Enum  | 상품 공유 채널                                                                       |
+| 이름               | 타입  | 설명                                                                                 |필수|
+| ------------------ | ----- | ------------------------------------------------------------------------------------ |---|
+| DF.EventProperty.KEY_ARRAY_ITEMS           | Array | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_STRING_SHARING_CHANNEL | Enum  | 상품 공유 채널                                                                       |✅|
 
 ### 상품 검색하기
 유저가 상품을 검색하여 결과를 확인하는 동작을 나타내는 이벤트입니다.
@@ -436,10 +436,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_SEARCH_RESULT, eventParam)
 </details>
 
 #### 기 정의된 속성 값
-| 이름       | 타입   | 설명                                                                                 |
-| ---------- | ------ | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS   | Array  | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
-| DF.EventProperty.KEY_STRING_KEYWORD | String | 검색 키워드                                                                          |
+| 이름       | 타입   | 설명                                                                                 |필수|
+| ---------- | ------ | ------------------------------------------------------------------------------------ |---|
+| DF.EventProperty.KEY_ARRAY_ITEMS   | Array  | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_STRING_KEYWORD | String | 검색 키워드                                                                          |✅|
 
 ### 관심 상품 추가
 유저가 상품을 관심 목록에 추가하는 동작을 나타내는 이벤트입니다.
@@ -503,9 +503,9 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_WISHLIST, eventParam)
 </details>
 
 #### 기 정의된 속성 값
-| 이름     | 타입  | 설명                                                                                 |
-| -------- | ----- | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
+| 이름     | 타입  | 설명                                                                                 |필수|
+| -------- | ----- | ------------------------------------------------------------------------------------ |---|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
 
 ### 장바구니에 상품 담기
 유저가 상품을 장바구니에 담는 동작을 나타내는 이벤트입니다.
@@ -570,9 +570,9 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_CART, eventParam)
 
 #### 기 정의된 속성 값
 
-| 이름     | 타입  | 설명                                                                                 |
-| -------- | ----- | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
+| 이름     | 타입  | 설명                                                                                 |필수|
+| -------- | ----- | ------------------------------------------------------------------------------------ |---|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
 
 ### 장바구니에 담긴 상품 제거하기
 유저가 장바구니에 담긴 상품을 제거하는 나타내는 이벤트입니다.
@@ -637,9 +637,9 @@ Dfinery.getInstance().logEvent(DF.Event.REMOVE_CART, eventParam)
 
 #### 기 정의된 속성 값
 
-| 이름     | 타입  | 설명                                                                                 |
-| -------- | ----- | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
+| 이름     | 타입  | 설명                                                                                 |필수|
+| -------- | ----- | ---|------------------------------------------------------------------------------------ |
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
 
 ### 상품 상세 보기
 유저가 특정 상품의 상세 정보를 조회하는 동작을 나타내는 이벤트입니다.
@@ -705,9 +705,9 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_PRODUCT_DETAILS, eventParam)
 
 
 #### 기 정의된 속성 값
-| 이름     | 타입  | 설명                                                                                 |
-| -------- | ----- | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
+| 이름     | 타입  | 설명                                                                                 |필수|
+| -------- | ----- | ------------------------------------------------------------------------------------ |---|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
 
 ### 구매 정보 입력
 유저가 구매 정보를 입력하는 동작을 나타내는 이벤트입니다.
@@ -754,9 +754,11 @@ itemList.put(item);
 JSONObject eventParam = new JSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
-    eventParam.put(DF.EventProperty.KEY_STRING_PAYMENT_METHOD, "BankTransfer");
     eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "상품번호");
-    eventParam.put(DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE, 30000.0);
+    eventParam.put(DF.EventProperty.KEY_STRING_PAYMENT_METHOD, "BankTransfer");
+    eventParam.put(DF.EventProperty.KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT, 25500.0);
+    eventParam.put(DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE, 3000.0);
+    eventParam.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 0);
 } catch (JSONException e) {
     e.printStackTrace();
 }
@@ -786,9 +788,11 @@ itemList.put(item)
 val eventParam = JSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
-    eventParam.put(DF.EventProperty.KEY_STRING_PAYMENT_METHOD, "BankTransfer");
-    eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "상품번호");
-    eventParam.put(DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE, 30000.0);
+    eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "상품번호")
+    eventParam.put(DF.EventProperty.KEY_STRING_PAYMENT_METHOD, "BankTransfer")
+    eventParam.put(DF.EventProperty.KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT, 25500.0)
+    eventParam.put(DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE, 3000.0)
+    eventParam.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 0)
 } catch (e: JSONException) {
     e.printStackTrace()
 }
@@ -798,13 +802,14 @@ Dfinery.getInstance().logEvent(DF.Event.PURCHASE, eventParam)
 </details>
 
 #### 기 정의된 속성 값
-| 이름                     | 타입   | 설명                                                                                 |
-| ------------------------ | ------ | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS                 | Array  | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
-| DF.EventProperty.KEY_STRING_ORDER_ID              | String | 주문 번호(ID)                                                                        |
-| DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE       | Double | 배송료                                                                               |
-| DF.EventProperty.KEY_STRING_PAYMENT_METHOD        | String | 결제 방법                                                                            |
-| DF.EventProperty.KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT | Double | 주문 총액                                                                            |
+| 이름                     | 타입   | 설명                                                                                 | 필수 |
+| ------------------------ | ------ | ------------------------------------------------------------------------------------ |---|
+| DF.EventProperty.KEY_ARRAY_ITEMS                 | Array  | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_STRING_ORDER_ID              | String | 주문 번호(ID)                                                                        |✅|
+| DF.EventProperty.KEY_STRING_PAYMENT_METHOD        | String | 결제 방법                                                                            |✅|
+| DF.EventProperty.KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT | Double | 주문 총액                                                                            |✅|
+| DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE       | Double | 배송료                                                                               |✅|
+| DF.EventProperty.KEY_DOUBLE_DISCOUNT              | Double | 상품할인가                                                                             |✅|
 
 ### 주문 취소하기
 유저가 구매한 주문을 취소하고 환불하는 동작을 나타내는 이벤트입니다.
@@ -830,6 +835,7 @@ itemList.put(item);
 JSONObject eventParam = new JSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
+    eventParam.put(DF.EventProperty.KEY_DOUBLE_TOTAL_REFUND_AMOUNT, 22500.0);
 } catch (JSONException e) {
     e.printStackTrace();
 }
@@ -859,6 +865,7 @@ itemList.put(item)
 val eventParam = JSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
+    eventParam.put(DF.EventProperty.KEY_DOUBLE_TOTAL_REFUND_AMOUNT, 22500.0)
 } catch (e: JSONException) {
     e.printStackTrace()
 }
@@ -869,28 +876,28 @@ Dfinery.getInstance().logEvent(DF.Event.REFUND, eventParam)
 </details>
 
 #### 기 정의된 속성 값
-| 이름                   | 타입   | 설명                                                                                 |
-| ---------------------- | ------ | ------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS               | Array  | [상품](https://github.com/IGAWorksDev/dfn-v2-dfinery-web-sdk/wiki/📊-분석#상품-속성) |
-| DF.EventProperty.KEY_DOUBLE_TOTAL_REFUND_AMOUNT | Double | 환불(취소) 총액                                                                            |
+| 이름                   | 타입   | 설명                                                                                 |필수|
+| ---------------------- | ------ | ------------------------------------------------------------------------------------ |---|
+| DF.EventProperty.KEY_ARRAY_ITEMS               | Array  | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_DOUBLE_TOTAL_REFUND_AMOUNT | Double | 환불(취소) 총액                                                                            |✅|
 
 <div id="product"></div>
 
 ### 상품 속성
 `KEY_ARRAY_ITEMS` 내에 배열로 적재되는 상품에 대한 기 정의된 속성 값에 대한 정보입니다.
-
-| 이름         | 타입   | 설명           |
-| ------------ | ------ | -------------- |
-| DF.EventProperty.KEY_STRING_ITEM_ID   | String | 상품 번호(ID)  |
-| DF.EventProperty.KEY_STRING_ITEM_NAME | String | 상품 명        |
-| DF.EventProperty.KEY_DOUBLE_PRICE     | Number | 상품 단가      |
-| DF.EventProperty.KEY_LONG_QUANTITY  | Number | 상품 수량      |
-| DF.EventProperty.KEY_DOUBLE_DISCOUNT  | Number | 상품 할인가    |
-| DF.EventProperty.KEY_STRING_CATEGORY1 | String | 상품 카테고리1 |
-| DF.EventProperty.KEY_STRING_CATEGORY2 | String | 상품 카테고리2 |
-| DF.EventProperty.KEY_STRING_CATEGORY3 | String | 상품 카테고리3 |
-| DF.EventProperty.KEY_STRING_CATEGORY4 | String | 상품 카테고리4 |
-| DF.EventProperty.KEY_STRING_CATEGORY5 | String | 상품 카테고리5 |
+4
+| 이름         | 타입   | 설명           |필수|
+| ------------ | ------ | -------------- |---|
+| DF.EventProperty.KEY_STRING_ITEM_ID   | String | 상품 번호(ID)  |✅|
+| DF.EventProperty.KEY_STRING_ITEM_NAME | String | 상품 명        |✅|
+| DF.EventProperty.KEY_DOUBLE_PRICE     | Number | 상품 단가      |✅|
+| DF.EventProperty.KEY_LONG_QUANTITY  | Number | 상품 수량      |✅|
+| DF.EventProperty.KEY_DOUBLE_DISCOUNT  | Number | 상품 할인가    |✅|
+| DF.EventProperty.KEY_STRING_CATEGORY1 | String | 상품 카테고리1 ||
+| DF.EventProperty.KEY_STRING_CATEGORY2 | String | 상품 카테고리2 ||
+| DF.EventProperty.KEY_STRING_CATEGORY3 | String | 상품 카테고리3 ||
+| DF.EventProperty.KEY_STRING_CATEGORY4 | String | 상품 카테고리4 ||
+| DF.EventProperty.KEY_STRING_CATEGORY5 | String | 상품 카테고리5 ||
 
 
 ## 커스텀 이벤트
