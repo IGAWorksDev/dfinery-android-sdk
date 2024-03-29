@@ -84,7 +84,7 @@ Dfinery.getInstance().suspendUserTargeting()
  이 섹션은 통합 식별 정보를 설정한 이력이 있는 사용자가 다시 같은 `EXTERNAL_ID` 값을 사용해서 로그인을 하는 과정을 보여줍니다.
 
  ### 1. 통합 ID 식별 정보 설정하기
- 입력한 `EXTERNAL_ID` 값이 기존과 동일할 경우 기존에 생성되었던 통합 ID와 다시 단말기가 연결됩니다.
+ 입력한 `EXTERNAL_ID` 값이 기존과 동일할 경우 기존에 생성되었던 식별된 사용자 A와 다시 단말기가 연결됩니다.
 
  ```java
 DfineryProperties.setIdentity(DF.Identity.EXTERNAL_ID, "A")
@@ -107,7 +107,7 @@ end
 이 섹션은 통합 식별 정보를 설정한 이력이 있는 사용자가 다른 `EXTERNAL_ID` 값을 사용해서 로그인을 하는 과정을 보여줍니다.
 
 ### 1. 통합 ID 식별 정보 설정하기
- 입력한 `EXTERNAL_ID` 값이 기존과 다를 경우 SDK는 다른 사용자로 판단해서 기존에 저장하고 있었던 통합 ID 정보를 모두 삭제하고 새로 설정하게 됩니다.
+ 입력한 `EXTERNAL_ID` 값이 기존과 다를 경우 SDK는 다른 사용자로 판단해서 기존에 저장하고 있었던 통합 ID 정보를 모두 삭제하고 새로 설정하게 되며 단말기가 식별된 사용자 B로 연결됩니다.
 
  ```java
 DfineryProperties.setIdentity(DF.Identity.EXTERNAL_ID, "B")
