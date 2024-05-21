@@ -6,7 +6,7 @@
 
 SDK의 `DfineryProperties.setUserProfile()` 메소드 혹은 `DfineryProperties.setUserProfiles()` 사용하여 유저 프로필을 설정할 수 있습니다.
 
-> [!NOTE]
+> [!IMPORTANT]
 > 유저 프로필은 [Dfinery 콘솔](https://console.dfinery.ai/)에서 미리 유저 프로필 속성을 생성을 하여 등록해야 서버에 정상적으로 반영됩니다. 등록되어 있지 않을 경우 호출 하더라도 반영되지 않습니다.
 
 ### 유저 프로필 한 건 설정하기
@@ -149,7 +149,7 @@ DfineryProperties.setUserProfile(DF.UserProfile.BIRTH, birthday)
 ### 알림 수신 동의 정보 설정하기
 알림 수신 동의 정보는 유저 프로필에 속해있으며 다양한 채널에 대한 수신 동의 정보 값을 설정할 수 있습니다.
 
-> [!NOTE]
+> [!IMPORTANT]
 > 알림 수신 동의 정보에 대한 유저 프로필은 예외적으로 Dfinery에서 서비스 생성 시 이미 자동으로 등록되어 있어 Dfinery 콘솔에서 설정하지 않아도 설정이 가능합니다.
 
 #### 알림 수신 동의 유형

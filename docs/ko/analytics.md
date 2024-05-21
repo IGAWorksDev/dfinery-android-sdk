@@ -4,9 +4,9 @@
 
 ## 이벤트 기록 하기
 
-SDK의 `Dfinery.getInstance().logEvent()` 메소드를 사용하여 사용자의 동작을 기록할 수 있습니다.
+SDK의 `logEvent()` 메소드를 사용하여 사용자의 동작을 기록할 수 있습니다.
 
-> [!NOTE]
+> [!IMPORTANT]
 > 모든 이벤트는 [Dfinery Console](https://console.dfinery.ai/)에서 미리 이벤트 생성을 하여 등록해야 서버에 정상적으로 반영됩니다. 등록되어 있지 않을 경우 호출 하더라도 반영되지 않습니다.
 
 ```java

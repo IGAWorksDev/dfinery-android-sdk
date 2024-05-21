@@ -6,7 +6,7 @@ A user profile is profile information about a user managed by the Dfinery server
 
 You can set user profiles using the SDK's `DfineryProperties.setUserProfile()` method or `DfineryProperties.setUserProfiles()`.
 
-> [!NOTE]
+> [!IMPORTANT]
 > Before calling the user profile, you must create and register the user profile properties in [Dfinery Console](https://console.dfinery.ai/) to be set up properly on the server. If it is not registered, it will not be set even if you call it.
 
 ### Setting for each item
@@ -149,7 +149,7 @@ DfineryProperties.setUserProfile(DF.UserProfile.BIRTH, birthday)
 ### Setting consent to receive notifications
 Notification consent information belongs to the user profile, and you can set the consent information values for various channels.
 
-> [!NOTE]
+> [!IMPORTANT]
 > Exceptionally, the user profile for notification consent information is already automatically registered when creating a service in Dfinery, so it can be set without having to set it in the Dfinery console.
 
 #### Notification Consent Type
