@@ -22,7 +22,7 @@ Console에서 [부가설정/채널 부가 설정/푸시/Android 설정관리](ht
 Firebase에서 제공하는 [수동으로 사용자 인증 정보 제공](https://firebase.google.com/docs/cloud-messaging/auth-server?hl=ko#provide-credentials-manually)을 참고하여 JSON 형식으로 키를 저장한다음 Console에 파일을 업로드 해주세요.
 
 해당 페이지에서 확인할 수 있는 주요 내용은 다음과 같습니다.
-> 1. [Firebase Console](https://console.firebase.google.com/)에서 설정 > [서비스 ?계정](https://console.cloud.google.com/iam-admin/)을 엽니다.
+> 1. [Firebase Console](https://console.firebase.google.com/)에서 설정 > [서비스 계정](https://console.cloud.google.com/iam-admin/)을 엽니다.
 > 2. 새 비공개 키 생성을 클릭한 다음 키 생성을 클릭하여 확인합니다.
 > 3. 키가 들어 있는 JSON 파일을 안전하게 저장합니다.
 
@@ -485,7 +485,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 </details>
 
 ### Firebase 사용자 인증 정보 비공개 키 파일 발급 따라해보기
-#### 1. [서비스 계정 사이트](https://console.cloud.google.com/iam-admin/serviceaccounts)에 접속합니다.
+#### 1. [서비스 계정](https://console.cloud.google.com/iam-admin/serviceaccounts)에 접속합니다.
 #### 2. 발급 하고 싶은 키의 프로젝트를 선택합니다.
 
 > 프로젝트가 없을 경우 Firebase 프로젝트 생성이 되지 않았다는 뜻이므로 [Android 프로젝트에 Firebase 추가하기](https://firebase.google.com/docs/android/setup?hl=ko#next_steps) 문서를 참고하여 Firebase 프로젝트를 생성합니다.
