@@ -3,7 +3,7 @@
 Dfinery는 Firebase Cloud Messaging을 사용하여 푸시를 수신받으므로 어플리케이션에서 Firebase 연동이 필요합니다.
 
 ## Android 프로젝트에 Firebase 추가하기
-Firebase에서 제공되는 [문서](https://firebase.google.com/docs/android/setup?hl=ko#next_steps) 의 지시사항에 따라 Android 프로젝트에 Firebase를 추가합니다.
+Firebase에서 제공되는 [Android 프로젝트에 Firebase 추가](https://firebase.google.com/docs/android/setup?hl=ko#next_steps) 의 지시사항에 따라 Android 프로젝트에 Firebase를 추가합니다.
 
 ## Dfinery Console에서 Firebase 정보 등록하기
 Console에서 [부가설정/채널 부가 설정/푸시/Android 설정관리](https://console.dfinery.ai)에 들어가 발신자 ID를 입력하고 JSON 형식의 Firebase 사용자 인증 정보 비공개 키 파일을 업로드합니다.
@@ -29,7 +29,7 @@ Firebase에서 제공하는 [수동으로 사용자 인증 정보 제공](https:
 만약 비공개 키 파일 발급에 어려움을 겪으실 경우 [Firebase 사용자 인증 정보 비공개 키 파일 발급 따라해보기](#firebase-사용자-인증-정보-비공개-키-파일-발급-따라해보기)를 참고하여 주시기 바랍니다.
 
 ## Firebase Cloud Messaging 설정하기
-Firebase에서 제공되는 [문서](https://firebase.google.com/docs/cloud-messaging/android/client?hl=ko) 의 지시사항에 따라 다음의 항목을 적용합니다.
+Firebase에서 제공되는 [Android에서 Firebase 클라우드 메시징 클라이언트 앱 설정](https://firebase.google.com/docs/cloud-messaging/android/client?hl=ko) 의 지시사항에 따라 다음의 항목을 적용합니다.
 - [앱 매니페스트에 FirebaseMessagingService를 상속받는 서비스 추가](https://firebase.google.com/docs/cloud-messaging/android/client?hl=ko#manifest)
 - [Android 13 이상에서 적용되는 런타임 알림 권한 요청 작성](https://firebase.google.com/docs/cloud-messaging/android/client?hl=ko#request-permission13)
 - [기기 등록 토큰 액세스 연동](https://firebase.google.com/docs/cloud-messaging/android/client?hl=ko#sample-register)
@@ -121,7 +121,7 @@ override fun onNewToken(token: String) {
 
 ## 푸시 알림 채널을 Dfinery에 연동하기
 ### 푸시 알림 채널 생성
-Android 8.0부터는 알림을 수신받기 위해 알림 채널 생성이 필요합니다. Android에서 제공하는 [문서](https://developer.android.com/training/notify-user/channels?hl=ko) 의 지시사항과 [알림 채널 생성 따라해보기](#알림-채널-생성-따라해보기)를 참고하여 알림 채널을 생성해주시기 바랍니다.
+Android 8.0부터는 알림을 수신받기 위해 알림 채널 생성이 필요합니다. Android에서 제공하는 [알림 채널 만들기 및 관리](https://developer.android.com/training/notify-user/channels?hl=ko)의 지시사항과 [알림 채널 생성 따라해보기](#알림-채널-생성-따라해보기)를 참고하여 알림 채널을 생성해주시기 바랍니다.
 
 > [!WARNING]
 > 한번 생성된 알림 채널에 대한 설정 정보는 이름과 설명등의 정보를 제외하고는 코드를 통해 설정 값이 변경되지 않습니다. 또한 알림 채널에 대한 설정 정보는 사용자에 의해 변경될 수 있으므로 유의 바랍니다. 
@@ -488,7 +488,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 #### 1. [서비스 계정](https://console.cloud.google.com/iam-admin/serviceaccounts)에 접속합니다.
 #### 2. 발급 하고 싶은 키의 프로젝트를 선택합니다.
 
-> 프로젝트가 없을 경우 Firebase 프로젝트 생성이 되지 않았다는 뜻이므로 [Android 프로젝트에 Firebase 추가하기](https://firebase.google.com/docs/android/setup?hl=ko#next_steps) 문서를 참고하여 Firebase 프로젝트를 생성합니다.
+> 프로젝트가 없을 경우 Firebase 프로젝트 생성이 되지 않았다는 뜻이므로 [Android 프로젝트에 Firebase 추가하기](https://firebase.google.com/docs/android/setup?hl=ko#next_steps)를 참고하여 Firebase 프로젝트를 생성합니다.
 
 ![select a recent project](../../assets/certificate_1.png)
 #### 3. 우측 하단의 작업에서 ⋮를 클릭합니다.

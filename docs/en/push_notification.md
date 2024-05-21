@@ -3,7 +3,7 @@
 Dfinery uses Firebase Cloud Messaging to receive pushes, so your application requires Firebase integration.
 
 ## Add Firebase to your Android project
-Add Firebase to your Android project by following the instructions in [document](https://firebase.google.com/docs/android/setup#next_steps) provided by Firebase.
+Add Firebase to your Android project by following the instructions in [Add Firebase to your Android project](https://firebase.google.com/docs/android/setup#next_steps) provided by Firebase.
 
 ## Register Firebase information in Dfinery Console
 In the console, go to [Additional Settings/Channel Additional Settings/Push/Android Settings Management](https://console.dfinery.ai), enter the sender ID, and enter Firebase JSON format. Upload your credential private key file.
@@ -17,10 +17,10 @@ Here are the main things you can find on that page:
  > 2. Click Generate New Private Key, then confirm by clicking Generate Key.
  > 3. Securely store the JSON file containing the key.
 
- If you are having difficulty issuing a private key file, please refer to [Follow along with issuing Firebase user credentials private key file](#follow-along-with-issuing-firebase-user-credentials-private-key-file).
+ If you are having a problem to create private key file, please refer to [Follow along with create Firebase credentials private key file](#follow-along-with-create-firebase-credentials-private-key-file).
 
 ## Set up a Firebase Cloud Messaging client app 
-Apply the following items according to the instructions in the [document](https://firebase.google.com/docs/cloud-messaging/android/client) provided by Firebase.
+Apply the following items according to the instructions in the [Set up a Firebase Cloud Messaging client app on Android](https://firebase.google.com/docs/cloud-messaging/android/client) provided by Firebase.
 - [Edit your app manifest](https://firebase.google.com/docs/cloud-messaging/android/client#manifest)
 - [Request runtime notification permission on Android 13+](https://firebase.google.com/docs/cloud-messaging/android/client#request-permission13)
 - [Access the device registration token](https://firebase.google.com/docs/cloud-messaging/android/client#sample-register)
@@ -112,7 +112,7 @@ override fun onNewToken(token: String) {
 
 ## Setting up a notification channel in Dfinery
 ### Create a notification channel
-Starting with Android 8.0, you need to create a notification channel to receive notifications. Please create a notification channel by referring to the instructions in [Documentation](https://developer.android.com/training/notify-user/channels) provided by Android and [Follow along on creating a notification channel](#follow-along-on-creating-a-notification-channel) .
+Starting with Android 8.0, you need to create a notification channel to receive notifications. Please create a notification channel by referring to the instructions in [Create and manage notification channels](https://developer.android.com/training/notify-user/channels) provided by Android and [Follow along on creating a notification channel](#follow-along-on-creating-a-notification-channel).
 
 > [!WARNING]
 > Once created, the setting information for the notification channel is not changed through code, except for information such as name and description. Also, please note that the settings information for notification channels can be changed by the user.
@@ -475,12 +475,12 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 ```
 </details>
 
-### Follow along with issuing Firebase user credentials private key file
+### Follow along with create Firebase credentials private key file
 
-#### 1. Access the [Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts).
-#### 2. Select the project for the key you want to issue.
+#### 1. Visit the [Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts).
+#### 2. Select the project for the key you want to create.
 
-> If there is no project, it means that the Firebase project has not been created, so refer to the [Add Firebase to your Android project](https://firebase.google.com/docs/android/setup#next_steps) document to create the Firebase project. 
+> If there is no project, it means that the Firebase project has not been created, so refer to the [Add Firebase to your Android project](https://firebase.google.com/docs/android/setup#next_steps) to create the Firebase project. 
 
 ![select a recent project](../../assets/certificate_1.png)
 #### 3. Click ⋮ in Actions at the bottom right.
