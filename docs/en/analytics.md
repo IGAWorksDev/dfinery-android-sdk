@@ -1,23 +1,23 @@
-# 📊 분석
+# 📊 Analytics
 
-이 문서는 Dfinery SDK를 사용하여 사용자의 동작을 추적하기 위해 수행해야할 작업에 대해 서술합니다.
+This document describes what you need to do to track user behavior using the Dfinery SDK.
 
-## 이벤트 기록 하기
+## Logging events
 
-SDK의 `Dfinery.getInstance().logEvent()` 메소드를 사용하여 사용자의 동작을 기록할 수 있습니다.
+You can log user actions using the SDK's `Dfinery.getInstance().logEvent()` method.
 
 > [!IMPORTANT]
-> 모든 이벤트는 [Dfinery Console](https://console.dfinery.ai/)에서 미리 이벤트 생성을 하여 등록해야 서버에 정상적으로 반영됩니다. 등록되어 있지 않을 경우 호출 하더라도 반영되지 않습니다.
+> All events must be created and registered in advance in [Dfinery Console](https://console.dfinery.ai/) to be properly reflected on the server. If it is not registered, it will not be reflected even if called.
 
 ```java
 void logEvent(String eventName)
 void logEvent(String eventName, JSONObject properties)
 ```
 
-- 첫번째 인자인 `eventName`은 기록할 이벤트의 이름을 의미합니다.
--  두번째 인자인 `properties`는 기록할 이벤트의 속성을 의미합니다. 만약 속성이 없을 경우 `null`을 입력할 수 있습니다.
+- The first argument, `eventName`, refers to the name of the event to be recorded.
+- The second argument, `properties`, refers to the properties of the event to be recorded. If there is no attribute, you can enter `null`.
 
-### 속성이 없을 경우
+### If the event has no properties
 
 <details open>
   <summary>Java</summary>
@@ -37,14 +37,14 @@ Dfinery.getInstance().logEvent("{event_name}")
 
 </details>
 
-### 속성이 있을 경우
+### If the event has properties
 
 <details open>
   <summary>Java</summary>
 
 ```java
 JSONObject eventParam = new JSONObject();
-eventParam.put("key", "value");	//사용자 정의 속성 값(Optional)
+eventParam.put("key", "value");	
 Dfinery.getInstance().logEvent("{event_name}", eventParam);
 ```
 
@@ -55,20 +55,20 @@ Dfinery.getInstance().logEvent("{event_name}", eventParam);
 
 ```kotlin
 val eventParam = JSONObject()
-eventParam.put("key", "value")	//사용자 정의 속성 값(Optional)
+eventParam.put("key", "value")	
 Dfinery.getInstance().logEvent("{event_name}", eventParam)
 ```
 
 </details>
 
 
-## 기 정의된 이벤트 기록 예제
+## Example of logging a Pre-defined Event 
 
-### 로그인
-유저가 서비스에 회원으로 가입하는 동작을 나타내는 이벤트입니다.
+### Login
+This event indicates that user signing up for a service as a member.
 
 > [!TIP]
-> 로그인을 한 [사용자의 식별 정보를 설정](./identity.md)하면 통합 아이디에 정보가 반영되어 사용자를 더 명확하게 식별할 수 있게 됩니다.
+> If you log in and [set Unified ID identification](./identity.md), the information will be set in the Unified ID, allowing you to identify the user more clearly.
 
 <details open>
   <summary>Java</summary>
@@ -89,8 +89,8 @@ Dfinery.getInstance().logEvent(DF.Event.LOGIN)
 </details>
 
 
-### 로그아웃 
-유저가 앱에서 로그아웃하는 동작을 나타내는 이벤트입니다.
+### Logout
+This event indicates that the user logs out of the app.
 
 <details open>
   <summary>Java</summary>
@@ -110,8 +110,8 @@ Dfinery.getInstance().logEvent(DF.Event.LOGOUT)
 
 </details>
 
-### 회원가입
-유저가 회원으로 가입하는 동작을 나타내는 이벤트입니다.
+### Sign Up
+This event indicates that the action of a user signing up as a member.
 
 <details open>
   <summary>Java</summary>
@@ -144,13 +144,13 @@ Dfinery.getInstance().logEvent(DF.Event.SIGN_UP, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
-| 이름            | 타입   | 설명          |필수|
+#### Pre-defined property values
+| Name            | Type   | Description          |is Required|
 | --------------- | ------ | ------------- |---|
-| DF.EventProperty.KEY_STRING_SIGN_CHANNEL | String | 회원가입 채널 |✅|
+| DF.EventProperty.KEY_STRING_SIGN_CHANNEL | String | membership registration channel |✅|
 
-### 홈 화면 조회
-유저가 앱의 홈 화면을 조회하는 동작을 나타내는 이벤트입니다.
+### View home
+This event indicates the user's action of viewing the app's home screen.
 
 <details open>
   <summary>Java</summary>
@@ -170,8 +170,8 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_HOME)
 
 </details>
 
-### 장바구니 조회
-유저가 장바구니를 조회하는 동작을 나타내는 이벤트입니다.
+### View cart
+This event indicates the action of the user checking the shopping cart.
 
 <details open>
   <summary>Java</summary>
@@ -179,10 +179,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_HOME)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -208,10 +208,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_CART, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -232,13 +232,13 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_CART, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
-| 이름     | 타입  | 설명                                                                                 |필수|
+#### Pre-defined property values
+| Name     | Type  | Description                                                                                 |is Required|
 | -------- | ----- | ---|------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [Product](#product-property-values) |✅|
 
-### 상품 목록 조회
-유저가 상품 목록을 조회하는 동작을 나타내는 이벤트입니다.
+### View list
+This event indicates the user's action of viewing the product list.
 
 <details open>
   <summary>Java</summary>
@@ -246,10 +246,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_CART, eventParam)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -275,10 +275,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_LIST, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -298,13 +298,13 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_LIST, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
-| 이름     | 타입  | 설명                                                                                 |필수|
+#### Pre-defined property values
+| Name     | Type  | Description                                                                                 |is Required|
 | -------- | ----- | ---|------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [Product](#product-property-values) |✅|
 
-### 상품 공유하기
-유저가 상품을 공유하는 동작을 나타내는 이벤트입니다.
+### Share product
+This event indicates the action of a user sharing a product.
 
 <details open>
   <summary>Java</summary>
@@ -312,10 +312,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_LIST, eventParam)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -342,10 +342,10 @@ Dfinery.getInstance().logEvent(DF.Event.SHARE_PRODUCT, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -366,14 +366,14 @@ Dfinery.getInstance().logEvent(DF.Event.SHARE_PRODUCT, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
-| 이름               | 타입  | 설명                                                                                 |필수|
+#### Pre-defined property values
+| Name               | Type  | Description                                                                                 |is Required|
 | ------------------ | ----- | ------------------------------------------------------------------------------------ |---|
-| DF.EventProperty.KEY_ARRAY_ITEMS           | Array | [상품](#상품-속성) |✅|
-| DF.EventProperty.KEY_STRING_SHARING_CHANNEL | Enum  | 상품 공유 채널                                                                       |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS           | Array | [Product](#product-property-values) |✅|
+| DF.EventProperty.KEY_STRING_SHARING_CHANNEL | Enum  | Channel used to share product                                                                       |✅|
 
-### 상품 검색하기
-유저가 상품을 검색하여 결과를 확인하는 동작을 나타내는 이벤트입니다.
+### View search result
+This event indicates the action of a user searching for a product and checking the results.
 
 <details open>
   <summary>Java</summary>
@@ -381,10 +381,10 @@ Dfinery.getInstance().logEvent(DF.Event.SHARE_PRODUCT, eventParam)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -396,7 +396,7 @@ itemList.put(item);
 JSONObject eventParam = new JSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
-    eventParam.put(DF.EventProperty.KEY_STRING_KEYWORD, "삼겹살");
+    eventParam.put(DF.EventProperty.KEY_STRING_KEYWORD, "Fork");
 } catch (JSONException e) {
     e.printStackTrace();
 }
@@ -411,10 +411,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_SEARCH_RESULT, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -426,7 +426,7 @@ itemList.put(item)
 val eventParam = JSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
-    eventParam.put(DF.EventProperty.KEY_STRING_KEYWORD, "삼겹살")
+    eventParam.put(DF.EventProperty.KEY_STRING_KEYWORD, "Fork")
 } catch (e: JSONException) {
     e.printStackTrace()
 }
@@ -435,14 +435,14 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_SEARCH_RESULT, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
-| 이름       | 타입   | 설명                                                                                 |필수|
+#### Pre-defined property values
+| Name       | Type   | Description                                                                                 |is Required|
 | ---------- | ------ | ------------------------------------------------------------------------------------ |---|
-| DF.EventProperty.KEY_ARRAY_ITEMS   | Array  | [상품](#상품-속성) |✅|
-| DF.EventProperty.KEY_STRING_KEYWORD | String | 검색 키워드                                                                          |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS   | Array  | [Product](#product-property-values) |✅|
+| DF.EventProperty.KEY_STRING_KEYWORD | String | Searching keyword                                                                          |✅|
 
-### 관심 상품 추가
-유저가 상품을 관심 목록에 추가하는 동작을 나타내는 이벤트입니다.
+### Add to wishlist
+This event indicates the action of a user adding a product to his/her interest list.
 
 <details open>
   <summary>Java</summary>
@@ -450,10 +450,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_SEARCH_RESULT, eventParam)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -479,10 +479,10 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_WISHLIST, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -502,13 +502,13 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_WISHLIST, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
-| 이름     | 타입  | 설명                                                                                 |필수|
+#### Pre-defined property values
+| Name     | Type  | Description                                                                                 |is Required|
 | -------- | ----- | ------------------------------------------------------------------------------------ |---|
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [Product](#product-property-values) |✅|
 
-### 장바구니에 상품 담기
-유저가 상품을 장바구니에 담는 동작을 나타내는 이벤트입니다.
+### Add to cart
+This event indicates the user putting a product into the shopping cart.
 
 <details open>
   <summary>Java</summary>
@@ -516,10 +516,10 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_WISHLIST, eventParam)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -545,10 +545,10 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_CART, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -568,14 +568,14 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_CART, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
+#### Pre-defined property values
 
-| 이름     | 타입  | 설명                                                                                 |필수|
+| Name     | Type  | Description                                                                                 |is Required|
 | -------- | ----- | ------------------------------------------------------------------------------------ |---|
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [Product](#product-property-values) |✅|
 
-### 장바구니에 담긴 상품 제거하기
-유저가 장바구니에 담긴 상품을 제거하는 나타내는 이벤트입니다.
+### Remove cart
+This event indicates that the user removes a product from the shopping cart.
 
 <details open>
   <summary>Java</summary>
@@ -583,10 +583,10 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_CART, eventParam)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -612,10 +612,10 @@ Dfinery.getInstance().logEvent(DF.Event.REMOVE_CART, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -635,14 +635,14 @@ Dfinery.getInstance().logEvent(DF.Event.REMOVE_CART, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
+#### Pre-defined property values
 
-| 이름     | 타입  | 설명                                                                                 |필수|
+| Name     | Type  | Description                                                                                 |is Required|
 | -------- | ----- | ---|------------------------------------------------------------------------------------ |
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [Product](#product-property-values) |✅|
 
-### 상품 상세 보기
-유저가 특정 상품의 상세 정보를 조회하는 동작을 나타내는 이벤트입니다.
+### View product details
+This event indicates the action of a user searching for detailed information about a specific product.
 
 <details open>
   <summary>Java</summary>
@@ -650,10 +650,10 @@ Dfinery.getInstance().logEvent(DF.Event.REMOVE_CART, eventParam)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -679,10 +679,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_PRODUCT_DETAILS, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -704,10 +704,10 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_PRODUCT_DETAILS, eventParam)
 </details>
 
 
-#### 기 정의된 속성 값
-| 이름     | 타입  | 설명                                                                                 |필수|
+#### Pre-defined property values
+| Name     | Type  | Description                                                                                 |is Required|
 | -------- | ----- | ------------------------------------------------------------------------------------ |---|
-| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [상품](#상품-속성) |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS | Array | [Product](#product-property-values) |✅|
 
 ### 구매 정보 입력
 유저가 구매 정보를 입력하는 동작을 나타내는 이벤트입니다.
@@ -730,8 +730,8 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_PAYMENT_INFO)
 
 </details>
 
-### 구매하기
-유저가 상품이나 서비스를 구매하는 동작을 나타내는 이벤트입니다.
+### Purchase
+This event indicates the action of a user purchasing a product or service.
 
 <details open>
   <summary>Java</summary>
@@ -739,10 +739,10 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_PAYMENT_INFO)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -754,7 +754,7 @@ itemList.put(item);
 JSONObject eventParam = new JSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
-    eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "상품번호");
+    eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "ProductNumber");
     eventParam.put(DF.EventProperty.KEY_STRING_PAYMENT_METHOD, "BankTransfer");
     eventParam.put(DF.EventProperty.KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT, 25500.0);
     eventParam.put(DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE, 3000.0);
@@ -773,10 +773,10 @@ Dfinery.getInstance().logEvent(DF.Event.PURCHASE, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -788,7 +788,7 @@ itemList.put(item)
 val eventParam = JSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
-    eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "상품번호")
+    eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "ProductNumber")
     eventParam.put(DF.EventProperty.KEY_STRING_PAYMENT_METHOD, "BankTransfer")
     eventParam.put(DF.EventProperty.KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT, 25500.0)
     eventParam.put(DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE, 3000.0)
@@ -801,18 +801,18 @@ Dfinery.getInstance().logEvent(DF.Event.PURCHASE, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
-| 이름                     | 타입   | 설명                                                                                 | 필수 |
+#### Pre-defined property values
+| Name                     | Type   | Description                                                                                 | is Required |
 | ------------------------ | ------ | ------------------------------------------------------------------------------------ |---|
-| DF.EventProperty.KEY_ARRAY_ITEMS                 | Array  | [상품](#상품-속성) |✅|
-| DF.EventProperty.KEY_STRING_ORDER_ID              | String | 주문 번호(ID)                                                                        |✅|
-| DF.EventProperty.KEY_STRING_PAYMENT_METHOD        | String | 결제 방법                                                                            |✅|
-| DF.EventProperty.KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT | Double | 주문 총액                                                                            |✅|
-| DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE       | Double | 배송료                                                                               |✅|
-| DF.EventProperty.KEY_DOUBLE_DISCOUNT              | Double | 상품할인가                                                                             |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS                 | Array  | [Product](#product-property-values) |✅|
+| DF.EventProperty.KEY_STRING_ORDER_ID              | String | Order Number(ID)                                                                        |✅|
+| DF.EventProperty.KEY_STRING_PAYMENT_METHOD        | String | Payment Method                                                                            |✅|
+| DF.EventProperty.KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT | Double | Total of the price                                                                            |✅|
+| DF.EventProperty.KEY_DOUBLE_DELIVERY_CHARGE       | Double | Delivery fee                                                                               |✅|
+| DF.EventProperty.KEY_DOUBLE_DISCOUNT              | Double | Discount                                                                             |✅|
 
-### 주문 취소하기
-유저가 구매한 주문을 취소하고 환불하는 동작을 나타내는 이벤트입니다.
+### Refund
+This event indicates the action of canceling and refunding an order purchased by a user.
 
 <details open>
   <summary>Java</summary>
@@ -820,10 +820,10 @@ Dfinery.getInstance().logEvent(DF.Event.PURCHASE, eventParam)
 ```java
 JSONObject item = new JSONObject();
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호");
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품");
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food");
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker");
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0);
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0);
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L);
@@ -850,10 +850,10 @@ Dfinery.getInstance().logEvent(DF.Event.REFUND, eventParam);
 ```kotlin
 val item = JSONObject()
 try {
-    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "상품번호")
-    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "상품이름")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "식품")
-    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "과자")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
+    item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY1, "Food")
+    item.put(DF.EventProperty.KEY_STRING_CATEGORY2, "Cracker")
     item.put(DF.EventProperty.KEY_DOUBLE_PRICE, 5000.0)
     item.put(DF.EventProperty.KEY_DOUBLE_DISCOUNT, 500.0)
     item.put(DF.EventProperty.KEY_LONG_QUANTITY, 5L)
@@ -875,59 +875,59 @@ Dfinery.getInstance().logEvent(DF.Event.REFUND, eventParam)
 
 </details>
 
-#### 기 정의된 속성 값
-| 이름                   | 타입   | 설명                                                                                 |필수|
+#### Pre-defined property values
+| Name                   | Type   | Description                                                                                 |is Required|
 | ---------------------- | ------ | ------------------------------------------------------------------------------------ |---|
-| DF.EventProperty.KEY_ARRAY_ITEMS               | Array  | [상품](#상품-속성) |✅|
-| DF.EventProperty.KEY_DOUBLE_TOTAL_REFUND_AMOUNT | Double | 환불(취소) 총액                                                                            |✅|
+| DF.EventProperty.KEY_ARRAY_ITEMS               | Array  | [Product](#product-property-values) |✅|
+| DF.EventProperty.KEY_DOUBLE_TOTAL_REFUND_AMOUNT | Double | total of the refund fee                                                                            |✅|
 
 <div id="product"></div>
 
-### 상품 속성
-`KEY_ARRAY_ITEMS` 내에 배열로 적재되는 상품에 대한 기 정의된 속성 값에 대한 정보입니다.
+### Product property values
+This is information about pre-defined property values for products loaded as an array in `KEY_ARRAY_ITEMS`.
 4
-| 이름         | 타입   | 설명           |필수|
+| Name         | Type   | Description           |is Required|
 | ------------ | ------ | -------------- |---|
-| DF.EventProperty.KEY_STRING_ITEM_ID   | String | 상품 번호(ID)  |✅|
-| DF.EventProperty.KEY_STRING_ITEM_NAME | String | 상품 명        |✅|
-| DF.EventProperty.KEY_DOUBLE_PRICE     | Number | 상품 단가      |✅|
-| DF.EventProperty.KEY_LONG_QUANTITY  | Number | 상품 수량      |✅|
-| DF.EventProperty.KEY_DOUBLE_DISCOUNT  | Number | 상품 할인가    |✅|
-| DF.EventProperty.KEY_STRING_CATEGORY1 | String | 상품 카테고리1 ||
-| DF.EventProperty.KEY_STRING_CATEGORY2 | String | 상품 카테고리2 ||
-| DF.EventProperty.KEY_STRING_CATEGORY3 | String | 상품 카테고리3 ||
-| DF.EventProperty.KEY_STRING_CATEGORY4 | String | 상품 카테고리4 ||
-| DF.EventProperty.KEY_STRING_CATEGORY5 | String | 상품 카테고리5 ||
+| DF.EventProperty.KEY_STRING_ITEM_ID   | String | Product number(ID)  |✅|
+| DF.EventProperty.KEY_STRING_ITEM_NAME | String | product name        |✅|
+| DF.EventProperty.KEY_DOUBLE_PRICE     | Number | price      |✅|
+| DF.EventProperty.KEY_LONG_QUANTITY  | Number | quantity      |✅|
+| DF.EventProperty.KEY_DOUBLE_DISCOUNT  | Number | discount    |✅|
+| DF.EventProperty.KEY_STRING_CATEGORY1 | String | product category 1 ||
+| DF.EventProperty.KEY_STRING_CATEGORY2 | String | product category 2 ||
+| DF.EventProperty.KEY_STRING_CATEGORY3 | String | product category 3 ||
+| DF.EventProperty.KEY_STRING_CATEGORY4 | String | product category 4 ||
+| DF.EventProperty.KEY_STRING_CATEGORY5 | String | product category 5 ||
 
 
-## 사용자 정의 이벤트
-사용자가 직접 임의의 이벤트 명칭과 속성을 입력하여 반영하는 이벤트입니다. 이벤트 명칭과 속성은 [Dfinery Console](https://console.dfinery.ai/)에서 사전에 등록해야합니다.
+## Custom Event
+This is an event that the user sets by directly entering an arbitrary event name and properties. Event names and properties must be registered in advance in [Dfinery Console](https://console.dfinery.ai/).
 
-## 자동으로 수집되는 데이터
-Dfinery는 다음의 정보에 대해서 자동으로 수집합니다.
+## Data collected automatically
+Dfinery automatically collects the following information:
 
-### 세션 추적
-Dfinery는 [활동의 생명주기 콜백](https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks) 을 사용하여 세션을 추적합니다.
+### Tracking Sessions
+Dfinery uses [Activity Lifecycle Callbacks](https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks) to track sessions.
 
 ### App Set ID
-Dfinery는 사용자를 특정하기 위해 [App Set Id](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjl6-Lfg8CDAxXdQPUHHa9BCYMQFnoECBIQAQ&url=https%3A%2F%2Fdeveloper.android.com%2Ftraining%2Farticles%2Fapp-set-id&usg=AOvVaw2BN0DC8U-gaq6r7U2PulxJ&opi=89978449) 를 자동으로 수집합니다.
+Dfinery uses [App Set Id](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjl6-Lfg8CDAxXdQPUHHa9BCYMQFnoECBIQAQ&url=https%3A%2F%2Fdeveloper to specify users. Automatically collects .android.com%2Ftraining%2Farticles%2Fapp-set-id&usg=AOvVaw2BN0DC8U-gaq6r7U2PulxJ&opi=89978449).
 
-### 단말기 정보 
-Dfinery는 다음의 단말기 정보를 자동으로 수집합니다.
-> 해당 값은 앱의 환경 및 허용된 권한에 따라 수집되지 않을 수 있습니다.
+### Device information
+Dfinery automatically collects the following device information:
+> The value may not be collected depending on the app's environment and granted permissions.
 
-- 단말기의 모델
-- 단말기의 운영체제
-- 단말기의 현재 연결되어 있는 통신사
-- 단말기의 설정된 언어
-- 단말기의 설정된 지역
-- 단말기의 설정된 Time Zone Offset
-- 단말기의 전화 기능 여부
-- 단말기의 현재 연결된 네트워크 종류
-- 단말기의 기기 제조사
+- Model of the device
+- The device's operating system
+- The mobile carrier the device is currently connected to
+- The language set on the device
+- The region set on the device
+- Time Zone Offset set on the device
+- Whether the device has a phone function
+- Type of network the device is currently connected to
+- The device manufacturer of the device
 
-### 어플리케이션 정보
-Dfinery는 다음의 어플리케이션 정보를 자동으로 수집합니다.
+### Application information
+Dfinery automatically collects the following application information:
 
-- 어플리케이션의 앱 버전
-- 어플리케이션의 패키지 이름
+- App version of the application
+- Package name of the application

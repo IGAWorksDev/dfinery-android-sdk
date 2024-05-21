@@ -1,4 +1,4 @@
-# 🪪 통합 ID 식별 정보 설정하기
+# 🪪 인앱메시지
 
 Dfinery는 사용자를 식별하기 위해 통합 ID를 발급하여 관리합니다. 통합 ID는 여러 정보를 규합하여 하나의 값을 만들기 때문에 정보가 많이 입력 될 경우 아이디의 고유성이 더 보장됩니다. 해당 정보들은 모두 선택사항이며 단말기에 암호화하여 저장됩니다.
 
@@ -6,16 +6,16 @@ Dfinery는 사용자를 식별하기 위해 통합 ID를 발급하여 관리합�
 통합 ID 식별 정보는`DfineryProperties.setIdentity()` 메소드를 사용하여 설정이 가능합니다. 통합 ID 식별 종류는 `DF.Identity`에 정의되어 있으며, 기 정의된 값만 사용 할 수 있습니다.
 
 > [!WARNING]
-> `EXTERNAL_ID`의 경우 통합 ID 식별 정보 중 사용자를 구분하는 중요한 값으로 사용되므로 되도록 고정 값을 써주시기 바랍니다.
+> `EXTERNAL_ID`의 경우 통합 ID 식별 정보 중 사용자를 구분하는 중요한 값으로 사용되므로 고정 값을 사용하는것이 권장됩니다.
 
 ### 통합 ID 식별 정보 유형
-|유형|내용|
+|이름|내용|
 |---|---|
 |DF.Identity.EXTERNAL_ID|사용자 ID|
 |DF.Identity.EMAIL|사용자 이메일|
 |DF.Identity.PHONE_NO|사용자 전화번호|
-|DF.Identity.KAKAO_USER_ID|사용자의 카카오 계정 아이디|
-|DF.Identity.LINE_USER_ID|사용자의 라인 계정 아이디|
+|DF.Identity.KAKAO_USER_ID|사용자의 [카카오](https://www.kakaocorp.com/) 계정 아이디|
+|DF.Identity.LINE_USER_ID|사용자의 [라인](https://line.me/ko/) 계정 아이디|
 
 ### 항목 별로 설정하기
 
@@ -36,7 +36,8 @@ DfineryProperties.setIdentity(DF.Identity.EXTERNAL_ID, "{value}")
 void setIdentities(Map<DF.Identity, String> values)
 ```
 
-- 첫번째 인자인 `values`은 설정할 통합 ID 식별 정보를 의미합니다. 해당 값은 `java.util.Map<DF.Identity, String>`의 형태로 통합 ID 식별 정보의 종류와 값을 입력해야 합니다. `values`는 `null`이 입력될 수 없습니다.
+- 첫번째 인자인 `values`은 설정할 통합 ID 식별 정보를 의미합니다. 
+- 해당 값은 `java.util.Map<DF.Identity, String>`의 형태로 통합 ID 식별 정보의 종류와 값을 입력해야 합니다. `values`는 `null`이 입력될 수 없습니다.
 
 <details open>
 <summary>Java</summary>
