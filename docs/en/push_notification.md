@@ -254,7 +254,6 @@ In the case of pushes with advertising purposes in Korea, the [Information and C
 ### 1. Notify users about allowing push notifications
 ### 2. Write the following code to set the value for the user’s allow/deny intent.
 
-> [!TIP]
 > [Setting consent to receive notifications](./user_profile.md#setting-consent-to-receive-notifications), and enter the values for the items you agreed to. The code below is an example of allowing consent to receive informational and advertising information for a push channel.
 
 <details open>
@@ -288,7 +287,6 @@ This is an example of creating a notification channel. Please refer to the [Exam
 
 #### 1. Create a notification channel.
 
-> [!IMPORTANT]
 > Notification channel API is supported in [Android 8.0](https://developer.android.com/about/versions/oreo) or higher.
 
 - The first parameter id refers to the ID of the notification channel.
@@ -336,7 +334,6 @@ notificationChannel.description = "{description}"
 
 #### 3. Set whether or not to vibrate the notification channel. (Optional)
 
-> [!IMPORTANT]
 > The value of the notification channel will always take precedence over all settings set in the Dfinery Console except 'Expose push messages while app is running'.
 
 <details open>
@@ -483,7 +480,6 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 #### 1. Access the [Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts).
 #### 2. Select the project for the key you want to issue.
 
-> [!TIP]
 > If there is no project, it means that the Firebase project has not been created, so refer to the [Add Firebase to your Android project](https://firebase.google.com/docs/android/setup#next_steps) document to create the Firebase project. 
 
 ![select a recent project](../../assets/certificate_1.png)
@@ -493,7 +489,6 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 ![click a manage keys](../../assets/certificate_3.png)
 #### 5. Select Add Key.
 
-> [!TIP]
 > If there is a key that has already been created, it means that there is a history of creating a key in the past, and you can use that key. If you cannot find the key, please create a new key.
 
 ![click a add key](../../assets/certificate_4.png)
