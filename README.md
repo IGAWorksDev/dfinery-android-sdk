@@ -13,6 +13,9 @@
 ### 🔗 Dependencies
 
 - [`com.google.android.gms:play-services-appset`](https://developer.android.com/training/articles/app-set-id)
+- [`com.google.android.gms:play-services-ads-identifier`](https://support.google.com/googleplay/android-developer/answer/6048248) : Use when using advertising ID(Optional)
+- [`androidx.core:core`](https://developer.android.com/jetpack/androidx/releases/core) : Use when using push action(Optional)
+- [`com.google.firebase:firebase-messaging`](https://firebase.google.com/docs/cloud-messaging) : Use when using push action(Optional)
 
 ### 📁 Components
 - `docs` : a folder containing documents needed to use the SDK
