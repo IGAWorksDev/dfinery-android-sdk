@@ -298,7 +298,7 @@ DfineryProperties.setUserProfiles(consents)
 
 #### 1. 알림 채널을 생성합니다.
 
-> [!NOTE]
+> [!IMPORTANT]
 > 알림 채널 API는 [Android 8.0](https://developer.android.com/about/versions/oreo?hl=ko)이상에서 지원합니다.
 
 - 첫번째 파라미터 id는 알림 채널의 ID를 의미합니다.
@@ -346,7 +346,7 @@ notificationChannel.description = "{description}"
 
 #### 3. 알림 채널의 진동 유무를 설정합니다. (Optional)
 
-> [!NOTE]
+> [!IMPORTANT]
 > 알림 채널의 값은 Dfinery Console에서 설정 한 값 중 '앱 실행 중 푸시 메시지 노출'을 제외한 모든 설정보다 항상 우선시됩니다.
 
 <details open>
@@ -490,6 +490,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 ### Firebase 사용자 인증 정보 비공개 키 파일 발급 따라해보기
 #### 1. [서비스 계정 사이트](https://console.cloud.google.com/iam-admin/serviceaccounts)에 접속합니다.
 #### 2. 발급 하고 싶은 키의 프로젝트를 선택합니다.
+
 > [!TIP] 
 > 프로젝트가 없을 경우 Firebase 프로젝트 생성이 되지 않았다는 뜻이므로 [Android 프로젝트에 Firebase 추가하기](https://firebase.google.com/docs/android/setup?hl=ko#next_steps) 문서를 참고하여 Firebase 프로젝트를 생성합니다.
 
@@ -499,6 +500,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 #### 4. 드롭다운에서 키 관리를 클릭합니다.
 ![click a manage keys](../../assets/certificate_3.png)
 #### 5. 키 추가를 선택합니다.
+
 > [!TIP] 
 > 이미 생성된 키가 있을 경우, 기존에 키를 생성한 이력이 있다는 뜻이며 해당 키를 사용하시면 됩니다. 해당 키를 찾을 수 없을 경우 새로 키를 생성하여 주시기 바랍니다.
 

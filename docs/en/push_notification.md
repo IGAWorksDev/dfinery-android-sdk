@@ -288,7 +288,7 @@ This is an example of creating a notification channel. Please refer to the [Exam
 
 #### 1. Create a notification channel.
 
-> [!NOTE]
+> [!IMPORTANT]
 > Notification channel API is supported in [Android 8.0](https://developer.android.com/about/versions/oreo) or higher.
 
 - The first parameter id refers to the ID of the notification channel.
@@ -336,7 +336,7 @@ notificationChannel.description = "{description}"
 
 #### 3. Set whether or not to vibrate the notification channel. (Optional)
 
-> [!NOTE]
+> [!IMPORTANT]
 > The value of the notification channel will always take precedence over all settings set in the Dfinery Console except 'Expose push messages while app is running'.
 
 <details open>
@@ -482,6 +482,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
 #### 1. Access the [Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts).
 #### 2. Select the project for the key you want to issue.
+
 > [!TIP]
 > If there is no project, it means that the Firebase project has not been created, so refer to the [Add Firebase to your Android project](https://firebase.google.com/docs/android/setup#next_steps) document to create the Firebase project. 
 
@@ -491,6 +492,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 #### 4. Click Manage keys from the dropdown.
 ![click a manage keys](../../assets/certificate_3.png)
 #### 5. Select Add Key.
+
 > [!TIP]
 > If there is a key that has already been created, it means that there is a history of creating a key in the past, and you can use that key. If you cannot find the key, please create a new key.
 
