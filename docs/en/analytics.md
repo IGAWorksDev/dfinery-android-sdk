@@ -6,7 +6,7 @@ This document describes what you need to do to track user behavior using the Dfi
 
 You can log user actions using the SDK's `Dfinery.getInstance().logEvent()` method.
 
-> [!IMPORTANT]
+> [!NOTE]
 > All events must be created and registered in advance in [Dfinery Console](https://console.dfinery.ai/) to be properly reflected on the server. If it is not registered, it will not be reflected even if called.
 
 ```java

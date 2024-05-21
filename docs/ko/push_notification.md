@@ -298,7 +298,7 @@ DfineryProperties.setUserProfiles(consents)
 
 #### 1. 알림 채널을 생성합니다.
 
-> [!IMPORTANT]
+> [!NOTE]
 > 알림 채널 API는 [Android 8.0](https://developer.android.com/about/versions/oreo?hl=ko)이상에서 지원합니다.
 
 - 첫번째 파라미터 id는 알림 채널의 ID를 의미합니다.
@@ -346,7 +346,7 @@ notificationChannel.description = "{description}"
 
 #### 3. 알림 채널의 진동 유무를 설정합니다. (Optional)
 
-> [!IMPORTANT]
+> [!NOTE]
 > 알림 채널의 값은 Dfinery Console에서 설정 한 값 중 '앱 실행 중 푸시 메시지 노출'을 제외한 모든 설정보다 항상 우선시됩니다.
 
 <details open>

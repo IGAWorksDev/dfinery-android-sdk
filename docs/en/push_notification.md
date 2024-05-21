@@ -288,7 +288,7 @@ This is an example of creating a notification channel. Please refer to the [Exam
 
 #### 1. Create a notification channel.
 
-> [!IMPORTANT]
+> [!NOTE]
 > Notification channel API is supported in [Android 8.0](https://developer.android.com/about/versions/oreo) or higher.
 
 - The first parameter id refers to the ID of the notification channel.
@@ -336,7 +336,7 @@ notificationChannel.description = "{description}"
 
 #### 3. Set whether or not to vibrate the notification channel. (Optional)
 
-> [!IMPORTANT]
+> [!NOTE]
 > The value of the notification channel will always take precedence over all settings set in the Dfinery Console except 'Expose push messages while app is running'.
 
 <details open>
