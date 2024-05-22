@@ -500,7 +500,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 > 이미 생성된 키가 있을 경우, 기존에 키를 생성한 이력이 있다는 뜻이며 해당 키를 사용하시면 됩니다. 해당 키를 찾을 수 없을 경우 새로 키를 생성하여 주시기 바랍니다.
 
 ![click a add key](../../assets/certificate_4.png)
-#### 6. 드롭 다운에서 새 키 만들기를 클릭합니다.
+#### 6. 드롭다운에서 새 키 만들기를 클릭합니다.
 ![click a create new key](../../assets/certificate_5.png)
 #### 7. JSON을 선택 후 만들기를 클릭합니다.
 ![create a key](../../assets/certificate_6.png)
