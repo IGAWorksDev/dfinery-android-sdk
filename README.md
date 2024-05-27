@@ -13,9 +13,9 @@
 ### 🔗 Dependencies
 
 - [`com.google.android.gms:play-services-appset`](https://developer.android.com/training/articles/app-set-id)
-- [`com.google.android.gms:play-services-ads-identifier`](https://support.google.com/googleplay/android-developer/answer/6048248) : Use when using advertising ID(Optional)
-- [`androidx.core:core`](https://developer.android.com/jetpack/androidx/releases/core) : Use when using push action(Optional)
-- [`com.google.firebase:firebase-messaging`](https://firebase.google.com/docs/cloud-messaging) : Use when using push action(Optional)
+- [`com.google.android.gms:play-services-ads-identifier`](https://support.google.com/googleplay/android-developer/answer/6048248) : Required only if you want to collect Google ADID(Optional)
+- [`androidx.core:core`](https://developer.android.com/jetpack/androidx/releases/core) : Required only if you want to use push action(Optional)
+- [`com.google.firebase:firebase-messaging`](https://firebase.google.com/docs/cloud-messaging) : Required only if you want to use push action(Optional)
 
 ### 📁 Components
 - `docs` : a folder containing documents needed to use the SDK
@@ -36,6 +36,9 @@
 - Advanced Use Cases
   - [Unified ID linking scenario](./docs/en/identity_scenario.md)
   - [Additional settings](./docs/en/additional.md)
+  - [Get SDK properties](./docs/en/getter.md)
+  - [Setting up using XML](./docs/en/config_by_xml.md)
+  - [Integrate Dfinery WebView](./docs/en/web_view_interface.md)
 </details>
 <details open>
  <summary>KO</summary>
@@ -50,6 +53,9 @@
 - 고급 사용 사례
   - [통합 ID 연동 시나리오](./docs/ko/identity_scenario.md)
   - [부가 설정](./docs/ko/additional.md)
+  - [값 가져오기](./docs/ko/getter.md)
+  - [XMl을 사용하여 설정하기](./docs/ko/config_by_xml.md)
+  - [Dfinery WebView 연동](./docs/ko/web_view_interface.md)
 
 </details>
 

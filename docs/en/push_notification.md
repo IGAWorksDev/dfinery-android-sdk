@@ -118,7 +118,7 @@ Starting with Android 8.0, you need to create a notification channel to receive 
 > Once created, the setting information for the notification channel is not changed through code, except for information such as name and description. Also, please note that the settings information for notification channels can be changed by the user.
 
 ### Register the created notification channel ID
-Use DfineryConfig's `setDefaultNotificationChannelId()` method to register the ID of the notification channel you created.
+Use DfineryConfig's `setDefaultNotificationChannelId()` method or set in your `res/values/dfinery.xml` to register the ID of the notification channel you created.
 
 <details open>
   <summary>Java</summary>
@@ -143,9 +143,22 @@ Dfinery.getInstance().init(this, "{your_application_key}", config)
 ```
 
 </details>
+<details open>
+  <summary>dfinery.xml</summary>
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="com_igaworks_dfinery_default_notification_channel_id" translatable="false">
+      {your_notification_channel}
+    </string>
+</resources>
+```
+
+</details>
 
 ## Setting the push notification icon
-Icon settings are required to display push notifications. Please set the icon using DfineryConfig's `setNotificationIconResourceId()` method.
+Icon settings are required to display push notifications. Please set the icon using DfineryConfig's `setNotificationIcon()` method or set in your `res/values/dfinery.xml`.
 
 > [!TIP]
 > Since this is an icon that is displayed not only in the notification itself but also in the top status bar, the color of the image is ignored, so an image with a transparent color (alpha channel) of 72x72px is recommended.
@@ -155,7 +168,7 @@ Icon settings are required to display push notifications. Please set the icon us
 
 ```java
 DfineryConfig config = new DfineryConfig.Builder()
-    .setNotificationIconResourceId(R.drawable.icon)
+    .setNotificationIcon(R.drawable.icon)
     .build();
 Dfinery.getInstance().init(this, "{your_application_key}", config);
 ```
@@ -167,15 +180,28 @@ Dfinery.getInstance().init(this, "{your_application_key}", config);
 
 ```kotlin
 val config = DfineryConfig.Builder()
-    .setNotificationIconResourceId(R.drawable.icon)
+    .setNotificationIcon(R.drawable.icon)
     .build()
 Dfinery.getInstance().init(this, "{your_application_key}", config)
 ```
 
 </details>
+<details open>
+  <summary>dfinery.xml</summary>
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="com_igaworks_dfinery_notification_icon">
+      @drawable/{your_notification_icon} 
+    </drawable>
+</resources>
+```
+
+</details>
 
 ## Handle receiving push notifications
-When a push is received, a push received event is raised in an object that inherits FirebaseMessagingService. Since Dfinery creates a notification based on the received push payload, please write the following within the [onMessageReceived(RemoteMessage)](https://firebase.google.com/docs/reference/android/com/google/firebase/messaging/FirebaseMessagingService#onMessageReceived(com.google.firebase.messaging.RemoteMessage)) method of the object.
+When a push is received, a push received event is raised in an object that inherits FirebaseMessagingService. Since Dfinery creates a notification based on the received push payload, please write the following within the [onMessageReceived(RemoteMessage)](https://firebase.google.com/docs/reference/android/com/google/firebase/messaging/FirebaseMessagingService#onMessageReceived(com.google.firebase.messaging.RemoteMessage)).
 
 <details open>
   <summary>Java</summary>
@@ -184,7 +210,7 @@ When a push is received, a push received event is raised in an object that inher
 @Override
 public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
-    if(Dfinery.getInstance().handleRemoteMessage(getApplicationContext(), remoteMessage)){
+    if(Dfinery.getInstance().handleRemoteMessage(getApplicationContext(), remoteMessage.getData())){
         //dfinery push
     }else{
         //This is not a push notification sent from Dfinery.
@@ -199,7 +225,7 @@ public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
 ```kotlin
 override fun onMessageReceived(remoteMessage: RemoteMessage) {
-  if(Dfinery.getInstance().handleRemoteMessage(applicationContext, remoteMessage)){
+  if(Dfinery.getInstance().handleRemoteMessage(applicationContext, remoteMessage.getData())){
         //dfinery push
     }else{
         //This is not a push notification sent from Dfinery.
@@ -282,7 +308,7 @@ DfineryProperties.setUserProfiles(consents)
 You are now ready to start using push notifications in Dfinery.
 
 ## Find out More
-### Follow along on creating a notification channel
+### Try creating a notification channel
 This is an example of creating a notification channel. Please refer to the [Example provided by Android](https://developer.android.com/develop/ui/views/notifications/channels#CreateChannel).
 
 #### 1. Create a notification channel.
@@ -459,7 +485,7 @@ Using the `getDfineryPushNotification()` API, you can parse the Extra or RemoteM
 @Override
 public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
-    PushNotification pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage);
+    PushNotification pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage.getData());
 }
 ```
 
@@ -470,12 +496,12 @@ public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
 ```kotlin
 override fun onMessageReceived(remoteMessage: RemoteMessage) {
-  val pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage);
+  val pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage.getData());
 }
 ```
 </details>
 
-### Follow along with create Firebase credentials private key file
+### Try create Firebase credentials private key file
 
 #### 1. Visit the [Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts).
 #### 2. Select the project for the key you want to create.

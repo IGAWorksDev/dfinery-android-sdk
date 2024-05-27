@@ -127,7 +127,7 @@ Android 8.0부터는 알림을 수신받기 위해 알림 채널 생성이 필�
 > 한번 생성된 알림 채널에 대한 설정 정보는 이름과 설명등의 정보를 제외하고는 코드를 통해 설정 값이 변경되지 않습니다. 또한 알림 채널에 대한 설정 정보는 사용자에 의해 변경될 수 있으므로 유의 바랍니다. 
 
 ### 생성한 푸시 알림 채널 ID 등록
-DfineryConfig의 `setDefaultNotificationChannelId()` 메소드를 사용하여 생성한 알림 채널의 ID를 등록합니다.
+DfineryConfig의 `setDefaultNotificationChannelId()` 메소드를 사용하거나 `res/values/dfinery.xml`을 사용하여 생성한 알림 채널의 ID를 등록합니다.
 
 <details open>
   <summary>Java</summary>
@@ -152,9 +152,22 @@ Dfinery.getInstance().init(this, "{your_application_key}", config)
 ```
 
 </details>
+<details open>
+  <summary>dfinery.xml</summary>
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="com_igaworks_dfinery_default_notification_channel_id" translatable="false">
+      {your_notification_channel}
+    </string>
+</resources>
+```
+
+</details>
 
 ## 푸시 알림 아이콘 설정하기
-푸시 알림을 표시하기 위해서는 아이콘 설정이 필요합니다. DfineryConfig의 `setNotificationIconResourceId()` 메소드를 사용하여 아이콘을 설정해주시기 바랍니다.
+푸시 알림을 표시하기 위해서는 아이콘 설정이 필요합니다. DfineryConfig의 `setNotificationIcon()` 메소드를 사용하거나 `res/values/dfinery.xml`을 사용하여 아이콘을 설정해주시기 바랍니다.
 
 > [!TIP]
 > 알림 자체는 물론 상단 상태 표시줄에도 표시되는 아이콘이기 때문에 이미지의 색상이 무시되니 72x72px의 투명색(알파채널)을 가진 이미지를 권장합니다.
@@ -164,7 +177,7 @@ Dfinery.getInstance().init(this, "{your_application_key}", config)
 
 ```java
 DfineryConfig config = new DfineryConfig.Builder()
-    .setNotificationIconResourceId(R.drawable.icon)
+    .setNotificationIcon(R.drawable.icon)
     .build();
 Dfinery.getInstance().init(this, "{your_application_key}", config);
 ```
@@ -176,15 +189,28 @@ Dfinery.getInstance().init(this, "{your_application_key}", config);
 
 ```kotlin
 val config = DfineryConfig.Builder()
-    .setNotificationIconResourceId(R.drawable.icon)
+    .setNotificationIcon(R.drawable.icon)
     .build()
 Dfinery.getInstance().init(this, "{your_application_key}", config)
 ```
 
 </details>
+<details open>
+  <summary>dfinery.xml</summary>
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="com_igaworks_dfinery_notification_icon">
+      @drawable/{your_notification_icon} 
+    </drawable>
+</resources>
+```
+
+</details>
 
 ## 푸시 알림 수신 처리하기
-푸시가 수신되면 FirebaseMessagingService를 상속받은 객체에 푸시 수신 이벤트가 발생합니다. Dfinery는 수신된 푸시 페이로드를 토대로 알림을 생성하므로 해당 객체의 [onMessageReceived(RemoteMessage)](https://firebase.google.com/docs/reference/android/com/google/firebase/messaging/FirebaseMessagingService#onMessageReceived(com.google.firebase.messaging.RemoteMessage)) 소드 내에 다음과 같이 작성하여 주시기 바랍니다.
+푸시가 수신되면 FirebaseMessagingService를 상속받은 객체에 푸시 수신 이벤트가 발생합니다. Dfinery는 수신된 푸시 페이로드를 토대로 알림을 생성하므로 해당 객체의 [onMessageReceived(RemoteMessage)](https://firebase.google.com/docs/reference/android/com/google/firebase/messaging/FirebaseMessagingService#onMessageReceived(com.google.firebase.messaging.RemoteMessage)) 메소드 내에 다음과 같이 작성하여 주시기 바랍니다.
 
 <details open>
   <summary>Java</summary>
@@ -193,7 +219,7 @@ Dfinery.getInstance().init(this, "{your_application_key}", config)
 @Override
 public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
-    if(Dfinery.getInstance().handleRemoteMessage(getApplicationContext(), remoteMessage)){
+    if(Dfinery.getInstance().handleRemoteMessage(getApplicationContext(), remoteMessage.getData())){
         //dfinery push
     }else{
         //This is not a push notification sent from Dfinery.
@@ -208,7 +234,7 @@ public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
 ```kotlin
 override fun onMessageReceived(remoteMessage: RemoteMessage) {
-  if(Dfinery.getInstance().handleRemoteMessage(applicationContext, remoteMessage)){
+  if(Dfinery.getInstance().handleRemoteMessage(applicationContext, remoteMessage.getData())){
         //dfinery push
     }else{
         //This is not a push notification sent from Dfinery.
@@ -468,7 +494,7 @@ PushPayload는 푸시 데이터를 담고있는 객체입니다. Dfinery를 통�
 @Override
 public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
-    PushNotification pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage);
+    PushNotification pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage.getData());
 }
 ```
 
@@ -479,7 +505,7 @@ public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
 ```kotlin
 override fun onMessageReceived(remoteMessage: RemoteMessage) {
-  val pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage);
+  val pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage.getData());
 }
 ```
 </details>
