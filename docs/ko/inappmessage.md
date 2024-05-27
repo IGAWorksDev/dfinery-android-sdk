@@ -21,3 +21,11 @@ Android 매니페스트 파일에서 다음 속성을 <application> 태그에 �
     <activity android:hardwareAccelerated="true" />
 </application>
 ```
+
+## 인앱메시지 사용자 지정 부모 뷰 설정
+SDK는 자동으로 표시되고 있는 Activity의 최상위 뷰를 찾아 인앱 메시지를 표시합니다. 
+만약 자동 설정을 사용하지 않으실 경우 `setCustomInAppMessageParentView()`를 사용하여 직접 표시할 부모 뷰를 설정 할 수있습니다.
+
+```kotlin
+Dfinery.getInstance().setCustomInAppMessageParentView(parentView);
+```

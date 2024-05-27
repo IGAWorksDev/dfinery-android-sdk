@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -49,11 +51,19 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         binding = ProductdetailsActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setTitle("Product");
-        productProperties = new ArrayList<>();
         initPredefinedProductPropertiesSelectorItems();
-        position = getIntent().getIntExtra(BUNDLE_KEY_POSITION, -1);
         value = getIntent().getStringExtra(BUNDLE_KEY_VALUE);
+        productProperties = new ArrayList<>();
+        JSONObject previousValue = new JSONObject();
+        try {
+            previousValue = new JSONObject(value);
+        } catch (JSONException e) {}
+        if(previousValue.length() == 0){
+            initProductProperties();
+        } else{
         putPreviouslyEnteredItem(value);
+        }
+        position = getIntent().getIntExtra(BUNDLE_KEY_POSITION, -1);
         setClickListener();
         setAdapter();
         getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(false) {
@@ -67,16 +77,50 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
     protected void onDestroy() {
         super.onDestroy();
         binding = null;
+        productProperties.clear();
+        productProperties = null;
+        productPropertiesAdapter = null;
+        productPropertiesSelectorItems.clear();
+        productPropertiesSelectorItems = null;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menu_delete_all){
+            showDeleteAllDialog();
+        }
+        return super.onOptionsItemSelected(item);
     }
     @Override
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.productDetail_button_confirm){
             confirm();
+            hideKeypad();
         } else if (id == R.id.productDetail_imageView_addProductProperties){
             showPredefinedProductPropertiesSelector();
         }
     }
+    private void showDeleteAllDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("속성을 모두 제거하시겠습니까?");
+        builder.setPositiveButton("제거하기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                productPropertiesAdapter.clear();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(true);
+        builder.show();
+    }
+
     private void putPreviouslyEnteredItem(String value){
         if(TextUtils.isEmpty(value)){
             return;
@@ -191,5 +235,12 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         intent.putExtra(BUNDLE_KEY_VALUE, jsonObject.toString());
         setResult(RESULT_OK, intent);
         finish();
+    }
+    private void initProductProperties(){
+        for(PredefinedProductProperties item : PredefinedProductProperties.values()){
+            if(item.isRequired()){
+                productProperties.add(new ItemProperties(item.getKey(), item.getValueType()));
+            }
+        }
     }
 }

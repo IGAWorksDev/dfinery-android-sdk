@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,6 +110,17 @@ public class EventPropertiesAdapter extends RecyclerView.Adapter<EventProperties
                     }
                     itemClickListener.onClick(selectedItemPosition);
                 }
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("상세보기");
+                builder.setMessage(itemProperties.getKey());
+                builder.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setCancelable(true);
+                builder.show();
             }
         });
         holder.binding.itemTextInputLayoutValue.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +174,7 @@ public class EventPropertiesAdapter extends RecyclerView.Adapter<EventProperties
                 if(selectedItemPosition == RecyclerView.NO_POSITION){
                     return;
                 }
+                Log.d(TAG, "selectedItemPosition: "+selectedItemPosition);
                 showRemoveAlertDialog(selectedItemPosition);
             }
         });
@@ -204,9 +217,10 @@ public class EventPropertiesAdapter extends RecyclerView.Adapter<EventProperties
         builder.setPositiveButton("제거", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dataSet.remove(position);
-                notifyItemRemoved(position);
                 dialog.dismiss();
+                dataSet.remove(position);
+//                notifyItemRemoved(position);
+                notifyDataSetChanged();
             }
         });
         builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -224,6 +238,10 @@ public class EventPropertiesAdapter extends RecyclerView.Adapter<EventProperties
             }
         }
         return true;
+    }
+    public void clear(){
+        dataSet.clear();
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

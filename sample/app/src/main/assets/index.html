@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dfinery Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/primer/build/build.css">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    <style>
+        .container{
+            width: 100%;
+        }
+        .column{
+            width: 100%;
+        }
+        button {
+            display: block;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+<!--    <script src="./dfinery-html-bridge.js"></script>-->
+    <script>
+    function Login() {
+        dfineryBridge.logEvent(LOGIN);
+        console.log("Login 함수가 호출되었습니다.");
+    }
+    function Logout() {
+        dfineryBridge.logEvent(LOGOUT);
+        console.log("Logout 함수가 호출되었습니다.");
+    }
+    function CustomEvent() {
+        const param = {
+            'is_logined':true,
+            'username':'hello',
+            'visit_count':1000
+        };
+        dfineryBridge.logEvent('custom_event_1', param);
+        console.log("Custom Event 함수가 호출되었습니다.");
+    }
+    function SignUp() {
+        const param = {
+            [KEY_STRING_SIGN_CHANNEL]: 'Kakao'
+        };
+        dfineryBridge.logEvent(SIGN_UP, param);
+        console.log("Sign Up 함수가 호출되었습니다.");
+    }
+    function Purchase() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items,
+            [KEY_STRING_ORDER_ID]: "상품번호",
+            [KEY_STRING_PAYMENT_METHOD]: "BankTransfer",
+            [KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT]: 25500.0,
+            [KEY_DOUBLE_DELIVERY_CHARGE]: 3000.0,
+            [KEY_DOUBLE_DISCOUNT]:0
+        };
+        dfineryBridge.logEvent(PURCHASE, param);
+        console.log("Purchase 함수가 호출되었습니다.");
+    }
+    function ViewHome() {
+        dfineryBridge.logEvent(VIEW_HOME);
+        console.log("View Home 함수가 호출되었습니다.");
+    }
+    function ViewProductDetails() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items
+        };
+        dfineryBridge.logEvent(VIEW_PRODUCT_DETAILS, param);
+        console.log("View Product Details 함수가 호출되었습니다.");
+    }
+    function AddToCart() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items
+        };
+        dfineryBridge.logEvent(ADD_TO_CART, param);
+        console.log("Add To Cart 함수가 호출되었습니다.");
+    }
+    function AddToWishlist() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items
+        };
+        dfineryBridge.logEvent(ADD_TO_WISHLIST, param);
+        console.log("Add To Wishlist 함수가 호출되었습니다.");
+    }
+    function Refund() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items,
+            [KEY_DOUBLE_TOTAL_REFUND_AMOUNT]: 22500.0
+        };
+        dfineryBridge.logEvent(dfineryBridge.REFUND, param);
+        console.log("Refund 함수가 호출되었습니다.");
+    }
+    function ViewSearchResult() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items,
+            [KEY_STRING_KEYWORD]: '삼겹살'
+        };
+        dfineryBridge.logEvent(VIEW_SEARCH_RESULT, param);
+        console.log("View Search Result 함수가 호출되었습니다.");
+    }
+    function ViewList() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items
+        };
+        dfineryBridge.logEvent(VIEW_LIST, param);
+        console.log("View List 함수가 호출되었습니다.");
+    }
+    function ViewCart() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items
+        };
+        dfineryBridge.logEvent(VIEW_CART, param);
+        console.log("View Cart 함수가 호출되었습니다.");
+    }
+    function RemoveCart() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items
+        };
+        dfineryBridge.logEvent(REMOVE_CART, param);
+        console.log("Remove Cart 함수가 호출되었습니다.");
+    }
+    function ShareProduct() {
+        const item = {
+            [KEY_STRING_ITEM_ID]: "상품번호",
+            [KEY_STRING_ITEM_NAME]: "상품이름",
+            [KEY_STRING_CATEGORY1]: "식품",
+            [KEY_STRING_CATEGORY2]: "과자",
+            [KEY_DOUBLE_PRICE]: 5000.0,
+            [KEY_DOUBLE_DISCOUNT]: 500.0,
+            [KEY_LONG_QUANTITY]: 5
+        }
+        const items = [item];
+        const param = {
+            [KEY_ARRAY_ITEMS]: items,
+            [KEY_STRING_SHARING_CHANNEL]: "Facebook"
+        };
+        dfineryBridge.logEvent(SHARE_PRODUCT, param);
+        console.log("Share Product 함수가 호출되었습니다.");
+    }
+    function AddPaymentInfo() {
+        dfineryBridge.logEvent(ADD_PAYMENT_INFO);
+        console.log("Add Payment Info 함수가 호출되었습니다.");
+    }
+    function suspendUserTargeting() {
+        dfineryBridge.suspendUserTargeting();
+        console.log("suspendUserTargeting 함수가 호출되었습니다.");
+    }
+    function setUserProfile() {
+        dfineryBridge.setUserProfile(NAME, 'bobos');
+        console.log("setUserProfile 함수가 호출되었습니다.");
+    }
+    function setUserProfiles() {
+        const param = {
+            [NAME]: 'william',
+            [GENDER]: MALE
+        };
+        dfineryBridge.setUserProfiles(param);
+        console.log("setUserProfiles 함수가 호출되었습니다.");
+    }
+    function setIdentity() {
+        dfineryBridge.setIdentity(EMAIL, 'wa@naver.com');
+        console.log("setIdentity 함수가 호출되었습니다.");
+    }
+    function setIdentities() {
+        const param = {
+            [EXTERNAL_ID]: 'sans',
+            [EMAIL]: 'sans@naver.com',
+            [PHONE_NO]: '01012345678'
+        };
+        dfineryBridge.setIdentities(param);
+        console.log("setIdentities 함수가 호출되었습니다.");
+    }
+    function resetIdentity() {
+        dfineryBridge.resetIdentity();
+        console.log("resetIdentity 함수가 호출되었습니다.");
+    }
+    </script>
+</head>
+<body class="markdown-body">
+<div class="container">
+    <div class="category">
+        <div class="column">
+            <h2>LogEvent</h2>
+            <h3>UserAnalytics</h3>
+            <button onclick="Login()">Login</button>
+            <button onclick="Logout()">Logout</button>
+            <h3>CustomEvent</h3>
+            <button onclick="CustomEvent()">Custom Event</button>
+            <h3>Common</h3>
+            <button onclick="SignUp()">Sign Up</button>
+            <button onclick="Purchase()">Purchase</button>
+            <h3>Commerce</h3>
+            <button onclick="ViewHome()">View Home</button>
+            <button onclick="ViewProductDetails()">View Product Details</button>
+            <button onclick="AddToCart()">Add To Cart</button>
+            <button onclick="AddToWishlist()">Add To Wishlist</button>
+            <button onclick="Refund()">Refund</button>
+            <button onclick="ViewSearchResult()">View Search Result</button>
+            <button onclick="ViewList()">View List</button>
+            <button onclick="ViewCart()">View Cart</button>
+            <button onclick="RemoveCart()">Remove Cart</button>
+            <button onclick="ShareProduct()">Share Product</button>
+            <button onclick="AddPaymentInfo()">Add Payment Info</button>
+            <button onclick="suspendUserTargeting()">suspendUserTargeting</button>
+            <h1>DfineryProperties</h1>
+            <button onclick="setUserProfile()">setUserProfile</button>
+            <button onclick="setUserProfiles()">setUserProfiles</button>
+            <button onclick="setIdentity()">setIdentity</button>
+            <button onclick="setIdentities()">setIdentities</button>
+            <button onclick="resetIdentity()">resetIdentity</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,22 @@ public class ProductPropertiesAdapter extends RecyclerView.Adapter<ProductProper
         holder.setIsRecyclable(false);
         final ItemProperties itemProperties = dataSet.get(position);
         holder.binding.itemTextViewKey.setText(itemProperties.getKey());
+        holder.binding.itemTextViewKey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("상세보기");
+                builder.setMessage(itemProperties.getKey());
+                builder.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setCancelable(true);
+                builder.show();
+            }
+        });
         if(!TextUtils.isEmpty(itemProperties.getValue())){
             holder.binding.itemEditTextValue.setText(itemProperties.getValue());
         }
@@ -68,6 +85,7 @@ public class ProductPropertiesAdapter extends RecyclerView.Adapter<ProductProper
             holder.binding.itemTextInputLayoutValue.setHint("");
             holder.binding.itemEditTextValue.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         }
+//        Log.d(TAG, "inputType: "+holder.binding.itemEditTextValue.getInputType());
         holder.binding.itemImageViewRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +93,7 @@ public class ProductPropertiesAdapter extends RecyclerView.Adapter<ProductProper
                 if(selectedItemPosition == RecyclerView.NO_POSITION){
                     return;
                 }
+                Log.d(TAG, "selectedItemPosition: "+selectedItemPosition);
                 showRemoveAlertDialog(selectedItemPosition);
             }
         });
@@ -131,9 +150,10 @@ public class ProductPropertiesAdapter extends RecyclerView.Adapter<ProductProper
         builder.setPositiveButton("제거", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dataSet.remove(position);
-                notifyItemRemoved(position);
                 dialog.dismiss();
+                dataSet.remove(position);
+//                notifyItemRemoved(position);
+                notifyDataSetChanged();
             }
         });
         builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -152,6 +172,10 @@ public class ProductPropertiesAdapter extends RecyclerView.Adapter<ProductProper
             }
         }
         return true;
+    }
+    public void clear(){
+        dataSet.clear();
+        notifyDataSetChanged();
     }
 
     public List<ItemProperties> getDataSet() {

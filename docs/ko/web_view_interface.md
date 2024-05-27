@@ -4,6 +4,9 @@
 ### dfinery-html-bridge.js
 HTML에서 Dfinery를 사용하기 용이하게 하기 위한 javascript가 구현되어 있는 js 파일입니다.
 
+> [!WARNING]
+> 이 스크립트 파일을 수정하지 마세요. 연동에 문제가 발생할 수 있습니다.
+
 ### DfineryBridge
 WebView 혹은 Unity, ReactNative등의 플러그인에서 공통적으로 사용되는 클래스입니다. WebView의 [`addJavascriptInterface()`](https://developer.android.com/reference/android/webkit/WebView#addJavascriptInterface(java.lang.Object,%20java.lang.String))를 사용하여 등록할 수 있습니다.
 
@@ -37,11 +40,90 @@ myWebView.addJavascriptInterface(DfineryBridge(), DfineryBridge.JAVASCRIPT_INTER
 
 #### 2. `dfinery-html-bridge.js`를 [다운로드](../../assets/dfinery-html-bridge.js)합니다. 
 #### 3. `dfinery-html-bridge.js` 파일을 `src/main/assets` 경로에 추가합니다.
-#### 4. Dfinery를 사용하려는 HTML 문서에 `dfinery-html-bridge.js` 스크립트를 추가합니다.
+#### 4. Dfinery를 사용하려는 HTML 문서 혹은 WebView에 `dfinery-html-bridge.js` 스크립트를 추가합니다.
+##### 4.1 HTML 문서에 직접 추가할 경우
 
 ```html
 <script src="./dfinery-html-bridge.js"></script>
 ```
+
+##### 4.2 WebView에 추가할 경우
+
+<details open>
+  <summary>Java</summary>
+
+```java
+myWebView.setWebViewClient(new WebViewClient(){
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+        Log.d(TAG, "onPageFinished. url:"+url);
+        if(url.equals("{myUrl}")){
+            BufferedReader reader = null;
+            StringBuilder javascriptString = new StringBuilder();
+            try {
+                reader = new BufferedReader(new InputStreamReader(getAssets().open("dfinery-html-bridge.js"), "UTF-8"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    javascriptString.append(line);
+                }
+            } catch (IOException e) {
+
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        //log the exception
+                    }
+                }
+            }
+            view.evaluateJavascript(javascriptString.toString(), null);
+        }
+    }
+});
+```
+
+</details>
+
+<details open>
+  <summary>Kotlin</summary>
+
+```kotlin
+myWebView.setWebViewClient(object : WebViewClient() {
+    fun onPageFinished(view: WebView, url: String) {
+        super.onPageFinished(view, url)
+        if (url == "{myUrl}") {
+            var reader: java.io.BufferedReader? = null
+            val javascriptString: java.lang.StringBuilder = java.lang.StringBuilder()
+            try {
+                reader = java.io.BufferedReader(
+                    InputStreamReader(
+                        getAssets().open("dfinery-html-bridge.js"),
+                        "UTF-8"
+                    )
+                )
+                var line: String?
+                while ((reader.readLine().also { line = it }) != null) {
+                    javascriptString.append(line)
+                }
+            } catch (e: java.io.IOException) {
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close()
+                    } catch (e: java.io.IOException) {
+                        //log the exception
+                    }
+                }
+            }
+            view.evaluateJavascript(javascriptString.toString(), null)
+        }
+    }
+})
+```
+
+</details>
 
 #### 5. HTML 문서 내에서 `dfineryBridge` 객체를 사용하여 Dfinery를 호출합니다.
 

@@ -21,3 +21,12 @@ You can also control it according to individual activities. To enable or disable
     <activity android:hardwareAccelerated="true" />
 </application>
 ```
+
+## Set In-app message custom parent view
+
+The SDK automatically finds the top view of the activity being displayed and displays an in-app message.
+If you do not want to use automatic set, you can use `setCustomInAppMessageParentView()` to set the parent view to display.
+
+```kotlin
+Dfinery.getInstance().setCustomInAppMessageParentView(parentView);
+```

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,6 +15,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -34,11 +36,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class EventDetailsActivity extends BaseActionBarActivity implements View.OnClickListener{
     public static final String TAG = Utils.getTagFromClass(EventDetailsActivity.class);
     public static final String BUNDLE_KEY_EVENT_NAME = "BUNDLE_KEY_EVENT_NAME";
+    public static final String BUNDLE_KEY_EVENT_PROPERTIES = "BUNDLE_KEY_EVENT_PROPERTIES";
     private EventdetailsActivityBinding binding;
     private String eventName;
     private EventPropertiesAdapter eventPropertiesAdapter;
@@ -52,7 +56,8 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         setContentView(binding.getRoot());
         this.eventName = getIntent().getStringExtra(BUNDLE_KEY_EVENT_NAME);
         super.setTitle(eventName);
-        eventProperties = new ArrayList<>();
+        String eventProperties = getIntent().getStringExtra(BUNDLE_KEY_EVENT_PROPERTIES);
+        initEventProperties(eventProperties);
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
@@ -103,6 +108,11 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         super.onDestroy();
         binding = null;
         activityResultLauncher = null;
+        eventProperties.clear();
+        eventProperties = null;
+        eventPropertiesSelectorItems.clear();
+        eventPropertiesSelectorItems = null;
+        eventPropertiesAdapter = null;
     }
 
     @Override
@@ -114,6 +124,14 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menu_delete_all){
+            showDeleteAllDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.eventDetail_button_request){
@@ -121,6 +139,26 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         } else if (id == R.id.eventDetail_imageView_addProperties){
             showPredefinedEventPropertiesSelector();
         }
+    }
+
+    private void showDeleteAllDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("속성을 모두 제거하시겠습니까?");
+        builder.setPositiveButton("제거하기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                eventPropertiesAdapter.clear();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(true);
+        builder.show();
     }
 
     private void setClickListener(){
@@ -235,6 +273,61 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
             if(item.getMatchedEventName() == null || eventName.equals(item.getMatchedEventName())){
                 eventPropertiesSelectorItems.add(item.name());
             }
+        }
+    }
+    private void initEventProperties(String properties){
+        eventProperties = new ArrayList<>();
+        if(TextUtils.isEmpty(properties)){
+        for(PredefinedEventProperties item : PredefinedEventProperties.values()){
+            if(item.getMatchedEventName() == null || eventName.equals(item.getMatchedEventName())){
+                if(item.isRequired()){
+                    eventProperties.add(new ItemProperties(item.getKey(), item.getValueType()));
+                }
+            }
+        }
+            return;
+        }
+        try {
+            JSONObject root = new JSONObject(properties);
+            JSONArray eventItems = root.optJSONArray(DF.EventProperty.KEY_ARRAY_ITEMS);
+            if(eventItems != null){
+                root.remove(DF.EventProperty.KEY_ARRAY_ITEMS);
+                for(int i=0; i<eventItems.length(); i++){
+                    ItemProperties item = new ItemProperties("{product}", ValueType.Product);
+                    JSONObject jsonObject = eventItems.optJSONObject(i);
+                    if(jsonObject!=null){
+                        item.setValue(jsonObject.toString());
+                        eventProperties.add(item);
+                    }
+                }
+            }
+            Iterator<String> iterator = root.keys();
+            while(iterator.hasNext()){
+                String key = iterator.next();
+                Object value = root.get(key);
+                ItemProperties item = null;
+                if(value instanceof String){
+                    item = new ItemProperties(key, ValueType.String);
+                    item.setValue(root.optString(key));
+                }
+                if(value instanceof Long){
+                    item = new ItemProperties(key, ValueType.Long);
+                    item.setValue(String.valueOf(root.optLong(key)));
+                }
+                if(value instanceof Double){
+                    item = new ItemProperties(key, ValueType.Double);
+                    item.setValue(String.valueOf(root.optDouble(key)));
+                }
+                if(value instanceof Boolean){
+                    item = new ItemProperties(key, ValueType.Boolean);
+                    item.setValue(String.valueOf(root.optBoolean(key)));
+                }
+                if(item != null){
+                    eventProperties.add(item);
+                }
+            }
+        } catch (JSONException e) {
+            return;
         }
     }
 }

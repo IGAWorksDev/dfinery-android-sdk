@@ -4,6 +4,9 @@ To use Dfinery features in your app's WebView, simply add `dfinery-html-bridge.j
 ### dfinery-html-bridge.js
 This is a js file that implements javascript to facilitate using Dfinery in HTML.
 
+> [!WARNING]
+> Do not modify this script file. Integration problems may occur.
+
 ### DfineryBridge
 This is a commonly used class in plugins such as WebView, Unity, and ReactNative. You can register using WebView's [`addJavascriptInterface()`](https://developer.android.com/reference/android/webkit/WebView#addJavascriptInterface(java.lang.Object,%20java.lang.String)) there is.
 
@@ -39,13 +42,93 @@ myWebView.addJavascriptInterface(DfineryBridge(), DfineryBridge.JAVASCRIPT_INTER
 #### 3. Add the `dfinery-html-bridge.js` file to the `src/main/assets` path.
 #### 4. Add the `dfinery-html-bridge.js` script to the HTML document where you want to use Dfinery.
 
+##### 4.1 When adding directly to an HTML document
+
 ```html
 <script src="./dfinery-html-bridge.js"></script>
 ```
 
+##### 4.2 When adding to WebView
+
+<details open>
+  <summary>Java</summary>
+
+```java
+myWebView.setWebViewClient(new WebViewClient(){
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+        Log.d(TAG, "onPageFinished. url:"+url);
+        if(url.equals("{myUrl}")){
+            BufferedReader reader = null;
+            StringBuilder javascriptString = new StringBuilder();
+            try {
+                reader = new BufferedReader(new InputStreamReader(getAssets().open("dfinery-html-bridge.js"), "UTF-8"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    javascriptString.append(line);
+                }
+            } catch (IOException e) {
+
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        //log the exception
+                    }
+                }
+            }
+            view.evaluateJavascript(javascriptString.toString(), null);
+        }
+    }
+});
+```
+
+</details>
+
+<details open>
+  <summary>Kotlin</summary>
+
+```kotlin
+myWebView.setWebViewClient(object : WebViewClient() {
+    fun onPageFinished(view: WebView, url: String) {
+        super.onPageFinished(view, url)
+        if (url == "{myUrl}") {
+            var reader: java.io.BufferedReader? = null
+            val javascriptString: java.lang.StringBuilder = java.lang.StringBuilder()
+            try {
+                reader = java.io.BufferedReader(
+                    InputStreamReader(
+                        getAssets().open("dfinery-html-bridge.js"),
+                        "UTF-8"
+                    )
+                )
+                var line: String?
+                while ((reader.readLine().also { line = it }) != null) {
+                    javascriptString.append(line)
+                }
+            } catch (e: java.io.IOException) {
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close()
+                    } catch (e: java.io.IOException) {
+                        //log the exception
+                    }
+                }
+            }
+            view.evaluateJavascript(javascriptString.toString(), null)
+        }
+    }
+})
+```
+
+</details>
+
 #### 5. Call Dfinery using the `dfineryBridge` object within the HTML document.
 
-> Below is an application example.
+> Below is an example.
 
 ```javascript
 function Login() {
