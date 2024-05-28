@@ -2,7 +2,7 @@
 앱의 WebView에서 Dfinery 기능을 사용하려면 SDK에서 제공되는 `dfinery-html-bridge.js`와 `DfineryBridge`를 WebView와 HTML에 추가하면 됩니다. 가이드에 따라 항목들이 추가되면 Dfinery에 사용할 수 있는 동일한 API를 WebView 내에서 사용할 수 있습니다.
 
 ### dfinery-html-bridge.js
-HTML에서 Dfinery를 사용하기 용이하게 하기 위한 javascript가 구현되어 있는 js 파일입니다.
+HTML에서 Dfinery를 사용하기 용이하게 하기 위한 javascript가 구현되어 있는 js 파일입니다. 이 경로에서 [다운로드](../../assets/dfinery-html-bridge.js) 할 수 있습니다.
 
 > [!WARNING]
 > 이 스크립트 파일을 수정하지 마세요. 연동에 문제가 발생할 수 있습니다.

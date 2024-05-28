@@ -1,9 +1,10 @@
 ![dfinery](https://www.dfinery.io/assets/images/logos/logo_color.svg)
 
-
 ## Dfinery Android SDK
 
 ![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/com.igaworks.dfinery/android-sdk?server=https%3A%2F%2Fs01.oss.sonatype.org)
+
+Dfinery's official Android SDK for Mobile Marketing
 
 ### ℹ️ Information
 - minSdk : 19 / Android 4.4+
