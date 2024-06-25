@@ -248,7 +248,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 푸시를 클릭할 경우 딥링크에 설정된 Activity가 실행되거나 딥링크가 없을 경우 `android.intent.action.MAIN` 액션을 가지고 있는 Activity가 실행됩니다. 
 
 클릭한 푸시 데이터는 해당하는 Activity의 `onCreate(Bundle)` 메소드로 전달됩니다.
-클릭한 데이터를 활용하고 싶으실 경우 이곳에서 `getDfineryPushNotification()`를 사용하여 푸시 데이터가 담겨있는 [PushNotification](#pushpayload-알아보기) 객체를 가져올 수 있습니다.
+클릭한 데이터를 활용하고 싶으실 경우 이곳에서 `getDfineryPushPayload()`를 사용하여 푸시 데이터가 담겨있는 [DfineryPushPayload](#dfinerypushpayload-알아보기)) 객체를 가져올 수 있습니다.
 
 > [!WARNING]
 > 데이터 파싱에 실패하거나 Intent에 푸시 데이터가 없을 경우 null이 반환되므로 반드시 null 체크를 해주시기 바랍니다.
@@ -260,7 +260,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    PushNotification pushNotification = Dfinery.getInstance().getDfineryPushNotification(getIntent());
+    DfineryPushPayload pushNotification = Dfinery.getInstance().getDfineryPushPayload(getIntent());
     if(pushNotification != null){
         String title = pushNotification.getTitle();
     }
@@ -275,7 +275,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val pushNotification = Dfinery.getInstance().getDfineryPushNotification(intent)
+    val pushNotification = Dfinery.getInstance().getDfineryPushPayload(intent)
     pushNotification?.let { 
         it.title
     }
@@ -442,8 +442,8 @@ notificationManager.createNotificationChannel(notificationChannel)
 
 #### 6. 완료되었습니다.
 
-### PushPayload 알아보기
-PushPayload는 푸시 데이터를 담고있는 객체입니다. Dfinery를 통해 수신된 페이로드의 키 값 상수와 값을 가져올 수 있는 메소드를 제공합니다.
+### DfineryPushPayload 알아보기
+DfineryPushPayload는 푸시 데이터를 담고있는 객체입니다. Dfinery를 통해 수신된 페이로드의 키 값 상수와 값을 가져올 수 있는 메소드를 제공합니다.
 #### getNotificationId()
 - 반환 유형 : Integer
 - 내용 : 알림 ID 값을 반환합니다.
@@ -485,7 +485,7 @@ PushPayload는 푸시 데이터를 담고있는 객체입니다. Dfinery를 통�
 - 내용 : [Dfinery Console](https://console.dfinery.ai/)의 메시지 부가 설정에서 설정한 "앱 실행 중 푸시 메시지 노출"의 체크 유무 값을 가져옵니다.
 
 ### SDK 동작 없이 PushPayload 가져오기
-`getDfineryPushNotification()` API를 사용하면 별도의 SDK 동작 없이 Intent에 포함되어 있는 Extra 혹은 RemoteMessage를 파싱할 수 있습니다.
+`getDfineryPushPayload()` API를 사용하면 별도의 SDK 동작 없이 Intent에 포함되어 있는 Extra 혹은 RemoteMessage를 파싱할 수 있습니다.
 
 <details open>
   <summary>Java</summary>
@@ -494,7 +494,7 @@ PushPayload는 푸시 데이터를 담고있는 객체입니다. Dfinery를 통�
 @Override
 public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
-    PushNotification pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage.getData());
+    DfineryPushPayload pushNotification = Dfinery.getInstance().getDfineryPushPayload(remoteMessage.getData());
 }
 ```
 
@@ -505,7 +505,7 @@ public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
 ```kotlin
 override fun onMessageReceived(remoteMessage: RemoteMessage) {
-  val pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage.getData());
+  val pushNotification = Dfinery.getInstance().getDfineryPushPayload(remoteMessage.getData());
 }
 ```
 </details>

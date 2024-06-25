@@ -43,7 +43,7 @@ Dfinery.getInstance().logEvent("{event_name}")
   <summary>Java</summary>
 
 ```java
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 eventParam.put("key", "value");	
 Dfinery.getInstance().logEvent("{event_name}", eventParam);
 ```
@@ -54,7 +54,7 @@ Dfinery.getInstance().logEvent("{event_name}", eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 eventParam.put("key", "value")	
 Dfinery.getInstance().logEvent("{event_name}", eventParam)
 ```
@@ -117,7 +117,7 @@ This event indicates that the action of a user signing up as a member.
   <summary>Java</summary>
 
 ```java
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_STRING_SIGN_CHANNEL, "Kakao");
 } catch (JSONException e) {
@@ -132,7 +132,7 @@ Dfinery.getInstance().logEvent(DF.Event.SIGN_UP, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_STRING_SIGN_CHANNEL, "Kakao")
 } catch (e: JSONException) {
@@ -177,7 +177,7 @@ This event indicates the action of the user checking the shopping cart.
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -191,7 +191,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
 } catch (JSONException e) {
@@ -206,7 +206,7 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_CART, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -220,7 +220,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
 } catch (e: JSONException) {
@@ -244,7 +244,7 @@ This event indicates the user's action of viewing the product list.
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -258,7 +258,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
 } catch (JSONException e) {
@@ -273,7 +273,7 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_LIST, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -287,7 +287,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
 } catch (e: JSONException) {
@@ -310,7 +310,7 @@ This event indicates the action of a user sharing a product.
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -324,7 +324,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
     eventParam.put(DF.EventProperty.KEY_STRING_SHARING_CHANNEL, "Facebook");
@@ -340,7 +340,7 @@ Dfinery.getInstance().logEvent(DF.Event.SHARE_PRODUCT, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -354,7 +354,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
     eventParam.put(DF.EventProperty.KEY_STRING_SHARING_CHANNEL, "Facebook")
@@ -379,7 +379,7 @@ This event indicates the action of a user searching for a product and checking t
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -393,7 +393,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
     eventParam.put(DF.EventProperty.KEY_STRING_KEYWORD, "Fork");
@@ -409,7 +409,7 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_SEARCH_RESULT, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -423,7 +423,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
     eventParam.put(DF.EventProperty.KEY_STRING_KEYWORD, "Fork")
@@ -448,7 +448,7 @@ This event indicates the action of a user adding a product to his/her interest l
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -462,7 +462,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
 } catch (JSONException e) {
@@ -477,7 +477,7 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_WISHLIST, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -491,7 +491,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
 } catch (e: JSONException) {
@@ -514,7 +514,7 @@ This event indicates the user putting a product into the shopping cart.
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -528,7 +528,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
 } catch (JSONException e) {
@@ -543,7 +543,7 @@ Dfinery.getInstance().logEvent(DF.Event.ADD_TO_CART, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -557,7 +557,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
 } catch (e: JSONException) {
@@ -581,7 +581,7 @@ This event indicates that the user removes a product from the shopping cart.
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -595,7 +595,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
 } catch (JSONException e) {
@@ -610,7 +610,7 @@ Dfinery.getInstance().logEvent(DF.Event.REMOVE_CART, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -624,7 +624,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
 } catch (e: JSONException) {
@@ -648,7 +648,7 @@ This event indicates the action of a user searching for detailed information abo
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -662,7 +662,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
 } catch (JSONException e) {
@@ -677,7 +677,7 @@ Dfinery.getInstance().logEvent(DF.Event.VIEW_PRODUCT_DETAILS, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -691,7 +691,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
 } catch (e: JSONException) {
@@ -737,7 +737,7 @@ This event indicates the action of a user purchasing a product or service.
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -751,7 +751,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
     eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "ProductNumber");
@@ -771,7 +771,7 @@ Dfinery.getInstance().logEvent(DF.Event.PURCHASE, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -785,7 +785,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
     eventParam.put(DF.EventProperty.KEY_STRING_ORDER_ID, "ProductNumber")
@@ -818,7 +818,7 @@ This event indicates the action of canceling and refunding an order purchased by
   <summary>Java</summary>
 
 ```java
-JSONObject item = new JSONObject();
+DfineryJSONObject item = new DfineryJSONObject();
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber");
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName");
@@ -832,7 +832,7 @@ try {
 }
 JSONArray itemList = new JSONArray();
 itemList.put(item);
-JSONObject eventParam = new JSONObject();
+DfineryJSONObject eventParam = new DfineryJSONObject();
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList);
     eventParam.put(DF.EventProperty.KEY_DOUBLE_TOTAL_REFUND_AMOUNT, 22500.0);
@@ -848,7 +848,7 @@ Dfinery.getInstance().logEvent(DF.Event.REFUND, eventParam);
   <summary>Kotlin</summary>
 
 ```kotlin
-val item = JSONObject()
+val item = DfineryJSONObject()
 try {
     item.put(DF.EventProperty.KEY_STRING_ITEM_ID, "ProductNumber")
     item.put(DF.EventProperty.KEY_STRING_ITEM_NAME, "ProductName")
@@ -862,7 +862,7 @@ try {
 }
 val itemList = JSONArray()
 itemList.put(item)
-val eventParam = JSONObject()
+val eventParam = DfineryJSONObject()
 try {
     eventParam.put(DF.EventProperty.KEY_ARRAY_ITEMS, itemList)
     eventParam.put(DF.EventProperty.KEY_DOUBLE_TOTAL_REFUND_AMOUNT, 22500.0)

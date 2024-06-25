@@ -239,7 +239,7 @@ override fun onMessageReceived(remoteMessage: RemoteMessage) {
 When you click Push, the activity set in the deep link is executed, or if there is no deep link, the activity with the `android.intent.action.MAIN` action is executed.
 
 The clicked push data is passed to the `onCreate(Bundle)` method of the corresponding Activity.
-If you want to use the clicked data, you can use `getDfineryPushNotification()` here to get the [PushNotification](#pushpayload) object containing the push data.
+If you want to use the clicked data, you can use `getDfineryPushPayload()` here to get the [DfineryPushPayload](#dfinerypushpayload) object containing the push data.
 
 > [!WARNING]
 > If data parsing fails or there is no push data in the Intent, null is returned, so a null check is required.
@@ -251,7 +251,7 @@ If you want to use the clicked data, you can use `getDfineryPushNotification()` 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    PushNotification pushNotification = Dfinery.getInstance().getDfineryPushNotification(getIntent());
+    DfineryPushPayload pushNotification = Dfinery.getInstance().getDfineryPushPayload(getIntent());
     if(pushNotification != null){
         String title = pushNotification.getTitle();
     }
@@ -266,7 +266,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val pushNotification = Dfinery.getInstance().getDfineryPushNotification(intent)
+    val pushNotification = Dfinery.getInstance().getDfineryPushPayload(intent)
     pushNotification?.let { 
         it.title
     }
@@ -432,8 +432,8 @@ notificationManager.createNotificationChannel(notificationChannel)
 
 #### 6. Complete.
 
-### PushPayload
-PushPayload is an object containing push data. Provides methods to retrieve key-value constants and values from payloads received through Dfinery.
+### DfineryPushPayload
+DfineryPushPayload is an object containing push data. Provides methods to retrieve key-value constants and values from payloads received through Dfinery.
 
 #### getNotificationId()
 - Return type : Integer
@@ -476,7 +476,7 @@ PushPayload is an object containing push data. Provides methods to retrieve key-
 - Description : Get the check status value for “Push message exposure while app running” set in the message additional settings of [Dfinery Console](https://console.dfinery.ai/).
 
 ### Using PushPayload without SDK handling
-Using the `getDfineryPushNotification()` API, you can parse the Extra or RemoteMessage included in the Intent without any SDK handling.
+Using the `getDfineryPushPayload()` API, you can parse the Extra or RemoteMessage included in the Intent without any SDK handling.
 
 <details open>
   <summary>Java</summary>
@@ -485,7 +485,7 @@ Using the `getDfineryPushNotification()` API, you can parse the Extra or RemoteM
 @Override
 public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
     super.onMessageReceived(remoteMessage);
-    PushNotification pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage.getData());
+    DfineryPushPayload pushNotification = Dfinery.getInstance().getDfineryPushPayload(remoteMessage.getData());
 }
 ```
 
@@ -496,7 +496,7 @@ public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
 
 ```kotlin
 override fun onMessageReceived(remoteMessage: RemoteMessage) {
-  val pushNotification = Dfinery.getInstance().getDfineryPushNotification(remoteMessage.getData());
+  val pushNotification = Dfinery.getInstance().getDfineryPushPayload(remoteMessage.getData());
 }
 ```
 </details>
