@@ -16,6 +16,6 @@ To test push, uncomment com.google.gms.google-services at the top of your app-le
 ```groovy
 plugins {
     id 'com.android.application'
-    //id 'com.google.gms.google-services' <- Please remove it.
+    //id 'com.google.gms.google-services' <- Please uncomment it.
 }
 ```
