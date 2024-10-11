@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="com_igaworks_dfinery_default_notification_channel_id" translatable="false" >dfinery</string>
+    <drawable name="com_igaworks_dfinery_notification_icon" >@drawable/ic_dfinery</drawable>
+    <bool name="com_igaworks_dfinery_log_enable" translatable="false">true</bool>
+    <integer name="com_igaworks_dfinery_log_level">2</integer>
+</resources>

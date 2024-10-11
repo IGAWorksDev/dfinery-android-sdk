@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.igaworks.dfinery.constants.DF;
 import com.igaworks.dfinerysample.R;
 import com.igaworks.dfinerysample.Utils;
 import com.igaworks.dfinerysample.databinding.ProductdetailsActivityBinding;
@@ -49,11 +52,19 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         binding = ProductdetailsActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setTitle("Product");
-        productProperties = new ArrayList<>();
         initPredefinedProductPropertiesSelectorItems();
-        position = getIntent().getIntExtra(BUNDLE_KEY_POSITION, -1);
         value = getIntent().getStringExtra(BUNDLE_KEY_VALUE);
-        putPreviouslyEnteredItem(value);
+        productProperties = new ArrayList<>();
+        JSONObject previousValue = new JSONObject();
+        try {
+            previousValue = new JSONObject(value);
+        } catch (JSONException e) {}
+        if(previousValue.length() == 0){
+            initProductProperties();
+        } else{
+            putPreviouslyEnteredItem(value);
+        }
+        position = getIntent().getIntExtra(BUNDLE_KEY_POSITION, -1);
         setClickListener();
         setAdapter();
         getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(false) {
@@ -67,16 +78,50 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
     protected void onDestroy() {
         super.onDestroy();
         binding = null;
+        productProperties.clear();
+        productProperties = null;
+        productPropertiesAdapter = null;
+        productPropertiesSelectorItems.clear();
+        productPropertiesSelectorItems = null;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menu_delete_all){
+            showDeleteAllDialog();
+        }
+        return super.onOptionsItemSelected(item);
     }
     @Override
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.productDetail_button_confirm){
             confirm();
+            hideKeypad();
         } else if (id == R.id.productDetail_imageView_addProductProperties){
             showPredefinedProductPropertiesSelector();
         }
     }
+    private void showDeleteAllDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("속성을 모두 제거하시겠습니까?");
+        builder.setPositiveButton("제거하기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                productPropertiesAdapter.clear();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(true);
+        builder.show();
+    }
+
     private void putPreviouslyEnteredItem(String value){
         if(TextUtils.isEmpty(value)){
             return;
@@ -91,13 +136,13 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
             String key = it.next();
             String itemValue = jsonObject.optString(key);
-            ItemProperties itemProperties = new ItemProperties(key, ValueType.get(itemValue));
+            ItemProperties itemProperties = new ItemProperties(key, ValueType.get(itemValue, DF.EventProperty.FORMAT_DATETIME));
             itemProperties.setValue(itemValue);
             productProperties.add(itemProperties);
         }
     }
     private void setAdapter(){
-        productPropertiesAdapter = new ProductPropertiesAdapter(this, productProperties);
+        productPropertiesAdapter = new ProductPropertiesAdapter(this, getSupportFragmentManager(), productProperties);
         binding.productDetailRecyclerViewProductProperties.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.productDetailRecyclerViewProductProperties.setAdapter(productPropertiesAdapter);
         binding.productDetailRecyclerViewProductProperties.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -148,7 +193,7 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         builder.setPositiveButton("완료", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String input = editText.getText().toString();
+                String input = editText.getText().toString().trim();
                 if(TextUtils.isEmpty(input)){
                     Snackbar.make(binding.eventDetailConstraintLayoutContainer, "값이 입력되지 않았습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -172,10 +217,6 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         builder.show();
     }
     private void confirm(){
-        if(!productPropertiesAdapter.validate()){
-            Snackbar.make(binding.eventDetailConstraintLayoutContainer, "미작성된 속성이 있습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
-            return;
-        }
         Intent intent = new Intent();
         intent.setAction(INTENT_ACTION_CONFIRM);
         intent.putExtra(BUNDLE_KEY_POSITION, position);
@@ -183,7 +224,7 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         JSONObject jsonObject = new JSONObject();
         for(ItemProperties index: selectedData){
             try {
-                jsonObject.put(index.getKey(), ValueType.getCastedValue(index.getValue()));
+                jsonObject.put(index.getKey(), index.getCastedValueByValueType());
             } catch (JSONException e) {
                 Log.e(TAG, e.toString());
             }
@@ -191,5 +232,12 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         intent.putExtra(BUNDLE_KEY_VALUE, jsonObject.toString());
         setResult(RESULT_OK, intent);
         finish();
+    }
+    private void initProductProperties(){
+        for(PredefinedProductProperties item : PredefinedProductProperties.values()){
+            if(item.isRequired()){
+                productProperties.add(new ItemProperties(item.getKey(), item.getValueType()));
+            }
+        }
     }
 }

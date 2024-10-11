@@ -1,0 +1,7 @@
+package com.igaworks.dfinerysample.enums;
+
+public enum InstanceStateKey {
+    CHECKED_PUSH_STYLE_RADIO_BUTTON_VIEW_ID,
+    CHECKED_IN_APP_MESSAGE_STYLE_RADIO_BUTTON_VIEW_ID,
+    SELECTED_NUMBER_OF_BUTTON_SPINNER_POSITION
+}

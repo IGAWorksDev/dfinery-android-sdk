@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,6 +15,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -26,6 +28,8 @@ import com.igaworks.dfinery.constants.DF;
 import com.igaworks.dfinerysample.R;
 import com.igaworks.dfinerysample.Utils;
 import com.igaworks.dfinerysample.databinding.EventdetailsActivityBinding;
+import com.igaworks.dfinerysample.enums.PreferenceKey;
+import com.igaworks.dfinerysample.helper.PreferenceHelper;
 import com.igaworks.dfinerysample.view.BaseActionBarActivity;
 import com.igaworks.dfinerysample.view.eventdetails.productdetails.ProductDetailsActivity;
 
@@ -34,11 +38,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class EventDetailsActivity extends BaseActionBarActivity implements View.OnClickListener{
     public static final String TAG = Utils.getTagFromClass(EventDetailsActivity.class);
     public static final String BUNDLE_KEY_EVENT_NAME = "BUNDLE_KEY_EVENT_NAME";
+    public static final String BUNDLE_KEY_EVENT_PROPERTIES = "BUNDLE_KEY_EVENT_PROPERTIES";
     private EventdetailsActivityBinding binding;
     private String eventName;
     private EventPropertiesAdapter eventPropertiesAdapter;
@@ -52,7 +58,8 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         setContentView(binding.getRoot());
         this.eventName = getIntent().getStringExtra(BUNDLE_KEY_EVENT_NAME);
         super.setTitle(eventName);
-        eventProperties = new ArrayList<>();
+        String eventProperties = getIntent().getStringExtra(BUNDLE_KEY_EVENT_PROPERTIES);
+        initEventProperties(eventProperties);
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
@@ -94,7 +101,7 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
     @Override
     protected void onResume() {
         super.onResume();
-        eventPropertiesAdapter = new EventPropertiesAdapter(this, activityResultLauncher, eventProperties);
+        eventPropertiesAdapter = new EventPropertiesAdapter(this, getSupportFragmentManager(), activityResultLauncher, eventProperties);
         setAdapter();
     }
 
@@ -103,6 +110,11 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         super.onDestroy();
         binding = null;
         activityResultLauncher = null;
+        eventProperties.clear();
+        eventProperties = null;
+        eventPropertiesSelectorItems.clear();
+        eventPropertiesSelectorItems = null;
+        eventPropertiesAdapter = null;
     }
 
     @Override
@@ -114,6 +126,14 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.menu_delete_all){
+            showDeleteAllDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.eventDetail_button_request){
@@ -121,6 +141,26 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         } else if (id == R.id.eventDetail_imageView_addProperties){
             showPredefinedEventPropertiesSelector();
         }
+    }
+
+    private void showDeleteAllDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("속성을 모두 제거하시겠습니까?");
+        builder.setPositiveButton("제거하기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                eventPropertiesAdapter.clear();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(true);
+        builder.show();
     }
 
     private void setClickListener(){
@@ -168,7 +208,7 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         builder.setPositiveButton("완료", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String input = editText.getText().toString();
+                String input = editText.getText().toString().trim();
                 if(TextUtils.isEmpty(input)){
                     Snackbar.make(binding.eventDetailConstraintLayoutContainer, "값이 입력되지 않았습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -192,18 +232,18 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         builder.show();
     }
     private void request(){
-        if(!eventPropertiesAdapter.validate()){
-            Snackbar.make(binding.eventDetailConstraintLayoutContainer, "미작성된 속성이 있습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
-            return;
-        }
         List<ItemProperties> selectedData = eventPropertiesAdapter.getDataSet();
         JSONObject root = new JSONObject();
         JSONArray items = new JSONArray();
         for(ItemProperties index: selectedData){
+            String value = index.getValue();
             if(index.getKey().equals(PredefinedEventProperties.PRODUCT.getKey())){
+                if(value == null || value.isEmpty()){
+                    continue;
+                }
                 JSONObject item = null;
                 try {
-                    item = new JSONObject(index.getValue());
+                    item = new JSONObject(value);
                 } catch (JSONException e) {
                     Log.e(TAG, e.toString());
                 }
@@ -212,7 +252,7 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
                 }
             } else{
                 try {
-                    root.put(index.getKey(), ValueType.getCastedValue(index.getValue()));
+                    root.put(index.getKey(), index.getCastedValueByValueType());
                 } catch (JSONException e) {
                     Log.e(TAG, e.toString());
                 }
@@ -226,6 +266,7 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
             }
         }
         Dfinery.getInstance().logEvent(eventName, root);
+        saveEvent(eventName, root);
         setResult(RESULT_OK);
         finish();
     }
@@ -234,6 +275,75 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         for(PredefinedEventProperties item : PredefinedEventProperties.values()){
             if(item.getMatchedEventName() == null || eventName.equals(item.getMatchedEventName())){
                 eventPropertiesSelectorItems.add(item.name());
+            }
+        }
+    }
+    private void initEventProperties(String properties){
+        eventProperties = new ArrayList<>();
+        if(TextUtils.isEmpty(properties)){
+            for(PredefinedEventProperties item : PredefinedEventProperties.values()){
+                if(item.getMatchedEventName() == null || eventName.equals(item.getMatchedEventName())){
+                    if(item.isRequired()){
+                        eventProperties.add(new ItemProperties(item.getKey(), item.getValueType()));
+                    }
+                }
+            }
+            return;
+        }
+        try {
+            JSONObject root = new JSONObject(properties);
+            JSONArray eventItems = root.optJSONArray(DF.EventProperty.KEY_ARRAY_ITEMS);
+            if(eventItems != null){
+                root.remove(DF.EventProperty.KEY_ARRAY_ITEMS);
+                for(int i=0; i<eventItems.length(); i++){
+                    ItemProperties item = new ItemProperties("{product}", ValueType.Product);
+                    JSONObject jsonObject = eventItems.optJSONObject(i);
+                    if(jsonObject!=null){
+                        item.setValue(jsonObject.toString());
+                        eventProperties.add(item);
+                    }
+                }
+            }
+            Iterator<String> iterator = root.keys();
+            while(iterator.hasNext()){
+                String key = iterator.next();
+                String value = root.optString(key);
+                ItemProperties itemProperties = new ItemProperties(key, ValueType.get(value, DF.EventProperty.FORMAT_DATETIME));
+                itemProperties.setValue(value);
+                eventProperties.add(itemProperties);
+            }
+        } catch (JSONException e) {
+            return;
+        }
+    }
+    private void saveEvent(String eventName, JSONObject properties){
+        PreferenceHelper preferenceHelper = new PreferenceHelper(getApplicationContext());
+        String eventNames = preferenceHelper.getString(PreferenceKey.JSON_ARRAY_EVENT_NAMES.name(), null);
+        if(TextUtils.isEmpty(eventNames)){
+            JSONArray names = new JSONArray();
+            names.put(eventName);
+            preferenceHelper.putString(PreferenceKey.JSON_ARRAY_EVENT_NAMES.name(), names.toString());
+        } else{
+            try {
+                JSONArray names = new JSONArray(eventNames);
+                names.put(eventName);
+                preferenceHelper.putString(PreferenceKey.JSON_ARRAY_EVENT_NAMES.name(), names.toString());
+            } catch (JSONException e) {
+                Log.d(TAG, e.toString());
+            }
+        }
+        String eventProperties = preferenceHelper.getString(PreferenceKey.JSON_ARRAY_EVENT_PROPERTIES.name(), null);
+        if(TextUtils.isEmpty(eventProperties)){
+            JSONArray value = new JSONArray();
+            value.put(properties);
+            preferenceHelper.putString(PreferenceKey.JSON_ARRAY_EVENT_PROPERTIES.name(), value.toString());
+        } else{
+            try {
+                JSONArray value = new JSONArray(eventProperties);
+                value.put(properties);
+                preferenceHelper.putString(PreferenceKey.JSON_ARRAY_EVENT_PROPERTIES.name(), value.toString());
+            } catch (JSONException e) {
+                Log.d(TAG, e.toString());
             }
         }
     }

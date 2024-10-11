@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    //id 'com.google.gms.google-services'
 }
 
 android {
@@ -29,10 +30,17 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
     implementation 'com.google.android.gms:play-services-appset:16.0.2'
-    implementation 'com.igaworks.dfinery:android-sdk:+'
+    implementation platform('com.google.firebase:firebase-bom:33.0.0')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation ('com.googlecode.json-simple:json-simple:1.1.1'){
+        exclude group:'org.hamcrest'
+    }
+    implementation 'com.igaworks.dfinery:android-sdk:1.1.0'
 }
