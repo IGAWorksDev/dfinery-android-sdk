@@ -8,22 +8,45 @@
     <application
         android:name=".BaseApplication"
         android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dfinery"
-        android:hardwareAccelerated="true">
+        android:networkSecurityConfig="@xml/network_config"
+        android:hardwareAccelerated="true"
+        tools:targetApi="31">
         <activity
             android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity android:name=".view.InAppMessageActivity" android:theme="@style/Theme.Dfinery.ActionBar"/>
+        <activity android:name=".view.PushListActivity"
+            android:theme="@style/Theme.Dfinery.ActionBar"
+            android:exported="true">
+            <intent-filter  android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="dfinery"
+                    android:host="pushlist" />
             </intent-filter>
         </activity>
         <activity android:name=".view.eventdetails.EventDetailsActivity" android:theme="@style/Theme.Dfinery.ActionBar"/>
         <activity android:name=".view.eventdetails.productdetails.ProductDetailsActivity" android:theme="@style/Theme.Dfinery.ActionBar"/>
+        <activity android:name=".view.WebActivity" android:theme="@style/Theme.Dfinery.ActionBar"/>
         <service
             android:name=".BaseFirebaseMessagingService"
             android:exported="false">

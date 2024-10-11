@@ -16,12 +16,12 @@ public enum ValueType {
     ArrayOfString,
     ArrayOfLong,
     ArrayOfDouble;
-    public static ValueType get(String value){
+    public static ValueType get(String value, String dateFormat){
         if(TextUtils.isEmpty(value)){
             return String;
         }
         Date date = null;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
         try {
             date = simpleDateFormat.parse(value);
         } catch (ParseException e) {}
@@ -48,23 +48,17 @@ public enum ValueType {
         if(!value.contains(",")){
             return String;
         }
-        String valueRemovedComma = value.replace(",", "");
-        String valueRemovedMinus = valueRemovedComma.replace("-", "");
-        if(TextUtils.isDigitsOnly(valueRemovedMinus)){
+        String converted1 = value.replace(",", "");
+        String converted2 = converted1.replace("-", "");
+        String converted3 = converted2.substring(1);
+        String converted4 = converted3.substring(0, converted3.length()-1);
+        if(TextUtils.isDigitsOnly(converted4)){
             return ArrayOfLong;
         }
-        String valueRemovedDot = valueRemovedMinus.replace(".", "");
+        String valueRemovedDot = converted4.replace(".", "");
         if(TextUtils.isDigitsOnly(valueRemovedDot)){
             return ArrayOfDouble;
         }
         return ArrayOfString;
-    }
-    public static Object getCastedValue(String value){
-        switch (ValueType.get(value)){
-            case Long: return java.lang.Long.valueOf(value);
-            case Double: return java.lang.Double.valueOf(value);
-            case Boolean: return java.lang.Boolean.valueOf(value);
-            default: return value;
-        }
     }
 }

@@ -28,6 +28,8 @@ import com.igaworks.dfinery.constants.DF;
 import com.igaworks.dfinerysample.R;
 import com.igaworks.dfinerysample.Utils;
 import com.igaworks.dfinerysample.databinding.EventdetailsActivityBinding;
+import com.igaworks.dfinerysample.enums.PreferenceKey;
+import com.igaworks.dfinerysample.helper.PreferenceHelper;
 import com.igaworks.dfinerysample.view.BaseActionBarActivity;
 import com.igaworks.dfinerysample.view.eventdetails.productdetails.ProductDetailsActivity;
 
@@ -99,7 +101,7 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
     @Override
     protected void onResume() {
         super.onResume();
-        eventPropertiesAdapter = new EventPropertiesAdapter(this, activityResultLauncher, eventProperties);
+        eventPropertiesAdapter = new EventPropertiesAdapter(this, getSupportFragmentManager(), activityResultLauncher, eventProperties);
         setAdapter();
     }
 
@@ -206,7 +208,7 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         builder.setPositiveButton("완료", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String input = editText.getText().toString();
+                String input = editText.getText().toString().trim();
                 if(TextUtils.isEmpty(input)){
                     Snackbar.make(binding.eventDetailConstraintLayoutContainer, "값이 입력되지 않았습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -230,18 +232,18 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
         builder.show();
     }
     private void request(){
-        if(!eventPropertiesAdapter.validate()){
-            Snackbar.make(binding.eventDetailConstraintLayoutContainer, "미작성된 속성이 있습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
-            return;
-        }
         List<ItemProperties> selectedData = eventPropertiesAdapter.getDataSet();
         JSONObject root = new JSONObject();
         JSONArray items = new JSONArray();
         for(ItemProperties index: selectedData){
+            String value = index.getValue();
             if(index.getKey().equals(PredefinedEventProperties.PRODUCT.getKey())){
+                if(value == null || value.isEmpty()){
+                    continue;
+                }
                 JSONObject item = null;
                 try {
-                    item = new JSONObject(index.getValue());
+                    item = new JSONObject(value);
                 } catch (JSONException e) {
                     Log.e(TAG, e.toString());
                 }
@@ -250,7 +252,7 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
                 }
             } else{
                 try {
-                    root.put(index.getKey(), ValueType.getCastedValue(index.getValue()));
+                    root.put(index.getKey(), index.getCastedValueByValueType());
                 } catch (JSONException e) {
                     Log.e(TAG, e.toString());
                 }
@@ -264,6 +266,7 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
             }
         }
         Dfinery.getInstance().logEvent(eventName, root);
+        saveEvent(eventName, root);
         setResult(RESULT_OK);
         finish();
     }
@@ -278,13 +281,13 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
     private void initEventProperties(String properties){
         eventProperties = new ArrayList<>();
         if(TextUtils.isEmpty(properties)){
-        for(PredefinedEventProperties item : PredefinedEventProperties.values()){
-            if(item.getMatchedEventName() == null || eventName.equals(item.getMatchedEventName())){
-                if(item.isRequired()){
-                    eventProperties.add(new ItemProperties(item.getKey(), item.getValueType()));
+            for(PredefinedEventProperties item : PredefinedEventProperties.values()){
+                if(item.getMatchedEventName() == null || eventName.equals(item.getMatchedEventName())){
+                    if(item.isRequired()){
+                        eventProperties.add(new ItemProperties(item.getKey(), item.getValueType()));
+                    }
                 }
             }
-        }
             return;
         }
         try {
@@ -304,30 +307,44 @@ public class EventDetailsActivity extends BaseActionBarActivity implements View.
             Iterator<String> iterator = root.keys();
             while(iterator.hasNext()){
                 String key = iterator.next();
-                Object value = root.get(key);
-                ItemProperties item = null;
-                if(value instanceof String){
-                    item = new ItemProperties(key, ValueType.String);
-                    item.setValue(root.optString(key));
-                }
-                if(value instanceof Long){
-                    item = new ItemProperties(key, ValueType.Long);
-                    item.setValue(String.valueOf(root.optLong(key)));
-                }
-                if(value instanceof Double){
-                    item = new ItemProperties(key, ValueType.Double);
-                    item.setValue(String.valueOf(root.optDouble(key)));
-                }
-                if(value instanceof Boolean){
-                    item = new ItemProperties(key, ValueType.Boolean);
-                    item.setValue(String.valueOf(root.optBoolean(key)));
-                }
-                if(item != null){
-                    eventProperties.add(item);
-                }
+                String value = root.optString(key);
+                ItemProperties itemProperties = new ItemProperties(key, ValueType.get(value, DF.EventProperty.FORMAT_DATETIME));
+                itemProperties.setValue(value);
+                eventProperties.add(itemProperties);
             }
         } catch (JSONException e) {
             return;
+        }
+    }
+    private void saveEvent(String eventName, JSONObject properties){
+        PreferenceHelper preferenceHelper = new PreferenceHelper(getApplicationContext());
+        String eventNames = preferenceHelper.getString(PreferenceKey.JSON_ARRAY_EVENT_NAMES.name(), null);
+        if(TextUtils.isEmpty(eventNames)){
+            JSONArray names = new JSONArray();
+            names.put(eventName);
+            preferenceHelper.putString(PreferenceKey.JSON_ARRAY_EVENT_NAMES.name(), names.toString());
+        } else{
+            try {
+                JSONArray names = new JSONArray(eventNames);
+                names.put(eventName);
+                preferenceHelper.putString(PreferenceKey.JSON_ARRAY_EVENT_NAMES.name(), names.toString());
+            } catch (JSONException e) {
+                Log.d(TAG, e.toString());
+            }
+        }
+        String eventProperties = preferenceHelper.getString(PreferenceKey.JSON_ARRAY_EVENT_PROPERTIES.name(), null);
+        if(TextUtils.isEmpty(eventProperties)){
+            JSONArray value = new JSONArray();
+            value.put(properties);
+            preferenceHelper.putString(PreferenceKey.JSON_ARRAY_EVENT_PROPERTIES.name(), value.toString());
+        } else{
+            try {
+                JSONArray value = new JSONArray(eventProperties);
+                value.put(properties);
+                preferenceHelper.putString(PreferenceKey.JSON_ARRAY_EVENT_PROPERTIES.name(), value.toString());
+            } catch (JSONException e) {
+                Log.d(TAG, e.toString());
+            }
         }
     }
 }

@@ -1,73 +1,94 @@
-const Dfinery = 'Dfinery';
-const DfineryProperties = 'DfineryProperties';
-const DfineryConfig = 'DfineryConfig';
-
-const LOGIN = "df_login";
-const LOGOUT = "df_logout";
-const SIGN_UP = "df_sign_up";
-const PURCHASE = "df_purchase";
-const REFUND = "df_refund";
-const VIEW_HOME = "df_view_home";
-const VIEW_PRODUCT_DETAILS = "df_view_product_details";
-const ADD_TO_CART = "df_add_to_cart";
-const ADD_TO_WISHLIST = "df_add_to_wishlist";
-const VIEW_SEARCH_RESULT = "df_view_search_result";
-const SHARE_PRODUCT = "df_share_product";
-const VIEW_LIST = "df_view_list";
-const VIEW_CART = "df_view_cart";
-const REMOVE_CART = "df_remove_cart";
-const ADD_PAYMENT_INFO = "df_add_payment_info";
-
-const KEY_ARRAY_ITEMS = "df_items";
-const KEY_STRING_ITEM_ID = "df_item_id";
-const KEY_STRING_ITEM_NAME = "df_item_name";
-const KEY_DOUBLE_PRICE = "df_price";
-const KEY_LONG_QUANTITY = "df_quantity";
-const KEY_DOUBLE_DISCOUNT = "df_discount";
-const KEY_STRING_CATEGORY1 = "df_category1";
-const KEY_STRING_CATEGORY2 = "df_category2";
-const KEY_STRING_CATEGORY3 = "df_category3";
-const KEY_STRING_CATEGORY4 = "df_category4";
-const KEY_STRING_CATEGORY5 = "df_category5";
-const KEY_DOUBLE_TOTAL_REFUND_AMOUNT = "df_total_refund_amount";
-const KEY_STRING_ORDER_ID = "df_order_id";
-const KEY_DOUBLE_DELIVERY_CHARGE = "df_delivery_charge";
-const KEY_STRING_PAYMENT_METHOD = "df_payment_method";
-const KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT = "df_total_purchase_amount";
-const KEY_STRING_SHARING_CHANNEL = "df_sharing_channel";
-const KEY_STRING_SIGN_CHANNEL = "df_sign_channel";
-const KEY_STRING_KEYWORD = "df_keyword";
-
-const NAME = "df_name";
-const GENDER = "df_gender";
-const BIRTH = "df_birth";
-const MEMBERSHIP = "df_membership";
-const INFORMATIONAL_NOTIFICATION_FOR_PUSH_CHANNEL = "df_push_optin";
-const ADVERTISING_NOTIFICATION_FOR_PUSH_CHANNEL = "df_push_ads_optin";
-const ADVERTISING_NOTIFICATION_FOR_SMS_CHANNEL = "df_sms_ads_optin";
-const ADVERTISING_NOTIFICATION_FOR_KAKAO_CHANNEL = "df_kakao_ads_optin";
-const ADVERTISING_NOTIFICATION_AT_NIGHT_FOR_PUSH_CHANNEL = "df_push_night_ads_optin";
-
-const MALE = "Male";
-const FEMALE = "Female";
-const NON_BINARY = "NonBinary";
-const OTHER = "Other";
-
-const EXTERNAL_ID = "external_id";
-const EMAIL = "email";
-const PHONE_NO = "phone_no";
-const KAKAO_USER_ID = "kakao_user_id";
-const LINE_USER_ID = "line_user_id";
-
+class DFEvent {
+  static get LOGIN() { return "df_login"; }
+  static get LOGOUT() { return "df_logout"; }
+  static get SIGN_UP() { return "df_sign_up"; }
+  static get PURCHASE() { return "df_purchase"; }
+  static get REFUND() { return "df_refund"; }
+  static get VIEW_HOME() { return "df_view_home"; }
+  static get VIEW_PRODUCT_DETAILS() { return "df_view_product_details"; }
+  static get ADD_TO_CART() { return "df_add_to_cart"; }
+  static get ADD_TO_WISHLIST() { return "df_add_to_wishlist"; }
+  static get VIEW_SEARCH_RESULT() { return "df_view_search_result"; }
+  static get SHARE_PRODUCT() { return "df_share_product"; }
+  static get VIEW_LIST() { return "df_view_list"; }
+  static get VIEW_CART() { return "df_view_cart"; }
+  static get REMOVE_CART() { return "df_remove_cart"; }
+  static get ADD_PAYMENT_INFO() { return "df_add_payment_info"; }
+}
+class DFEventProperty {
+  static get KEY_ARRAY_ITEMS() { return "df_items"; }
+  static get KEY_STRING_ITEM_ID() { return "df_item_id"; }
+  static get KEY_STRING_ITEM_NAME() { return "df_item_name"; }
+  static get KEY_DOUBLE_PRICE() { return "df_price"; }
+  static get KEY_LONG_QUANTITY() { return "df_quantity"; }
+  static get KEY_DOUBLE_DISCOUNT() { return "df_discount"; }
+  static get KEY_STRING_CATEGORY1() { return "df_category1"; }
+  static get KEY_STRING_CATEGORY2() { return "df_category2"; }
+  static get KEY_STRING_CATEGORY3() { return "df_category3"; }
+  static get KEY_STRING_CATEGORY4() { return "df_category4"; }
+  static get KEY_STRING_CATEGORY5() { return "df_category5"; }
+  static get KEY_DOUBLE_TOTAL_REFUND_AMOUNT() { return "df_total_refund_amount"; }
+  static get KEY_STRING_ORDER_ID() { return "df_order_id"; }
+  static get KEY_DOUBLE_DELIVERY_CHARGE() { return "df_delivery_charge"; }
+  static get KEY_STRING_PAYMENT_METHOD() { return "df_payment_method"; }
+  static get KEY_DOUBLE_TOTAL_PURCHASE_AMOUNT() { return "df_total_purchase_amount"; }
+  static get KEY_STRING_SHARING_CHANNEL() { return "df_sharing_channel"; }
+  static get KEY_STRING_SIGN_CHANNEL() { return "df_sign_channel"; }
+  static get KEY_STRING_KEYWORD() { return "df_keyword"; }
+}
+class DFUserProfile {
+  static get NAME() { return "df_name"; }
+  static get GENDER() { return "df_gender"; }
+  static get BIRTH() { return "df_birth"; }
+  static get MEMBERSHIP() { return "df_membership"; }
+  static get INFORMATIONAL_NOTIFICATION_FOR_PUSH_CHANNEL() { return "df_push_optin"; }
+  static get ADVERTISING_NOTIFICATION_FOR_PUSH_CHANNEL() { return "df_push_ads_optin"; }
+  static get ADVERTISING_NOTIFICATION_FOR_SMS_CHANNEL() { return "df_sms_ads_optin"; }
+  static get ADVERTISING_NOTIFICATION_FOR_KAKAO_CHANNEL() { return "df_kakao_ads_optin"; }
+  static get ADVERTISING_NOTIFICATION_AT_NIGHT_FOR_PUSH_CHANNEL() { return "df_push_night_ads_optin"; }
+}
+class DFGender {
+  static get MALE() { return "Male"; }
+  static get FEMALE() { return "Female"; }
+  static get NON_BINARY() { return "NonBinary"; }
+  static get OTHER() { return "Other"; }
+}
+class DFIdentity {
+  static get EXTERNAL_ID() { return "external_id";}
+  static get EMAIL() { return "email";}
+  static get PHONE_NO() { return "phone_no";}
+  static get KAKAO_USER_ID() { return "kakao_user_id";}
+  static get LINE_USER_ID() { return "line_user_id";}
+}
 function isAndroidBridgeAvailable() {
   var result = false;
-  if (window.dfineryInternalBridge) {
-    result = true;
-  }
-  if (!result) {
-    console.log("Android dfineryInternalBridge not found.");
+  try{
+    if (window.dfineryInternalBridge) {
+      result = true;
+    }
+    if (!result) {
+      console.log("Android dfineryInternalBridge not found.");
+    }
+  } catch(err){
+    console.log(err);
   }
   return result;
+}
+function isIosBridgeAvailable() {
+    var result = false;
+    try {
+        if (window.webkit
+            && window.webkit.messageHandlers
+            && window.webkit.messageHandlers.dfineryInternalBridge) {
+            result = true;
+        }
+        if (!result) {
+            console.log("iOS dfineryInternalBridge not found.");
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    return result;
 }
 function makeMessage(){
   const message = new Object();
@@ -88,84 +109,52 @@ function encodeMessage(message){
     const encoded = encodeURIComponent(json);
     return window.btoa(encoded);
 }
-
+function sendMessage(message){
+    if(isAndroidBridgeAvailable()){
+      window.dfineryInternalBridge.invoke(encodeMessage(message));
+    }
+    if(isIosBridgeAvailable()){
+      window.webkit.messageHandlers.dfineryInternalBridge.postMessage(message);
+    }
+}
+const Dfinery = 'Dfinery';
+const DfineryProperties = 'DfineryProperties';
+const DfineryConfig = 'DfineryConfig';
 var dfineryBridge = {
   logEvent: function(eventName, properties){
     const message = makeMessage(Dfinery, 'logEvent', eventName, properties);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   },
   suspendUserTargeting: function(){
     const message = makeMessage(Dfinery, 'suspendUserTargeting');
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   },
   setGoogleAdvertisingId: function(googleAdvertisingId, isLimitAdTrackingEnabled){
     const message = makeMessage(DfineryProperties, 'setGoogleAdvertisingId', googleAdvertisingId, isLimitAdTrackingEnabled);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   },
   setUserProfile: function(key, value){
     const message = makeMessage(DfineryProperties, 'setUserProfile', key, value);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   },
   setUserProfiles: function(values){
     const message = makeMessage(DfineryProperties, 'setUserProfiles', values);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   },
   setIdentity: function(key, value){
     const message = makeMessage(DfineryProperties, 'setIdentity', key, value);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   },
   setIdentities: function(values){
     const message = makeMessage(DfineryProperties, 'setIdentities', values);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   },
   resetIdentity: function(){
     const message = makeMessage(DfineryProperties, 'resetIdentity');
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   },
   setPushToken: function(pushToken){
     const message = makeMessage(DfineryProperties, 'setPushToken', pushToken);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
-  },
-  setLogEnable: function(enable){
-    const message = makeMessage(DfineryConfig, 'setLogEnable', enable);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
-  },
-  setLogLevel: function(logLevel){
-    const message = makeMessage(DfineryConfig, 'setLogLevel', logLevel);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
-  },
-  setNotificationIcon: function(resourceId){
-    const message = makeMessage(DfineryConfig, 'setNotificationIcon', resourceId);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
-  },
-  setDefaultNotificationChannelId: function(id){
-    const message = makeMessage(DfineryConfig, 'setDefaultNotificationChannelId', id);
-    if(isAndroidBridgeAvailable()){
-      window.dfineryInternalBridge.invoke(encodeMessage(message));
-    }
+    sendMessage(message);
   }
 };

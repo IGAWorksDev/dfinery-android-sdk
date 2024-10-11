@@ -27,12 +27,17 @@ import com.igaworks.dfinery.constants.DF;
 import com.igaworks.dfinerysample.R;
 import com.igaworks.dfinerysample.Utils;
 import com.igaworks.dfinerysample.databinding.UserprofileFragmentBinding;
+import com.igaworks.dfinerysample.model.UserProfileInfo;
 import com.igaworks.dfinerysample.view.eventdetails.ValueType;
+
+import org.json.JSONException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -42,7 +47,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     private enum KeyType{
         USER_PROFILE, IDENTITY
     }
-    private static final String BIRTH_DATE_FORMAT = "yyyy-MM-dd";
+    private static String BIRTH_DATE_FORMAT = "yyyy-MM-dd";
     private Map<Integer, String> userProfileSet;
     private Map<Integer, String> identityKeySet;
     private int selectedUserProfileKeyPosition;
@@ -87,7 +92,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                     binding.userProfileTextInputLayoutUserProfileValue.setHint("Value");
                     return;
                 }
-                binding.userProfileTextInputLayoutUserProfileValue.setHint(ValueType.get(input).name());
+                binding.userProfileTextInputLayoutUserProfileValue.setHint(ValueType.get(input,"yyyy-MM-dd").name());
             }
         });
         return binding.getRoot();
@@ -97,6 +102,10 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userProfileSet.clear();
+        userProfileSet = null;
+        identityKeySet.clear();
+        identityKeySet = null;
     }
 
     private void setUserProfileKeySet(){
@@ -105,6 +114,14 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         userProfileSet.put(1, DF.UserProfile.MEMBERSHIP);
         userProfileSet.put(2, DF.UserProfile.GENDER);
         userProfileSet.put(3, DF.UserProfile.BIRTH);
+//        userProfileSet.put(4, "custom_user_string");
+//        userProfileSet.put(5, "custom_user_long");
+//        userProfileSet.put(6, "custom_user_boolean");
+//        userProfileSet.put(7, "custom_user_double");
+//        userProfileSet.put(8, "custom_user_dateTime");
+//        userProfileSet.put(9, "custom_user_string_list");
+//        userProfileSet.put(10, "custom_user_long_list");
+//        userProfileSet.put(11, "custom_user_double_list");
     }
     private void setIdentityKeySet(){
         identityKeySet = new HashMap<>();
@@ -113,6 +130,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         identityKeySet.put(2, "phone_no");
         identityKeySet.put(3, "kakao_user_id");
         identityKeySet.put(4, "line_user_id");
+//        identityKeySet.put(5, "zalo_user_id");
     }
 
     @Override
@@ -127,6 +145,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 return;
             }
             setUserProfile(key, value);
+            ((BaseActivity)getActivity()).hideKeypad();
         } else if (id == R.id.userProfile_button_selectPredefinedIdentityKey) {
             showPredefinedIdentityKey();
         } else if (id == R.id.userProfile_button_identitySet) {
@@ -136,13 +155,79 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                 return;
             }
             setIdentity(key, value);
+            ((BaseActivity)getActivity()).hideKeypad();
         } else if (id == R.id.userProfile_button_notificationSet) {
             int notificationTypeSelected = binding.userProfileSpinnerNotificationType.getSelectedItemPosition();
             int notificationChannelSelected = binding.userProfileSpinnerNotificationChannel.getSelectedItemPosition();
-            boolean subscriptionEnabled = binding.userProfileCheckBoxSubscriptionStatus.isEnabled();
+            boolean subscriptionEnabled = binding.userProfileCheckBoxSubscriptionStatus.isChecked();
             Log.d(TAG, notificationTypeSelected + "/" + notificationChannelSelected + "/" + subscriptionEnabled);
             setNotificationSubscriptionStatus(notificationTypeSelected, notificationChannelSelected, subscriptionEnabled);
+        } else if (id == R.id.userProfile_button_example){
+            try {
+                showExampleSelector();
+            } catch (JSONException e) {
+
+            }
         }
+    }
+    private void showExampleSelector() throws JSONException {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("유저 프로필을 선택해주세요");
+        List<UserProfileInfo> list = new ArrayList<>();
+        list.add(new UserProfileInfo("custom_user_string", "test"));
+        list.add(new UserProfileInfo("custom_user_long", 12345));
+        list.add(new UserProfileInfo("custom_user_boolean", false));
+        list.add(new UserProfileInfo("custom_user_double", 123.45));
+        list.add(new UserProfileInfo("custom_user_dateTime", new Date()));
+        String[] stringList = new String[]{"Hello", "World","!!!"};
+        list.add(new UserProfileInfo("custom_user_string_list", stringList));
+        Long[] longList = new Long[]{10L,20L,30L,40L};
+        list.add(new UserProfileInfo("custom_user_long_list", longList));
+        Double[] doubleList = new Double[]{10.1,10.2,10.3,11.4};
+        list.add(new UserProfileInfo("custom_user_double_list", doubleList));
+        String[] items = new String[list.size()];
+        int i = 0;
+        for(UserProfileInfo index: list){
+            items[i] = index.toString();
+            i++;
+        }
+        builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                UserProfileInfo userProfileInfo = list.get(which);
+                showExampleInfo(userProfileInfo);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+    private void showExampleInfo(UserProfileInfo userProfileInfo){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(userProfileInfo.getKey()+"를 등록하시겠습니까?");
+        builder.setMessage(userProfileInfo.getValueString());
+        builder.setPositiveButton("등록하기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Map<String, Object> value = new HashMap<>();
+                value.put(userProfileInfo.getKey(), userProfileInfo.getValue());
+                DfineryProperties.setUserProfiles(value);
+                Snackbar.make(binding.userProfileConstraintLayoutContainer, "등록되었습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
     private void setClickListener(){
         binding.userProfileButtonSelectPredefinedUserProfileKey.setOnClickListener(this);
@@ -150,6 +235,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         binding.userProfileButtonSelectPredefinedIdentityKey.setOnClickListener(this);
         binding.userProfileButtonIdentitySet.setOnClickListener(this);
         binding.userProfileButtonNotificationSet.setOnClickListener(this);
+        binding.userProfileButtonExample.setOnClickListener(this);
     }
     private void setNotificationTypeSpinner(){
         binding.userProfileSpinnerNotificationType.setAdapter(getNotificationTypeAdapter());
@@ -195,8 +281,8 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 selectedUserProfileKeyPosition = which;
-                binding.userProfileEditTextUserProfileKey.setText(userProfileSet.get(which));
                 dialog.dismiss();
+                binding.userProfileEditTextUserProfileKey.setText(userProfileSet.get(which));
                 if(which == 2) {
                     //GENDER
                     showGenderSelector();
@@ -249,6 +335,7 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 selectedIdentityKeyPosition = which;
+                dialog.dismiss();
                 final String value = identityKeySet.get(which);
                 binding.userProfileEditTextIdentityKey.setText(value);
                 switch (value){
@@ -264,7 +351,6 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                         binding.userProfileEditTextIdentityValue.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
                     }
                 }
-                dialog.dismiss();
             }
         });
         builder.show();
@@ -315,15 +401,30 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
         return true;
     }
     private void setIdentity(String key, String value){
+//        identityKeySet.put(0, "user_id");
+//        identityKeySet.put(1, "customer_no");
+//        identityKeySet.put(2, "email");
+//        identityKeySet.put(3, "phone_no");
+//        identityKeySet.put(4, "kakao_user_id");
+//        identityKeySet.put(5, "line_user_id");
+//        identityKeySet.put(6, "zalo_user_id");
+        if(TextUtils.isEmpty(value)){
+            value = null;
+        }
         switch (selectedIdentityKeyPosition){
             case 0: DfineryProperties.setIdentity(DF.Identity.EXTERNAL_ID, value); break;
             case 1: DfineryProperties.setIdentity(DF.Identity.EMAIL, value); break;
             case 2: DfineryProperties.setIdentity(DF.Identity.PHONE_NO, value); break;
             case 3: DfineryProperties.setIdentity(DF.Identity.KAKAO_USER_ID, value); break;
             case 4: DfineryProperties.setIdentity(DF.Identity.LINE_USER_ID, value); break;
+//            case 5: DfineryProperties.setIdentity(DF.Identity.ZALO_USER_ID, value); break;
         }
     }
     private void setUserProfile(String key, String value){
+//        userProfileSet.put(0, UserProfile.NAME.getValue());
+//        userProfileSet.put(1, UserProfile.MEMBERSHIP.getValue());
+//        userProfileSet.put(2, UserProfile.GENDER.getValue());
+//        userProfileSet.put(3, UserProfile.BIRTH.getValue());
         if(selectedUserProfileKeyPosition == 3){
             Date birthday = getBirthdayDate(value);
             if(birthday != null){
@@ -369,7 +470,13 @@ public class UserProfileFragment extends Fragment implements View.OnClickListene
                     DfineryProperties.setUserProfile(key, arrays);
                     break;
                 }
-                default: DfineryProperties.setUserProfile(key, value);
+                default: {
+                    if(TextUtils.isEmpty(value)){
+                        DfineryProperties.setUserProfile(key, (String)null);
+                    } else{
+                        DfineryProperties.setUserProfile(key, value);
+                    }
+                }
             }
         }
     }

@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id 'com.google.gms.google-services'
+    //id 'com.google.gms.google-services'
 }
 
 android {
@@ -38,4 +38,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-appset:16.0.2'
     implementation platform('com.google.firebase:firebase-bom:33.0.0')
     implementation 'com.google.firebase:firebase-messaging'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation ('com.googlecode.json-simple:json-simple:1.1.1'){
+        exclude group:'org.hamcrest'
+    }
+    implementation 'com.igaworks.dfinery:android-sdk:1.1.0'
 }

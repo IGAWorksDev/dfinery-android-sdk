@@ -9,8 +9,13 @@
         android:id="@+id/navigation_userProfile"
         android:icon="@drawable/baseline_account_circle_24"
         android:title="PROFILE"/>
+
     <item
-        android:id="@+id/navigation_webView"
-        android:icon="@drawable/browser"
-        android:title="WEBVIEW"/>
+        android:id="@+id/navigation_inAppMessage"
+        android:icon="@drawable/ic_baseline_ad_units_24"
+        android:title="IAM"/>
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="CONFIG"/>
 </menu>

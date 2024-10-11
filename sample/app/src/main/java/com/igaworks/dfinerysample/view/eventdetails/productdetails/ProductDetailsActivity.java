@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.igaworks.dfinery.constants.DF;
 import com.igaworks.dfinerysample.R;
 import com.igaworks.dfinerysample.Utils;
 import com.igaworks.dfinerysample.databinding.ProductdetailsActivityBinding;
@@ -61,7 +62,7 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         if(previousValue.length() == 0){
             initProductProperties();
         } else{
-        putPreviouslyEnteredItem(value);
+            putPreviouslyEnteredItem(value);
         }
         position = getIntent().getIntExtra(BUNDLE_KEY_POSITION, -1);
         setClickListener();
@@ -135,13 +136,13 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
             String key = it.next();
             String itemValue = jsonObject.optString(key);
-            ItemProperties itemProperties = new ItemProperties(key, ValueType.get(itemValue));
+            ItemProperties itemProperties = new ItemProperties(key, ValueType.get(itemValue, DF.EventProperty.FORMAT_DATETIME));
             itemProperties.setValue(itemValue);
             productProperties.add(itemProperties);
         }
     }
     private void setAdapter(){
-        productPropertiesAdapter = new ProductPropertiesAdapter(this, productProperties);
+        productPropertiesAdapter = new ProductPropertiesAdapter(this, getSupportFragmentManager(), productProperties);
         binding.productDetailRecyclerViewProductProperties.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.productDetailRecyclerViewProductProperties.setAdapter(productPropertiesAdapter);
         binding.productDetailRecyclerViewProductProperties.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -192,7 +193,7 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         builder.setPositiveButton("완료", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String input = editText.getText().toString();
+                String input = editText.getText().toString().trim();
                 if(TextUtils.isEmpty(input)){
                     Snackbar.make(binding.eventDetailConstraintLayoutContainer, "값이 입력되지 않았습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -216,10 +217,6 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         builder.show();
     }
     private void confirm(){
-        if(!productPropertiesAdapter.validate()){
-            Snackbar.make(binding.eventDetailConstraintLayoutContainer, "미작성된 속성이 있습니다.", BaseTransientBottomBar.LENGTH_SHORT).show();
-            return;
-        }
         Intent intent = new Intent();
         intent.setAction(INTENT_ACTION_CONFIRM);
         intent.putExtra(BUNDLE_KEY_POSITION, position);
@@ -227,7 +224,7 @@ public class ProductDetailsActivity extends BaseActionBarActivity implements Vie
         JSONObject jsonObject = new JSONObject();
         for(ItemProperties index: selectedData){
             try {
-                jsonObject.put(index.getKey(), ValueType.getCastedValue(index.getValue()));
+                jsonObject.put(index.getKey(), index.getCastedValueByValueType());
             } catch (JSONException e) {
                 Log.e(TAG, e.toString());
             }

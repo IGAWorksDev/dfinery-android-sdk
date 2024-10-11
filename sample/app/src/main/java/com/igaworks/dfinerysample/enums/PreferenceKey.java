@@ -1,0 +1,9 @@
+package com.igaworks.dfinerysample.enums;
+
+public enum PreferenceKey {
+    SELECTED_BOTTOM_NAVIGATION_MENU,
+    STRING_FIREBASE_REGISTRATION_ID,
+    STRING_SDK_SERVICE_ID,
+    JSON_ARRAY_EVENT_NAMES,
+    JSON_ARRAY_EVENT_PROPERTIES
+}
