@@ -42,5 +42,5 @@ dependencies {
     implementation ('com.googlecode.json-simple:json-simple:1.1.1'){
         exclude group:'org.hamcrest'
     }
-    implementation 'com.igaworks.dfinery:android-sdk:1.1.0'
+    implementation 'com.igaworks.dfinery:android-sdk:1.1.1'
 }

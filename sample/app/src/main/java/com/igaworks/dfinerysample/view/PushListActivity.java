@@ -20,13 +20,12 @@ public class PushListActivity extends BaseActivity {
         setContentView(binding.getRoot());
         StringBuilder stringBuilder = new StringBuilder();
         DfineryPushPayload dfineryPushPayload = Dfinery.getInstance().getDfineryPushPayload(getIntent());
-        if(dfineryPushPayload != null){
+        if(dfineryPushPayload != null && dfineryPushPayload.isAvailable()){
             Log.d(TAG, "pushData: "+ dfineryPushPayload);
             stringBuilder.append(dfineryPushPayload.toString());
             stringBuilder.append("\n");
         }
         if(getIntent() != null && getIntent().getData()!=null){
-
             stringBuilder.append(getIntent().getData().toString());
         }
         binding.pushListTextView.setText(stringBuilder.toString());
