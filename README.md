@@ -21,9 +21,6 @@ Dfinery's official Android SDK for Mobile Marketing
 - [`androidx.core:core`](https://developer.android.com/jetpack/androidx/releases/core) : Required only if you want to use push action(Optional)
 - [`com.google.firebase:firebase-messaging`](https://firebase.google.com/docs/cloud-messaging) : Required only if you want to use push action(Optional)
 
-### 📁 Components
-- [sample](https://github.com/IGAWorksDev/dfinery-android-sdk/tree/main/sample) :  a folder containing sample app
-
 ### 🗄️ Changelog
 
 Click [here](./CHANGELOG.md) to view the Android SDK Changelog.
