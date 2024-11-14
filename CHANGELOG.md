@@ -1,4 +1,4 @@
-## 1.1.2(2024-11-14)
+## 1.1.2 (2024-11-14)
 
 <details open>
  <summary>EN</summary>
@@ -15,7 +15,7 @@
 
 </details>
 
-## 1.1.1(2024-10-29)
+## 1.1.1 (2024-10-29)
 
 <details open>
  <summary>EN</summary>
