@@ -1,3 +1,20 @@
+## 1.2.0 (2024-11-21)
+
+<details open>
+ <summary>EN</summary>
+
+- Change the name of a constant
+- You can now reset the google advertising ID and push token by set a null value.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+- 상수 명칭 변경
+- 광고 ID와 푸시 토큰 겂울 null 값을 입력하여 초기화 할 수 있게 되었습니다
+
+</details>
+
 ## 1.1.2 (2024-11-14)
 
 <details open>
