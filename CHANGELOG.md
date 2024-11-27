@@ -1,3 +1,20 @@
+## 1.2.1 (2024-11-27)
+
+<details open>
+ <summary>EN</summary>
+
+- Fixed a bug that prevented in-app messages from being used in version 1.2.0
+- Change the name of a constant
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+- 1.2.0 버전에서 인앱메시지를 사용할 수 없던 버그가 수정되었습니다
+- 상수 명칭 변경
+
+</details>
+
 ## 1.2.0 (2024-11-21)
 
 <details open>
@@ -11,7 +28,7 @@
  <summary>KO</summary>
 
 - 상수 명칭 변경
-- 광고 ID와 푸시 토큰 겂울 null 값을 입력하여 초기화 할 수 있게 되었습니다
+- 광고 ID와 푸시 토큰 값을 `null`을 입력하여 초기화 할 수 있게 되었습니다
 
 </details>
 

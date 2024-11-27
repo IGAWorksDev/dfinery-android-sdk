@@ -10,9 +10,10 @@ Dfinery's official Android SDK for Mobile Marketing
 - [Dfinery Developer Guide](https://docs.dfinery.ai/developer-guide/platform/android)
 
 ### ℹ️ Information
-- minSdk : 19 / Android 4.4
-- compileSdk : 34
-- targetSdk : 33
+- Minimum supported SDK : 19 / Android 4.4
+- Compiled Sdk : 34
+- Targeted Sdk : 33
+- Recently compiled Firebase Cloud Messaging version: 24.0.0
 
 ### 🔗 Dependencies
 
