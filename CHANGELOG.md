@@ -1,17 +1,52 @@
+## 2.0.0 (2024-12-30)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+- Logic to retry when API request fails due to issues such as network communication has been applied.
+- Changed so that network request payload is output when the log level is set to Debug or higher.
+
+#### Added
+- Changed so that personalization is applied using event properties contained through logEvent().
+- disableSdk() has been added to stop the SDK and remove local data.
+- enableSdk() has been added to resume the SDK when it is stopped using disableSdk().
+
+#### Removed
+- suspendUserTargeting() has been removed.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+- 네트워크 통신 등의 이슈로 API 요청이 실패했을때 재시도하는 로직이 적용되었습니다.
+- Log 레벨을 Debug 이상으로 설정했을 경우 네트워크 요청 페이로드가 출력되도록 변경되었습니다.
+
+#### 추가됨
+- logEvent()를 통해 담겨진 이벤트 속성이 활용된 개인화가 적용되도록 변경되었습니다.
+- SDK를 중단시키고 로컬 데이터를 제거하는 disableSdk()가 추가되었습니다.
+- disableSdk()를 사용하여 SDK가 중지 상태일때 재개하는 enableSdk()가 추가되었습니다.
+
+#### 제거됨
+- suspendUserTargeting()가 제거되었습니다.
+
+</details>
+
 ## 1.2.1 (2024-11-27)
 
 <details open>
  <summary>EN</summary>
 
 - Fixed a bug that prevented in-app messages from being used in version 1.2.0
-- Change the name of a constant
+- Change the name of a constant.
 
 </details>
 <details open>
  <summary>KO</summary>
 
-- 1.2.0 버전에서 인앱메시지를 사용할 수 없던 버그가 수정되었습니다
-- 상수 명칭 변경
+- 1.2.0 버전에서 인앱메시지를 사용할 수 없던 버그가 수정되었습니다.
+- 상수 명칭 변경.
 
 </details>
 
@@ -20,7 +55,7 @@
 <details open>
  <summary>EN</summary>
 
-- Change the name of a constant
+- Change the name of a constant.
 - You can now reset the google advertising ID and push token by set a null value.
 
 </details>
@@ -28,7 +63,7 @@
  <summary>KO</summary>
 
 - 상수 명칭 변경
-- 광고 ID와 푸시 토큰 값을 `null`을 입력하여 초기화 할 수 있게 되었습니다
+- 광고 ID와 푸시 토큰 값을 `null`을 입력하여 초기화 할 수 있게 되었습니다.
 
 </details>
 
@@ -37,15 +72,15 @@
 <details open>
  <summary>EN</summary>
 
-- Support for in-app message operators with Null, NotNull and Empty
-- Fixed a bug where display restrictions based on exposure frequency of test in-app messages were not applied
+- Support for in-app message operators with Null, NotNull and Empty.
+- Fixed a bug where display restrictions based on exposure frequency of test in-app messages were not applied.
 
 </details>
 <details open>
  <summary>KO</summary>
 
-- 값이 있는, 값이 없는, 빈 배열 인앱메시지 연산자 지원
-- 테스트 인앱메시지의 노출 빈도에 따른 표시 제한이 적용되지 않는 버그 수정
+- 값이 있는, 값이 없는, 빈 배열 인앱메시지 연산자 지원.
+- 테스트 인앱메시지의 노출 빈도에 따른 표시 제한이 적용되지 않는 버그 수정.
 
 </details>
 
@@ -54,21 +89,21 @@
 <details open>
  <summary>EN</summary>
 
-- Fixed bug that occurs when delaying in-app messages without setting an end event
-- Changed the display logic when a delayed in-app message for an event with the same name is registered
-- Fixed error that some operators of in-app messages are processed as matching conditions
-- Modified so that test in-app messages are displayed with priority over general in-app messages
+- Fixed bug that occurs when delaying in-app messages without setting an end event.
+- Changed the display logic when a delayed in-app message for an event with the same name is registered.
+- Fixed error that some operators of in-app messages are processed as matching conditions.
+- Modified so that test in-app messages are displayed with priority over general in-app messages.
 - Fixed in-app messages to not appear darker than the console webpage.
 
 </details>
 <details open>
  <summary>KO</summary>
 
-- 종료 이벤트를 설정하지 않고 인앱메시지를 지연하였을때 발생하는 버그 수정
-- 동일한 이름을 가진 이벤트의 지연된 인앱메시지가 등록되었을때 노출 로직 변경
+- 종료 이벤트를 설정하지 않고 인앱메시지를 지연하였을때 발생하는 버그 수정.
+- 동일한 이름을 가진 이벤트의 지연된 인앱메시지가 등록되었을때 노출 로직 변경.
 - 인앱메시지 일부 연산자의 조건이 부합으로 처리되는 오류 수정
-- 테스트 인앱메시지가 일반 인앱메시지 보다 우선 노출되도록 수정
-- 인앱메시지가 콘솔 웹페이지 보다 어둡게 표시되지 않도록 수정
+- 테스트 인앱메시지가 일반 인앱메시지 보다 우선 노출되도록 수정.
+- 인앱메시지가 콘솔 웹페이지 보다 어둡게 표시되지 않도록 수정.
 
 </details>
 
@@ -76,15 +111,15 @@
 <details open>
  <summary>EN</summary>
  
-- Add push module
-- Add in-app message module
+- Add push module.
+- Add in-app message module.
 
 </details>
 <details open>
  <summary>KO</summary>
  
-- 푸시 기능 추가
-- 인앱메시지 기능 추가
+- 푸시 기능 추가.
+- 인앱메시지 기능 추가.
 
 </details>
 
@@ -92,12 +127,12 @@
 <details open>
  <summary>EN</summary>
  
-- Initial release
+- Initial release.
 
 </details>
 <details open>
  <summary>KO</summary>
  
-- 최초 배포
+- 최초 배포.
 
 </details>
