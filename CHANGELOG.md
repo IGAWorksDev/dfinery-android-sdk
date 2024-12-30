@@ -1,4 +1,4 @@
-## 2.0.0 (2024-12-30)
+## 2.0.1 (2024-12-30)
 
 <details open>
  <summary>EN</summary>
@@ -9,8 +9,8 @@
 
 #### Added
 - Changed so that personalization is applied using event properties contained through logEvent().
-- disableSdk() has been added to stop the SDK and remove local data.
-- enableSdk() has been added to resume the SDK when it is stopped using disableSdk().
+- disableSDK() has been added to stop the SDK and remove local data.
+- enableSDK() has been added to resume the SDK when it is stopped using disableSDK().
 
 #### Removed
 - suspendUserTargeting() has been removed.
@@ -25,8 +25,8 @@
 
 #### 추가됨
 - logEvent()를 통해 담겨진 이벤트 속성이 활용된 개인화가 적용되도록 변경되었습니다.
-- SDK를 중단시키고 로컬 데이터를 제거하는 disableSdk()가 추가되었습니다.
-- disableSdk()를 사용하여 SDK가 중지 상태일때 재개하는 enableSdk()가 추가되었습니다.
+- SDK를 중단시키고 로컬 데이터를 제거하는 disableSDK()가 추가되었습니다.
+- disableSDK()를 사용하여 SDK가 중지 상태일때 재개하는 enableSDK()가 추가되었습니다.
 
 #### 제거됨
 - suspendUserTargeting()가 제거되었습니다.
