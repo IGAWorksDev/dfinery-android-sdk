@@ -4,13 +4,13 @@
  <summary>EN</summary>
 
 #### Fixed
-- Logic to retry when API request fails due to issues such as network communication has been applied.
+- When an API request fails due to issues such as network communication, it is retried.
 - Changed so that network request payload is output when the log level is set to Debug or higher.
 
 #### Added
-- Changed so that personalization is applied using event properties contained through logEvent().
-- disableSDK() has been added to stop the SDK and remove local data.
-- enableSDK() has been added to resume the SDK when it is stopped using disableSDK().
+- Personalization of event attributes is supported when displaying in-app messages.
+- `disableSDK()` has been added to stop the SDK and remove local data.
+- `enableSDK()` has been added to resume the SDK when it is stopped using `disableSDK()`.
 
 #### Removed
 - suspendUserTargeting() has been removed.
@@ -20,13 +20,13 @@
  <summary>KO</summary>
 
 #### 고쳐짐
-- 네트워크 통신 등의 이슈로 API 요청이 실패했을때 재시도하는 로직이 적용되었습니다.
+- 네트워크 통신 등의 이슈로 API 요청이 실패했을때 재시도하게 되었습니다.
 - Log 레벨을 Debug 이상으로 설정했을 경우 네트워크 요청 페이로드가 출력되도록 변경되었습니다.
 
 #### 추가됨
-- logEvent()를 통해 담겨진 이벤트 속성이 활용된 개인화가 적용되도록 변경되었습니다.
-- SDK를 중단시키고 로컬 데이터를 제거하는 disableSDK()가 추가되었습니다.
-- disableSDK()를 사용하여 SDK가 중지 상태일때 재개하는 enableSDK()가 추가되었습니다.
+- 인앱메시지 표시시 이벤트 속성 개인화가 지원됩니다.
+- SDK를 중단시키고 로컬 데이터를 제거하는 `disableSDK()`가 추가되었습니다.
+- `disableSDK()`를 사용하여 SDK가 중지 상태일때 재개하는 `enableSDK()`가 추가되었습니다.
 
 #### 제거됨
 - suspendUserTargeting()가 제거되었습니다.
