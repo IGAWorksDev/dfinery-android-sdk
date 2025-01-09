@@ -1,3 +1,26 @@
+## 2.1.0 (2024-01-09)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+- Fixed an issue where the following in-app message would not be displayed if the in-app message rendering failed.
+
+#### Added
+- Added `setUserProfile(String key, JSONArray value)` in DfineryProperties.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+- 인앱메시지 렌더링이 실패했을 경우 다음 인앱메시지가 표시되지 않는 문제가 해결되었습니다.
+
+#### 추가됨
+- DfineryProperties에 `setUserProfile(String key, JSONArray value)`가 추가되었습니다.
+
+</details>
+
 ## 2.0.1 (2024-12-30)
 
 <details open>
