@@ -1,3 +1,20 @@
+## 2.1.1 (2024-02-06)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+- Fixed an issue where in-app message exposure caused a load internally under certain conditions on Android 15.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+- Android 15의 특정 조건에서 내부적으로 인앱메시지 노출이 부하를 일으키는 현상 수정되었습니다.
+
+</details>
+
 ## 2.1.0 (2024-01-09)
 
 <details open>
