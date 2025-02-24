@@ -1,3 +1,42 @@
+## 2.1.2 (2024-02-24)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+- Fixed the issue where push notifications with buttons were collected at the wrong click location.
+- Fixed the issue where push click events were not collected depending on the specific `launchMode` setting of the Activity.
+    > Please add `setIntent()` to `onNewIntent()` of the Activity that runs when a push click is made.
+    > ```java
+    > protected void onNewIntent(Intent intent) {
+    > super.onNewIntent(intent);
+    > setIntent(intent);
+    >}
+    >```
+
+#### Added
+- Support for the campaign journey feature.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+- 버튼이 있는 푸시 알림 클릭 시 잘못된 클릭 위치로 수집되는 현상이 수정되었습니다.
+- Activity의 특정 `launchMode` 설정에 따라 푸시 클릭 이벤트가 수집되지 않는 현상이 수정되었습니다.
+    > 푸시 클릭시 실행하는 Activity의 `onNewIntent()`에 `setIntent()`를 추가해 주시기 바랍니다.
+    > ```java
+    > protected void onNewIntent(Intent intent) {
+    >    super.onNewIntent(intent);
+    >    setIntent(intent); 
+    >}
+    >```
+
+#### 추가됨
+- 캠페인 여정 기능이 지원됩니다.
+
+</details>
+
 ## 2.1.1 (2024-02-06)
 
 <details open>
@@ -12,6 +51,9 @@
 
 #### 고쳐짐
 - Android 15의 특정 조건에서 내부적으로 인앱메시지 노출이 부하를 일으키는 현상 수정되었습니다.
+
+#### 추가됨
+- DfineryProperties에 `setUserProfile(String key, JSONArray value)`가 추가되었습니다.
 
 </details>
 
