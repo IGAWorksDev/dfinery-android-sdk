@@ -1,3 +1,20 @@
+## 2.1.3 (2024-03-20)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+- Fixed the bug where changed OS version in device profile was not updated to the server.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+- 기기 프로필에서 변경된 OS 버전이 서버에 업데이트되지 않는 버그를 수정했습니다.
+
+</details>
+
 ## 2.1.2 (2024-02-24)
 
 <details open>
