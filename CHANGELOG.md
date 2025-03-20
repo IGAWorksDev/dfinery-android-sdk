@@ -1,3 +1,20 @@
+## 2.1.4 (2024-03-20)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+- Fixed the bug where push click events would not be counted if the Activity that was launched after the push click was finished within `onCreate()`.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+- 푸시 클릭 후 실행되는 Activity가 `onCreate()` 내에서 종료될 경우 푸시 클릭 이벤트가 집계되지 않는 버그가 수정되었습니다.
+
+</details>
+
 ## 2.1.3 (2024-03-20)
 
 <details open>
@@ -11,7 +28,7 @@
  <summary>KO</summary>
 
 #### 고쳐짐
-- 기기 프로필에서 변경된 OS 버전이 서버에 업데이트되지 않는 버그를 수정했습니다.
+- 기기 프로필에서 변경된 OS 버전이 서버에 업데이트되지 않는 버그를 수정되었습니다.
 
 </details>
 
