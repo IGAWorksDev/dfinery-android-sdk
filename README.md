@@ -1,4 +1,4 @@
-![dfinery](https://dfn-v2-frontend.s3.ap-northeast-2.amazonaws.com/console-remote/prod/shared/0.1.0/img/dfinery-logo-with-text.bde4279c.svg)
+![dfinery](logo.svg)
 
 ## Dfinery Android SDK
 
