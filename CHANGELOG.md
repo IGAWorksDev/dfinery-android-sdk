@@ -1,3 +1,34 @@
+## 2.2.0 (2024-03-27)
+
+<details open>
+ <summary>EN</summary>
+
+ #### Added
+- The following in-app message operators have been added:
+    - NDaysAfterEveryYear
+    - NMonthsAfter
+    - NMonthsAfterEveryYear
+    - NDaysAfter
+
+#### Fixed
+- If a timeout occurs during a request, the request will be retried.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 추가됨
+- 다음의 인앱메시지 연산자가 추가 되었습니다.
+    - N일 후 특정일 연도제외
+    - N개월 후 특정일 연도포함
+    - N개월 후 특정일 연도제외
+    - N일 후 특정일 연도포함
+
+#### 고쳐짐
+- 요청 중 Timeout 발생시 재시도 하도록 변경되었습니다.
+
+</details>
+
 ## 2.1.4 (2024-03-20)
 
 <details open>
