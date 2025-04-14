@@ -2,7 +2,7 @@
 
 ## Dfinery Android SDK
 
-![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/com.igaworks.dfinery/android-sdk?server=https%3A%2F%2Fs01.oss.sonatype.org)
+![Maven Central (Releases)](https://img.shields.io/maven-central/v/com.igaworks.dfinery/android-sdk)
 
 Dfinery's official Android SDK for Mobile Marketing
 
