@@ -1,3 +1,32 @@
+## 2.3.0 (2024-04-14)
+
+<details open>
+ <summary>EN</summary>
+
+ #### Added
+- You can now specify the accent color for push notifications.
+
+```java
+new DfineryConfig.Builder()
+    .setNotificationAccentColor(Color.GREEN)
+    .build();
+```
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 추가됨
+- 푸시 알림의 강조 색상을 지정할 수 있게 되었습니다.
+
+```java
+new DfineryConfig.Builder()
+    .setNotificationAccentColor(Color.GREEN)
+    .build();
+```
+
+</details>
+
 ## 2.2.0 (2024-03-27)
 
 <details open>
