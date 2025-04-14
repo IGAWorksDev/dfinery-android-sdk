@@ -1,4 +1,4 @@
-## 2.3.0 (2024-04-14)
+## 2.3.0 (2025-04-14)
 
 <details open>
  <summary>EN</summary>
@@ -27,7 +27,7 @@ new DfineryConfig.Builder()
 
 </details>
 
-## 2.2.0 (2024-03-27)
+## 2.2.0 (2025-03-27)
 
 <details open>
  <summary>EN</summary>
@@ -58,7 +58,7 @@ new DfineryConfig.Builder()
 
 </details>
 
-## 2.1.4 (2024-03-20)
+## 2.1.4 (2025-03-20)
 
 <details open>
  <summary>EN</summary>
@@ -75,7 +75,7 @@ new DfineryConfig.Builder()
 
 </details>
 
-## 2.1.3 (2024-03-20)
+## 2.1.3 (2025-03-20)
 
 <details open>
  <summary>EN</summary>
@@ -92,7 +92,7 @@ new DfineryConfig.Builder()
 
 </details>
 
-## 2.1.2 (2024-02-24)
+## 2.1.2 (2025-02-24)
 
 <details open>
  <summary>EN</summary>
@@ -131,7 +131,7 @@ new DfineryConfig.Builder()
 
 </details>
 
-## 2.1.1 (2024-02-06)
+## 2.1.1 (2025-02-06)
 
 <details open>
  <summary>EN</summary>
@@ -151,7 +151,7 @@ new DfineryConfig.Builder()
 
 </details>
 
-## 2.1.0 (2024-01-09)
+## 2.1.0 (2025-01-09)
 
 <details open>
  <summary>EN</summary>
