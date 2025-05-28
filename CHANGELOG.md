@@ -1,3 +1,20 @@
+## 2.3.1 (2025-05-28)
+
+<details open>
+ <summary>EN</summary>
+
+ #### Deprecated
+- `PUSH_OPTIN` in DFUserProfile is deprecated. If you need to change whether to allow receiving push notifications, please use the `PUSH_ADS_OPTIN`.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 더 이상 사용되지 않음
+- DFUserProfile의 `PUSH_OPTIN`이 Deprecated 되었습니다. 푸시 알림 수신 허용 여부를 변경해야 하실 경우 `PUSH_ADS_OPTIN`을 써주시길 바랍니다.
+
+</details>
+
 ## 2.3.0 (2025-04-14)
 
 <details open>
