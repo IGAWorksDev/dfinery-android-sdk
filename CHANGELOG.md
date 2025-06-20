@@ -1,3 +1,22 @@
+## 2.3.2 (2025-06-20)
+
+<details open>
+ <summary>EN</summary>
+
+ #### Notes
+
+ - Changes for third-party integration.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 주요사항
+
+- 서드파티 연동을 위한 구조 변경.
+
+</details>
+
 ## 2.3.1 (2025-05-28)
 
 <details open>
