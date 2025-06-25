@@ -1,3 +1,38 @@
+## 2.3.3 (2025-06-25)
+
+<details open>
+ <summary>EN</summary>
+
+ #### Added
+
+ - You can now set notification accent color using `dfinery.xml`.
+
+```xml
+<string name="com_igaworks_dfinery_notification_accent_color">#e00052</string>
+```
+
+ #### Fixed
+
+- Fixed a timing issue when calling APIs before SDK initialization.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 추가됨
+
+- 이제 `dfinery.xml`을 사용하여 알림 강조 색상을 설정할 수 있습니다.
+
+```xml
+<string name="com_igaworks_dfinery_notification_accent_color">#e00052</string>
+```
+
+#### 고쳐짐
+
+- SDK 초기화 전 API 호출 시 드물게 발생하던 타이밍 이슈를 수정했습니다.
+
+</details>
+
 ## 2.3.2 (2025-06-20)
 
 <details open>
