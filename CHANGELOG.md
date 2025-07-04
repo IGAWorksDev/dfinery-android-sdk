@@ -1,3 +1,32 @@
+## 2.3.4 (2025-07-04)
+
+<details open>
+ <summary>EN</summary>
+
+- Enhanced data processing stability by resolving event duplication, omission, and ordering errors that occurred during concurrent API calls in a multi-threaded environment.
+
+- Ensured compatibility with the Adbrix SDK by resolving a database (DB) conflict that occurred when used concurrently.
+
+    > [!IMPORTANT]
+    > To integrate with the Adbrix SDK, you must use this version or a later one.
+
+- Removed the [com.android.support:support-annotations](https://mvnrepository.com/artifact/com.android.support/support-annotations) dependency.
+
+- Updated compileSdk to **35**.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+- 다중 스레드 환경에서 API 동시 호출 시 발생하던 이벤트 정보의 중복, 누락 및 순서 오류를 해결하여 데이터 처리 안정성을 강화했습니다.
+- Adbrix SDK와 함께 사용 시 발생하던 데이터베이스(DB) 충돌 문제를 해결하여 SDK 호환성을 확보했습니다.
+    > [!IMPORTANT]
+    > Adbrix SDK와 함께 연동하는 경우, 반드시 본 버전 이상을 사용해야 합니다.
+- [com.android.support:support-annotations](https://mvnrepository.com/artifact/com.android.support/support-annotations) 의존성이 제거되었습니다.
+- compileSdk가 **35**로 변경되었습니다.
+
+</details>
+
 ## 2.3.3 (2025-06-25)
 
 <details open>
@@ -64,7 +93,7 @@
 <details open>
  <summary>KO</summary>
 
-#### Deprecated
+#### 더 이상 사용되지 않음
 - DFUserProfile의 `PUSH_OPTIN`이 Deprecated 되었습니다. 푸시 알림 수신 허용 여부를 변경해야 하실 경우 `PUSH_ADS_OPTIN`을 써주시길 바랍니다.
 
 </details>
