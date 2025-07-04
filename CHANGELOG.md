@@ -1,3 +1,22 @@
+## 2.3.5 (2025-07-04)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+
+- Fixed an issue in `2.3.4` where [ANR](https://developer.android.com/topic/performance/vitals/anr) could occur when an event request failed.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+
+- `2.3.4` 버전에서 이벤트 요청 실패시 [ANR](https://developer.android.com/topic/performance/vitals/anr)이 발생할 수 있는 문제가 해결되었습니다.
+
+</details>
+
 ## 2.3.4 (2025-07-04)
 
 <details open>
@@ -6,8 +25,6 @@
 - Enhanced data processing stability by resolving event duplication, omission, and ordering errors that occurred during concurrent API calls in a multi-threaded environment.
 
 - Ensured compatibility with the Adbrix SDK by resolving a database (DB) conflict that occurred when used concurrently.
-
-    > [!IMPORTANT]
     > To integrate with the Adbrix SDK, you must use this version or a later one.
 
 - Removed the [com.android.support:support-annotations](https://mvnrepository.com/artifact/com.android.support/support-annotations) dependency.
@@ -20,7 +37,6 @@
 
 - 다중 스레드 환경에서 API 동시 호출 시 발생하던 이벤트 정보의 중복, 누락 및 순서 오류를 해결하여 데이터 처리 안정성을 강화했습니다.
 - Adbrix SDK와 함께 사용 시 발생하던 데이터베이스(DB) 충돌 문제를 해결하여 SDK 호환성을 확보했습니다.
-    > [!IMPORTANT]
     > Adbrix SDK와 함께 연동하는 경우, 반드시 본 버전 이상을 사용해야 합니다.
 - [com.android.support:support-annotations](https://mvnrepository.com/artifact/com.android.support/support-annotations) 의존성이 제거되었습니다.
 - compileSdk가 **35**로 변경되었습니다.
