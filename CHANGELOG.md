@@ -1,3 +1,24 @@
+## 2.4.0 (2025-08-12)
+
+<details open>
+ <summary>EN</summary>
+
+#### Added
+
+- Push ad campaigns are supported.
+- `WebLink` action type is supported when a push clicking.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 추가됨
+
+- 푸시 광고 캠페인이 지원됩니다.
+- 푸시 클릭시 `WebLink` 액션 타입이 지원됩니다.
+
+</details>
+
 ## 2.3.5 (2025-07-04)
 
 <details open>
