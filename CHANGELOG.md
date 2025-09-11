@@ -43,10 +43,15 @@
 <details open>
  <summary>EN</summary>
 
+ > **⚠️Warning: A potential issue has been identified in this version (`v2.3.4`) that may cause an Application Not Responding (ANR) error under certain conditions.**
+>
+> Please **never use** this in production environments and immediately update to the latest stable version, **`v2.3.5`** or later.
+>
+> We sincerely apologize for any inconvenience.
+
 - Enhanced data processing stability by resolving event duplication, omission, and ordering errors that occurred during concurrent API calls in a multi-threaded environment.
 
 - Ensured compatibility with the Adbrix SDK by resolving a database (DB) conflict that occurred when used concurrently.
-    > To integrate with the Adbrix SDK, you must use this version or a later one.
 
 - Removed the [com.android.support:support-annotations](https://mvnrepository.com/artifact/com.android.support/support-annotations) dependency.
 
@@ -56,9 +61,14 @@
 <details open>
  <summary>KO</summary>
 
+> **⚠️경고: 이 버전(`v2.3.4`)에서 특정 조건 하에 ANR(Application Not Responding)을 유발할 수 있는 잠재적 문제가 발견되었습니다.**
+> 
+> 운영 환경(Production)에서는 **절대 사용하지 마시고**, 안정성이 확보된 최신 버전인 **`v2.3.5`** 이상으로 즉시 업데이트해주시기 바랍니다.
+> 
+> 이용에 불편을 드려 대단히 죄송합니다.
+
 - 다중 스레드 환경에서 API 동시 호출 시 발생하던 이벤트 정보의 중복, 누락 및 순서 오류를 해결하여 데이터 처리 안정성을 강화했습니다.
 - Adbrix SDK와 함께 사용 시 발생하던 데이터베이스(DB) 충돌 문제를 해결하여 SDK 호환성을 확보했습니다.
-    > Adbrix SDK와 함께 연동하는 경우, 반드시 본 버전 이상을 사용해야 합니다.
 - [com.android.support:support-annotations](https://mvnrepository.com/artifact/com.android.support/support-annotations) 의존성이 제거되었습니다.
 - compileSdk가 **35**로 변경되었습니다.
 
