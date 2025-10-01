@@ -1,3 +1,26 @@
+## 2.4.1 (2025-10-01)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+
+- API call prevention logic added for failed initialization.
+- Improved stability of in-app message display.
+- Enhanced stability of deep link opening from push notifications.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+
+- 초기화 실패 시 API 호출 방지 로직 추가.
+- 인앱 메시지 표시 안정성 향상.
+- 푸시 알림에서 딥 링크 열기 안정성 향상.
+
+</details>
+
 ## 2.4.0 (2025-08-12)
 
 <details open>
