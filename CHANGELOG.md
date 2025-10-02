@@ -1,3 +1,22 @@
+## 2.4.2 (2025-10-02)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+- Fixed an issue where in-app message custom parent views would not be set in certain situations.
+
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+
+- 특정 상황에서 인앱메시지 커스텀 부모 뷰가 설정되지 않는 문제가 해결되었습니다.
+
+</details>
+
 ## 2.4.1 (2025-10-01)
 
 <details open>
