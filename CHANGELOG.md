@@ -1,3 +1,22 @@
+## 2.4.3 (2025-10-23)
+
+<details open>
+ <summary>EN</summary>
+
+#### Fixed
+- In applications with the Dfinery SDK installed and push integration completed, the issue where push notifications received through a route other than **Dfinery Console** were notified with empty content has been resolved.
+
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+#### 고쳐짐
+
+- Dfinery SDK가 탑재되고 푸시 연동이 완료된 애플리케이션에서, **Dfinery Console을 통하지 않고** 다른 경로로 수신된 푸시 알림의 내용이 비어있는 상태로 노출되는 문제가 해결되었습니다.
+
+</details>
+
 ## 2.4.2 (2025-10-02)
 
 <details open>
