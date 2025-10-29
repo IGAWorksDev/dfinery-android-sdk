@@ -1,11 +1,9 @@
 package com.igaworks.dfinerykotlinsample
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -20,18 +18,12 @@ import com.igaworks.dfinery.constants.DFEventProperty
 import com.igaworks.dfinery.constants.DFGender
 import com.igaworks.dfinery.constants.DFIdentity
 import com.igaworks.dfinery.constants.DFUserProfile
-import com.igaworks.dfinery.models.DfineryPushPayload
-import org.json.JSONException
-import org.json.JSONObject
 import java.lang.ref.WeakReference
 import java.util.Date
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     companion object{
         val TAG: String? = MainActivity::class.java.canonicalName
-        const val ACTION_SHOW_MESSAGE: String = "com.igaworks.dfinery.MainActivity.ACTION_SHOW_MESSAGE"
-        const val EXTRA_TITLE: String = "com.igaworks.dfinery.MainActivity.EXTRA_TITLE"
-        const val EXTRA_MESSAGE: String = "com.igaworks.dfinery.MainActivity.EXTRA_MESSAGE"
         const val REQUEST_CODE_POST_NOTIFICATIONS: Int = 234
     }
 
@@ -61,23 +53,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             )
         }
         getAdvertisingId()
-        showPushNotificationIsClickedMessage(intent)
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        if (ACTION_SHOW_MESSAGE == intent.action) {
-            val title = intent.getStringExtra(EXTRA_TITLE)
-            val message = intent.getStringExtra(EXTRA_MESSAGE)
-            if (!TextUtils.isEmpty(title)) {
-                AlertDialog.Builder(this@MainActivity)
-                    .setTitle(title)
-                    .setMessage(message)
-                    .show()
-            }
-        }
-        showPushNotificationIsClickedMessage(intent)
     }
 
     override fun onClick(view: View) {
@@ -177,25 +157,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 Log.e(TAG, "Failed to get Advertising ID", e)
             }
         }).start()
-    }
-
-    private fun showPushNotificationIsClickedMessage(intent: Intent?) {
-        if (intent != null && intent.hasExtra("com.igaworks.dfinery.IS_DFINERY_PUSH")) {
-            val dfn = intent.getStringExtra(DfineryPushPayload.payload_root)
-            if (TextUtils.isEmpty(dfn)) {
-                return
-            }
-            try {
-                val root = JSONObject(dfn)
-                val clickAct = root.getJSONObject(DfineryPushPayload.payload_click_action)
-                val uri = clickAct.getString(DfineryPushPayload.payload_click_action_deeplink)
-                AlertDialog.Builder(this@MainActivity)
-                    .setTitle("사용자가 푸시 알림을 클릭했습니다.")
-                    .setMessage(uri)
-                    .show()
-            } catch (e: JSONException) {
-                Log.e(TAG, "parsing error", e)
-            }
-        }
     }
 }

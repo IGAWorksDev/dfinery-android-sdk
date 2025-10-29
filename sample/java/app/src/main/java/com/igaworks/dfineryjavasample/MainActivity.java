@@ -1,12 +1,10 @@
 package com.igaworks.dfineryjavasample;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -18,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
-import com.google.android.material.snackbar.Snackbar;
 import com.igaworks.dfinery.Dfinery;
 import com.igaworks.dfinery.DfineryProperties;
 import com.igaworks.dfinery.constants.DFEvent;
@@ -26,10 +23,6 @@ import com.igaworks.dfinery.constants.DFEventProperty;
 import com.igaworks.dfinery.constants.DFGender;
 import com.igaworks.dfinery.constants.DFIdentity;
 import com.igaworks.dfinery.constants.DFUserProfile;
-import com.igaworks.dfinery.models.DfineryPushPayload;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.Date;
@@ -38,9 +31,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getCanonicalName();
-    public static final String ACTION_SHOW_MESSAGE = "com.igaworks.dfinery.MainActivity.ACTION_SHOW_MESSAGE";
-    public static final String EXTRA_TITLE = "com.igaworks.dfinery.MainActivity.EXTRA_TITLE";
-    public static final String EXTRA_MESSAGE = "com.igaworks.dfinery.MainActivity.EXTRA_MESSAGE";
     public static final int REQUEST_CODE_POST_NOTIFICATIONS = 234;
 
     @Override
@@ -65,24 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE_POST_NOTIFICATIONS);
         }
         getAdvertisingId();
-        showPushNotificationIsClickedMessage(getIntent());
     }
 
     @Override
     protected void onNewIntent(@NonNull Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        if(ACTION_SHOW_MESSAGE.equals(intent.getAction())){
-            String title = intent.getStringExtra(EXTRA_TITLE);
-            String message = intent.getStringExtra(EXTRA_MESSAGE);
-            if(!TextUtils.isEmpty(title)){
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(title)
-                        .setMessage(message)
-                        .show();
-            }
-        }
-        showPushNotificationIsClickedMessage(intent);
     }
 
     @Override
@@ -171,25 +149,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }).start();
-    }
-
-    private void showPushNotificationIsClickedMessage(Intent intent){
-        if(intent!=null && intent.hasExtra("com.igaworks.dfinery.IS_DFINERY_PUSH")){
-            String dfn = intent.getStringExtra(DfineryPushPayload.payload_root);
-            if(TextUtils.isEmpty(dfn)){
-                return;
-            }
-            try {
-                JSONObject root = new JSONObject(dfn);
-                JSONObject clickAct = root.getJSONObject(DfineryPushPayload.payload_click_action);
-                String uri = clickAct.getString(DfineryPushPayload.payload_click_action_deeplink);
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("사용자가 푸시 알림을 클릭했습니다.")
-                        .setMessage(uri)
-                        .show();
-            } catch (JSONException e) {
-                Log.e(TAG, "parsing error", e);
-            }
-        }
     }
 }

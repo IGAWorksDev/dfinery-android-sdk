@@ -1,13 +1,11 @@
 package com.igaworks.dfineryhybridappsample;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.ConsoleMessage;
@@ -26,10 +24,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.igaworks.dfinery.DfineryProperties;
-import com.igaworks.dfinery.models.DfineryPushPayload;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -58,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE_POST_NOTIFICATIONS);
         }
         getAdvertisingId();
-        showPushNotificationIsClickedMessage(getIntent());
 
         WebView webView = findViewById(R.id.main_webView);
         initWebView(webView);
@@ -68,17 +61,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(@NonNull Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        if(ACTION_SHOW_MESSAGE.equals(intent.getAction())){
-            String title = intent.getStringExtra(EXTRA_TITLE);
-            String message = intent.getStringExtra(EXTRA_MESSAGE);
-            if(!TextUtils.isEmpty(title)){
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(title)
-                        .setMessage(message)
-                        .show();
-            }
-        }
-        showPushNotificationIsClickedMessage(intent);
     }
 
     @Override
@@ -115,26 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
-    }
-
-    private void showPushNotificationIsClickedMessage(Intent intent){
-        if(intent!=null && intent.hasExtra("com.igaworks.dfinery.IS_DFINERY_PUSH")){
-            String dfn = intent.getStringExtra(DfineryPushPayload.payload_root);
-            if(TextUtils.isEmpty(dfn)){
-                return;
-            }
-            try {
-                JSONObject root = new JSONObject(dfn);
-                JSONObject clickAct = root.getJSONObject(DfineryPushPayload.payload_click_action);
-                String uri = clickAct.getString(DfineryPushPayload.payload_click_action_deeplink);
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("사용자가 푸시 알림을 클릭했습니다.")
-                        .setMessage(uri)
-                        .show();
-            } catch (JSONException e) {
-                Log.e(TAG, "parsing error", e);
-            }
-        }
     }
 
     private void initWebView(WebView webView){
