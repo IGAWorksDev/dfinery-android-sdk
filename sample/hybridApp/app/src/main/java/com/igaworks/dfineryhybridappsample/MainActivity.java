@@ -32,9 +32,6 @@ import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getCanonicalName();
-    public static final String ACTION_SHOW_MESSAGE = "com.igaworks.dfinery.MainActivity.ACTION_SHOW_MESSAGE";
-    public static final String EXTRA_TITLE = "com.igaworks.dfinery.MainActivity.EXTRA_TITLE";
-    public static final String EXTRA_MESSAGE = "com.igaworks.dfinery.MainActivity.EXTRA_MESSAGE";
     public static final int REQUEST_CODE_POST_NOTIFICATIONS = 234;
 
     @Override
@@ -115,9 +112,6 @@ public class MainActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 Log.d(TAG, "onPageFinished. url:"+url);
-                if(url.equals("file:///android_asset/index.html")){
-                    initJavascript(view);
-                }
             }
 
             @Override
@@ -153,37 +147,5 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         webView.addJavascriptInterface(new DfineryJavascriptInterface(), "dfineryWebBridge");
         webView.loadUrl("file:///android_asset/index.html");
-    }
-
-    /**
-     * java 코드를 통해 html에 script를 추가하는 방법
-     * @param view
-     */
-    private void initJavascript(WebView view){
-        BufferedReader reader = null;
-        StringBuilder javascriptString = new StringBuilder();
-        try {
-            reader = new BufferedReader(new InputStreamReader(getAssets().open("dfinery-bridge.js"), "UTF-8"));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                javascriptString.append(line);
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "error", e);
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    Log.e(TAG, "error", e);
-                }
-            }
-        }
-        view.evaluateJavascript(javascriptString.toString(), new ValueCallback<String>() {
-            @Override
-            public void onReceiveValue(String value) {
-                Log.d(TAG, "onReceiveValue: "+value);
-            }
-        });
     }
 }
