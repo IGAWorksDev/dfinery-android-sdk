@@ -1,13 +1,25 @@
+## 2.4.4 (2025-12-02)
+
+<details open>
+ <summary>EN</summary>
+
+##### Fixed
+- We resolved an issue where, rarely, when a new user identity was set (via `setIdentity()`), stored events were sent to the server with the new identity applied earlier than intended.
+
+</details>
+<details open>
+ <summary>KO</summary>
+
+ ##### 고쳐짐
+- `setIdentity()` API를 사용할 때, 드물게 저장되어 있던 이벤트에 새로운 식별자가 의도보다 일찍 적용되어 서버로 전송되는 문제가 해결되었습니다.
+
+</details>
+
 ## 2.4.3 (2025-10-23)
 
 <details open>
  <summary>EN</summary>
 
-
-## 2.4.4 (2025-12-02)
-
-##### Fixed
-- We resolved an issue where, rarely, when a new user identity was set (via `setIdentity()`), stored events were sent to the server with the new identity applied earlier than intended.
 #### Fixed
 - In applications with the Dfinery SDK installed and push integration completed, the issue where push notifications received through a route other than **Dfinery Console** were notified with empty content has been resolved.
 
@@ -16,11 +28,6 @@
 <details open>
  <summary>KO</summary>
 
-
-## 2.4.4 (2025-12-02)
-
-##### 고쳐짐
-- `setIdentity()` API를 사용할 때, 드물게 저장되어 있던 이벤트에 새로운 식별자가 의도보다 일찍 적용되어 서버로 전송되는 문제가 해결되었습니다.
 #### 고쳐짐
 
 - Dfinery SDK가 탑재되고 푸시 연동이 완료된 애플리케이션에서, **Dfinery Console을 통하지 않고** 다른 경로로 수신된 푸시 알림의 내용이 비어있는 상태로 노출되는 문제가 해결되었습니다.
