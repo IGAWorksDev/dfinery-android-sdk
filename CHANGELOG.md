@@ -1,6 +1,11 @@
 <details open>
 <summary>EN</summary>
 
+
+## 2.4.5 (2026-01-06)
+
+##### Enhancement
+- We improved data accuracy by applying precision-matching for identifiers and device profiles, ensuring the reliable collection of event contexts under any conditions.
 ## 2.4.4 (2025-12-02)
 
 ##### Fixed
@@ -213,6 +218,11 @@ new DfineryConfig.Builder()
 <details open>
 <summary>KO</summary>
 
+
+## 2.4.5 (2026-01-06)
+
+##### 개선
+- 이벤트와 식별자·기기 정보 간의 정밀 매칭 로직을 적용하여, 어떤 상황에서도 발생 시점의 정확한 맥락 데이터를 수집할 수 있도록 개선했습니다.
 ## 2.4.4 (2025-12-02)
 
  ##### 고쳐짐
