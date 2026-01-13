@@ -2,6 +2,11 @@
 <summary>EN</summary>
 
 
+
+## 2.4.6 (2026-01-13)
+
+##### Fixed
+- Resolved an issue (v2.4.1–v2.4.5) where the SDK would become inoperative until the next init call if the initialization API failed due to exhausted timeout retries.
 ## 2.4.5 (2026-01-06)
 
 ##### Enhancement
@@ -219,6 +224,11 @@ new DfineryConfig.Builder()
 <summary>KO</summary>
 
 
+
+## 2.4.6 (2026-01-13)
+
+##### 고쳐짐
+- 버전 2.4.1~2.4.5에서 재시도를 포함한 초기화 API 호출이 모두 타임아웃될 경우 다음 초기화 전까지 이벤트 수집을 비롯한 SDK의 일부 기능이 중단되던 교착 상태 문제를 해결하였습니다.
 ## 2.4.5 (2026-01-06)
 
 ##### 개선
