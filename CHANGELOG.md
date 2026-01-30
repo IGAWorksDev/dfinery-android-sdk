@@ -3,6 +3,21 @@
 
 
 
+
+## 2.4.7 (2026-01-30)
+
+##### Changed
+- Push notifications are now displayed even when the SDK is paused or disabled.
+
+##### Fixed
+- Resolved an issue in Flutter and Unity where Integer or null values were missing when calling setUserProfile().
+
+##### Enhancement
+- Improved event storage logic to enhance app responsiveness.
+- Improved In-App Message lookup logic to enhance app responsiveness.
+
+##### Notes
+- Standardized log structures and messages across platforms for consistent formatting.
 ## 2.4.6 (2026-01-13)
 
 ##### Fixed
@@ -225,6 +240,21 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.4.7 (2026-01-30)
+
+##### 변경됨
+- SDK 일시정지 및 비활성화 상태에서도 푸시 알림이 노출되도록 변경되었습니다.
+
+##### 고쳐짐
+- Flutter, Unity에서 setUserProfile() 호출 시 정수형(Integer) 및 null 데이터가 누락되던 문제가 해결되었습니다.
+
+##### 개선
+- 이벤트 저장 로직이 개선되어 앱 응답성이 향상되었습니다.
+- 인앱메시지 조회 로직이 개선되어 앱 응답성이 향상되었습니다.
+
+##### 주요 사항
+- 플랫폼별로 상이했던 로그 구조와 메시지가 통일된 규격으로 변경되었습니다.
 ## 2.4.6 (2026-01-13)
 
 ##### 고쳐짐
