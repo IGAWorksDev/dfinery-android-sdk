@@ -4,6 +4,11 @@
 
 
 
+
+## 2.4.8 (2026-02-24)
+
+##### Fixed
+- Optimized layout logic to ensure In-App Messages seamlessly occupy the full screen without overlapping system bars, addressing the Edge-to-Edge enforcement introduced in Android 15 and the removal of the Opt-out option (windowOptOutEdgeToEdgeEnforcement) in Android 16.
 ## 2.4.7 (2026-01-30)
 
 ##### Changed
@@ -241,6 +246,11 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.4.8 (2026-02-24)
+
+##### 고쳐짐
+- Android 15부터 도입된 전체 화면 정책 및 Android 16의 옵트아웃(Opt-out) 폐지에 대응하여, 인앱메시지가 화면 전체를 안정적으로 점유하고 시스템 바와 겹치지 않도록 레이아웃 로직을 최적화하였습니다.
 ## 2.4.7 (2026-01-30)
 
 ##### 변경됨
