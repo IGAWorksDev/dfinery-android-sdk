@@ -5,6 +5,20 @@
 
 
 
+
+## 2.5.0 (2026-03-11)
+
+##### Added
+- **Manual Push Notification Handling API**: Added the handlePushNotificationOpened(Intent intent) interface, allowing developers to manually analyze intents and process click events in custom app architectures or bridge environments.
+
+##### Enhancement
+- **Stabilized Internal Execution and Data Processing**: Optimized the internal thread architecture and database concurrency to maintain app responsiveness even during high-volume data bursts.
+
+- **Enhanced Data Integrity**: Improved the data logging and transmission process during background transitions to ensure reliable data consistency.
+
+- **Resource Efficiency**: Minimized system resource consumption by removing redundant lookup logic and implementing a concurrency flag for In-App Message fetching.
+
+- **Refined Push Handling and Action Delivery**: Strengthened reliability by implementing duplicate-click prevention and optimizing PendingIntent creation to ensure accurate delivery of notification clicks and button actions.
 ## 2.4.8 (2026-02-24)
 
 ##### Fixed
@@ -247,6 +261,17 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.5.0 (2026-03-11)
+
+##### 추가됨
+- **푸시 알림 클릭 수동 처리 API 제공**: 앱의 특수 구조나 커스텀 브릿지 환경에서 개발자가 직접 인텐트(Intent)를 분석하여 클릭 이벤트를 처리할 수 있는 인터페이스 `handlePushNotificationOpened(Intent intent)`가 추가되었습니다.
+
+##### 개선
+- **SDK 내부 실행 구조 및 데이터 처리 안정화**: 대량의 데이터가 일시에 유입되는 극한의 상황에서도 앱의 반응성이 저하되지 않도록 내부 실행 스레드 구조를 개선하고 DB 동시성 처리 성능을 최적화하였습니다.
+- **데이터 정합성 보장**: 앱이 백그라운드로 진입하는 시점의 데이터 기록 및 전송 프로세스를 개선하여, 안정적인 데이터 정합성을 확보하였습니다.
+- **리소스 사용 효율화**: 불필요한 반복 조회 로직을 제거하고, 인앱메시지 중복 호출 방지 플래그를 도입하여 시스템 자원 소모를 최소화하였습니다.
+- **푸시 알림 처리 및 액션 전달 로직 개선**: 중복 처리 방지 로직과 PendingIntent 생성 구조를 개선하여, 알림 클릭 및 버튼 액션이 유실 없이 정확하게 전달되도록 신뢰성을 강화하였습니다.
 ## 2.4.8 (2026-02-24)
 
 ##### 고쳐짐
