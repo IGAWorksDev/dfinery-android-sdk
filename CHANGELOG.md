@@ -6,6 +6,11 @@
 
 
 
+
+## 2.6.0 (2026-03-27)
+
+##### Enhancement
+- Improved SDK operational stability in background environments.
 ## 2.5.0 (2026-03-11)
 
 ##### Added
@@ -262,6 +267,11 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.6.0 (2026-03-27)
+
+##### 개선
+- 백그라운드 환경에서의 SDK 동작 안정성이 개선되었습니다.
 ## 2.5.0 (2026-03-11)
 
 ##### 추가됨
