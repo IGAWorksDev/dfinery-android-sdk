@@ -1,12 +1,6 @@
 <details open>
 <summary>EN</summary>
 
-
-
-
-
-
-
 ## 2.6.0 (2026-03-27)
 
 ##### Enhancement
@@ -261,12 +255,6 @@ new DfineryConfig.Builder()
 </details>
 <details open>
 <summary>KO</summary>
-
-
-
-
-
-
 
 ## 2.6.0 (2026-03-27)
 
