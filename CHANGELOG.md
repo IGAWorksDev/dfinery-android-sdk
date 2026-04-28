@@ -1,6 +1,16 @@
 <details open>
 <summary>EN</summary>
 
+
+## 2.6.1 (2026-04-28)
+
+##### Fixed
+- Enhanced Data Integrity: Resolved an issue where user identity was incorrectly mapped for events triggered before SDK initialization.
+
+##### Enhancement
+- Stabilized Push Receipt Reporting: Optimized the delivery mechanism to prevent missing push receipt logs in background and Doze mode on Android 13+.
+
+- Standardized Platform Logic: Unified data formats across platforms (iOS/Web) and optimized immediate data transmission upon any identity update.
 ## 2.6.0 (2026-03-27)
 
 ##### Enhancement
@@ -256,6 +266,15 @@ new DfineryConfig.Builder()
 <details open>
 <summary>KO</summary>
 
+
+## 2.6.1 (2026-04-28)
+
+##### 고쳐짐
+- 데이터 정합성 강화: SDK 초기화 이전 호출된 이벤트의 사용자 식별 정보(Identity)가 잘못 매핑되는 오류를 해결했습니다.
+
+##### 개선
+- 광고 푸시 수신 리포트 안정화: Android 13 이상 최신 OS 및 백그라운드 환경에서 푸시 수신 리포팅이 누락되지 않도록 전송 방식을 개선했습니다.
+- 플랫폼 로직 표준화: 타 플랫폼(iOS/Web)과 데이터 포맷을 동일하게 맞추고, 식별 정보 변경 시 데이터 전송이 즉각 이루어지도록 최적화했습니다.
 ## 2.6.0 (2026-03-27)
 
 ##### 개선
