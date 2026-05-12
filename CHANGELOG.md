@@ -2,6 +2,15 @@
 <summary>EN</summary>
 
 
+
+## 2.7.0 (2026-05-12)
+
+##### Enhancement
+- Added Intent Extra keys to support direct utilization of push click data.
+
+    - `com.igaworks.dfinery.push.extra.IS_DFINERY_PUSH` (Boolean) : A flag to verify if the notification was sent by Dfinery.
+    - `com.igaworks.dfinery.push.extra.PUSH_PAYLOAD` (String/JSON) : The full raw data of the received push notification (content within the `dfn` key).
+    - `com.igaworks.dfinery.push.extra.CLICK_RESULT` (String/JSON) : Refined click action data based on the specific area (e.g., notification body or a specific button) clicked by the user.
 ## 2.6.1 (2026-04-28)
 
 ##### Fixed
@@ -267,6 +276,14 @@ new DfineryConfig.Builder()
 <summary>KO</summary>
 
 
+
+## 2.7.0 (2026-05-12)
+
+##### 개선
+- 푸시 클릭 시 전달되는 데이터를 직접 활용할 수 있도록 Intent Extra 키를 추가했습니다.
+    - `com.igaworks.dfinery.push.extra.IS_DFINERY_PUSH` (Boolean) : Dfinery에서 발송한 푸시인지 확인하는 플래그
+    - `com.igaworks.dfinery.push.extra.PUSH_PAYLOAD` (String/JSON) : 수신된 푸시 알림의 전체 원본 데이터 (dfn 내부 값)
+    - `com.igaworks.dfinery.push.extra.CLICK_RESULT` (String/JSON) : 사용자가 클릭한 지점(알림 본체 또는 특정 버튼)에 대해 정제된 클릭 액션 정보
 ## 2.6.1 (2026-04-28)
 
 ##### 고쳐짐
