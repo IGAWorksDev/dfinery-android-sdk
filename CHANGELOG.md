@@ -3,6 +3,15 @@
 
 
 
+
+## 2.7.1 (2026-07-31)
+
+##### Fixed
+- Fixed an issue where `handleRemoteMessage()` returned `true` when receiving push notifications sent from non-Dfinery services.
+- Fixed an issue in third-party environments (e.g., React Native) where user identifiers (Identity) were intermittently sent in an encrypted state if a push notification was received before SDK initialization was completed.
+
+##### Enhancement
+- Improved `AppSetId` collection rates
 ## 2.7.0 (2026-05-12)
 
 ##### Enhancement
@@ -277,6 +286,15 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.7.1 (2026-07-31)
+
+##### 고쳐짐
+- 타 서비스(Non-Dfinery)에서 발송한 푸시 수신 시 `handleRemoteMessage`가 `true`를 반환하던 문제를 수정하였습니다.
+- React Native 등 Third-Party 환경에서 SDK 초기화 완료 전 푸시 수신 시, 간헐적으로 식별자(Identity)가 암호화된 상태로 서버에 전송되던 문제를 수정하였습니다.
+
+##### 개선
+- AppSetId 수집율이 향상되었습니다.
 ## 2.7.0 (2026-05-12)
 
 ##### 개선
