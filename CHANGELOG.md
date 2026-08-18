@@ -4,6 +4,16 @@
 
 
 
+
+## 2.7.2 (2026-08-18)
+
+##### Fixed
+- Enhanced Background & Multithread Stability
+    - Resolved an intermittent crash (ConcurrentModificationException) caused by concurrent event logging in background or multithreaded environments.
+    - Improved thread-safety in internal data processing to ensure seamless data collection and delivery under asynchronous workloads.
+
+##### Notes
+- Updated compileSdk to 35
 ## 2.7.1 (2026-07-31)
 
 ##### Fixed
@@ -287,6 +297,16 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.7.2 (2026-08-18)
+
+##### 고쳐짐
+- 백그라운드 및 멀티스레드 환경 안정화
+    - 앱이 백그라운드 상태이거나 여러 스레드에서 동시에 이벤트를 기록할 때, 간헐적으로 발생하던 비정상 종료(Crash) 현상을 수정했습니다.
+    - SDK 내부 데이터 처리 구조의 동기화(Thread-Safety)를 강화하여, 고성능 비동기 환경에서도 데이터가 끊김 없이 안전하게 전송되도록 개선했습니다.
+
+##### 주요 사항
+- compileSdk 버전이 35로 업데이트 되었습니다.
 ## 2.7.1 (2026-07-31)
 
 ##### 고쳐짐
