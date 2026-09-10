@@ -5,6 +5,15 @@
 
 
 
+
+## 2.7.3 (2026-09-10)
+
+##### Changed
+- Updated initialization requests not to retry upon failure.
+
+##### Fixed
+- Resolved an issue where in-app messages opened before status updates were complete by enforcing sequential execution (DB update first, then View open).
+- Resolved an issue where in-app message status changes were skipped on the first occurrence.
 ## 2.7.2 (2026-08-18)
 
 ##### Fixed
@@ -298,6 +307,15 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.7.3 (2026-09-10)
+
+##### 변경됨
+- 초기화 요청 실패시 재시도를 하지 않도록 변경되었습니다.
+
+##### 고쳐짐
+- 인앱메시지 상태 변경이 완료된 후 메시지 화면이 열리도록 처리 순서가 개선되었습니다.
+- 인앱메시지 상태 변경이 1회 한정으로 스킵되어 반영되지 않던 문제가 수정되었습니다.
 ## 2.7.2 (2026-08-18)
 
 ##### 고쳐짐
