@@ -6,6 +6,11 @@
 
 
 
+
+## 2.7.4 (2026-10-14)
+
+##### Enhancement
+- Enhanced event collection stability
 ## 2.7.3 (2026-09-10)
 
 ##### Changed
@@ -308,6 +313,11 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.7.4 (2026-10-14)
+
+##### 개선
+- 이벤트 수집 안정성 강화
 ## 2.7.3 (2026-09-10)
 
 ##### 변경됨
