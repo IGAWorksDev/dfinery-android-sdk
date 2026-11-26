@@ -7,6 +7,16 @@
 
 
 
+
+## 2.7.5 (2026-11-26)
+
+##### Security
+- Enhanced In-App Message Database Security
+    - Improved internal query processing
+- Enhanced Background Service Security
+    - Strengthened internal component access control
+- Logging Policy Changes
+    - Default value changed to false, log level changed to Log.ERROR
 ## 2.7.4 (2026-10-14)
 
 ##### Enhancement
@@ -314,6 +324,16 @@ new DfineryConfig.Builder()
 
 
 
+
+## 2.7.5 (2026-11-26)
+
+##### 보안
+- 인앱 메시지 데이터베이스 보안 강화
+    - 내부 쿼리 처리 방식 개선
+- 백그라운드 서비스 보안 강화
+    - 내부 컴포넌트 접근 제어 강화
+- 로깅 정책 변경
+    - 기본값 `false`, 로그 레벨 `Log.ERROR`로 변경
 ## 2.7.4 (2026-10-14)
 
 ##### 개선
